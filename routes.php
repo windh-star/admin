@@ -164,18 +164,26 @@ $route['api/getListBugs'] = 'BugsController/getListBugs';
 //artikel
 $route['artikel'] = 'ArtikelController/index';
 $route['api/getTabelArtikel'] = 'ArtikelController/getTabelArtikel';
+$route['api/simpanArtikel'] = 'ArtikelController/simpanArtikel';
+$route['api/ubahArtikel'] = 'ArtikelController/ubahArtikel';
+$route['api/hapusArtikel'] = 'ArtikelController/hapusArtikel';
+
 
 //ikk bps
 $route['ikk_bps'] = 'IkkBpsController/index';
 $route['api/getTabelIkkBps'] = 'IkkBpsController/getTabelIkkBps';
 
+//sesi pengguna
+$route['sesi_pengguna'] = 'IkkBpsController/index';
+$route['api/getTabelSesiPengguna'] = 'SesiPenggunaController/getTabelSesiPengguna';
+
 //Tambahan 
 $route['api/getListKategoriWilayah'] = 'WilayahController/getListKategoriWilayah';
 $route['api/getListProvinsi'] = 'WilayahController/getListProvinsi';
 $route['api/getListKategoriBuaBps'] = 'WilayahController/getListKategoriBuaBps';
-$route['api/getRingkasanKategoriBuaBps/(:any)'] = 'WilayahController/getRingkasanKategoriBuaBps/$1';
+$route['api/getRingkasanKategoriBuaBps'] = 'WilayahController/getRingkasanKategoriBuaBps';
 $route['api/rangeBugs'] = 'WilayahController/rangeBugs';
 $route['api/getListKategoriArtikel'] = 'WilayahController/getListKategoriArtikel';
 $route['api/getListStatusArtikel'] = 'WilayahController/getListStatusArtikel';
-$route['api/getRingkasanKategoriArtikel/(:any)'] = 'WilayahController/getRingkasanKategoriArtikel/$1';
+$route['api/getRingkasanKategoriArtikel'] = 'WilayahController/getRingkasanKategoriArtikel';
 $route['imporIkkBps'] = 'ImporEksporController/imporIkkBps';
