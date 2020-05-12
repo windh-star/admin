@@ -12,7 +12,7 @@ class WilayahModel extends CI_Model {
 
     function getTabelWilayah($datatable){
 		$columns = implode(', ', $datatable['col-display']);
-		$query  = "(SELECT *,IF(kategori='1','Provinsi','Kab/Kota')) AS ket_kategori,(SELECT wilayah from wilayah WHERE wilayah.id_wilayah=wilayah.id_provinsi) as provinsi FROM {$this->tabel}) a";
+		$query  = "(SELECT wilayah.id_wilayah,wilayah.wilayah,kategori,IF(kategori='1','Provinsi','Kab/Kota') AS ket_kategori,a.provinsi FROM wilayah,(SELECT id_wilayah, wilayah as provinsi from wilayah WHERE kategori='1') a where wilayah.id_prov=a.id_wilayah) b";
   
 		$sql  = "SELECT {$columns} FROM {$query}";
   
@@ -48,24 +48,6 @@ class WilayahModel extends CI_Model {
 			$sql .= " WHERE " . $where;
 		}
 
-		//filter provinsi	
-		$provinsi = $this->input->post('provinsi');
-		if ($provinsi != '') $where .= "provinsi = '{$provinsi}'";
-  
-		if ($search != '') {
-			if ($where != '') $where .= ' AND ('; else $where .= ' (';
-			for ($i=0; $i < $count_c ; $i++) {
-				$where .= $columnd[$i] .' LIKE "%'. $search .'%"';
-				if ($i < $count_c - 1) {
-					$where .= ' OR ';
-				}
-			}
-			$where .= ')';
-		}
-		if ($where != '') {
-			$sql .= " WHERE " . $where;
-		}
-  
 		// get total filtered
 		$data = $this->db->query($sql);
 		$total_filter = $data->num_rows();
@@ -88,6 +70,11 @@ class WilayahModel extends CI_Model {
 		foreach ($data->result() as $row) {
 		   $data = array();
 		   $data[] = null;
+		   for ($i=0; $i < $count_c; $i++) {
+			$field = $columnd[$i];
+			if ($i == 6) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
+			else $data[] = $row->$field;
+		 }
 		   $option['data'][] = $data;
 		}
   
@@ -136,17 +123,19 @@ class WilayahModel extends CI_Model {
 	  }
 	
 	//Provinsi Wilayah
+
 	function getListProvinsi($keyword,$page,$limit){
 		return $this->db->select("id_wilayah as id, wilayah as text,kategori,id_prov")
-		->like("id_prov", $keyword)
-		->where("CONCAT(SUBSTR(id_wilayah, 1, 2),'00') = id_prov")
+		->where("kategori= 1 ")
+		->like("wilayah", $keyword)
 		->get($this->tabel_wilayah, $limit, $page)->result_array();
 	}
 
 	function getJumlahListProvinsi($keyword){
-      	return $this->db->select("id_wilayah as id, wilayah as text,kategori,id_prov")
-    					->like("id_prov", $keyword)
-						->count_all_results($this->tabel_wilayah);
+		return $this->db->select("id_wilayah as id, wilayah as text,kategori,id_prov")
+					->where("kategori= 1 ")
+					->like("wilayah", $keyword)
+					->count_all_results($this->tabel_wilayah);
 	  }
 	  
 	//Kategori BUA BPS
@@ -163,12 +152,8 @@ class WilayahModel extends CI_Model {
 	  }
 
 	//Rekap Jumlah Kategori BUA BPS, A = Bahan, B = Upah, C = Alat
-	function getRingkasanKategoriBuaBps($id_kategori){
-			if ($id_kategori != '0') $where = "WHERE id_kategori ='".$id_kategori."'"; else $where = "";
-		return $this->db->query("SELECT id_kategori,SUM(bahan) as bahan,SUM(upah) as upah,
-		SUM(alat) as alat from (SELECT id_kategori,IF(kategori = 'A',COUNT(*),0) AS `bahan`,
-		IF(kategori = 'B',COUNT(*),0) AS `upah`,IF(kategori = 'C',COUNT(*),0) AS `alat`
-		FROM (select * from buabps GROUP BY id_kategori) a ".$where." group by kategori) b");
+	function getRingkasanKategoriBuaBps(){
+		return $this->db->query("SELECT id_kategori,SUM(bahan) as bahan,SUM(upah) as upah, SUM(alat) as alat from (SELECT id_kategori,IF(kategori = 'A',COUNT(*),0) AS `bahan`, IF(kategori = 'B',COUNT(*),0) AS `upah`,IF(kategori = 'C',COUNT(*),0) AS `alat` FROM (select * from bua_bps GROUP BY id_kategori) a group by kategori) b");
 	}
 	
 	//Range Tanggal Bugs
@@ -207,12 +192,8 @@ class WilayahModel extends CI_Model {
 	  }
 
 	   //Rekap Jumlah Kategori Artikel, 1 = Artikel, 2 = Berita, 3 = Event
-	function getRingkasanKategoriArtikel($id_artikel){
-		if ($id_artikel != '0') $where = "WHERE ".$this->id_artikel."='".$id_artikel."'"; else $where = "";
-		return $this->db->query("SELECT ".$this->id_artikel.",SUM(artikel) as artikel,SUM(berita) as berita,
-		SUM(event) as event from (SELECT ".$this->id_artikel.",IF(kategori = '1',COUNT(*),0) AS `artikel`,
-		IF(kategori = '2',COUNT(*),0) AS `berita`,IF(kategori = '3',COUNT(*),0) AS `event`
-		FROM (select * from ".$this->tabel_artikel." GROUP BY ".$this->id_artikel.") a ".$where." group by kategori) b");
+	function getRingkasanKategoriArtikel(){
+		return $this->db->query("SELECT id_artikel,SUM(artikel) as artikel,SUM(berita) as berita, SUM(event) as event from (SELECT id_artikel,IF(kategori = '1',COUNT(*),0) AS `artikel`, IF(kategori = '2',COUNT(*),0) AS `berita`,IF(kategori = '3',COUNT(*),0) AS `event` FROM (select * from artikel GROUP BY id_artikel) a group by kategori) b");
 	}
 
 }

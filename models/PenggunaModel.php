@@ -18,7 +18,7 @@ class PenggunaModel extends CI_Model{
         $this->input->post('pengguna');
         $join = "INNER JOIN {$this->ref1} ON {$this->foreign_key1} = {$this->foreign_key_ref1}";
         $columns = implode(', ', $datatable['col-display']);
-        $sql  = "SELECT {$columns} FROM {$this->tabel} {$join}";
+        $sql  = "(SELECT {$columns} FROM {$this->tabel} {$join} where status = '1' or status = '2')";
     
         $data = $this->db->query($sql);
         $total_data = $data->num_rows();

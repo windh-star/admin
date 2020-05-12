@@ -114,13 +114,48 @@ class ArtikelModel extends CI_Model{
                         ->like("judul_artikel", $keyword)
                         ->count_all_results($this->tabel);
     }
-
+    
       //Rekap Jumlah Kategori Artikel, 1 = Artikel, 2 = Berita, 3 = Event
-	function getRingkasanKategoriArtikel($id_artikel){
-		if ($id_artikel != '0') $where = "WHERE ".$this->id_artikel."='".$id_artikel."'"; else $where = "";
-		return $this->db->query("SELECT ".$this->id_artikel.",SUM(artikel) as artikel,SUM(berita) as berita,
-		SUM(event) as event from (SELECT ".$this->id_artikel.",IF(kategori = '1',COUNT(*),0) AS `artikel`,
-		IF(kategori = '2',COUNT(*),0) AS `berita`,IF(kategori = '3',COUNT(*),0) AS `event`
-		FROM (select * from ".$this->tabel_artikel." GROUP BY ".$this->id_artikel.") a ".$where." group by kategori) b");
+	function getRingkasanKategoriArtikel(){
+		return $this->db->query("SELECT id_artikel,SUM(artikel) as bahan,SUM(berita) as upah, SUM(event) as event from (SELECT id_artikel,IF(kategori = '1',COUNT(*),0) AS `artikel`, IF(kategori = '2',COUNT(*),0) AS `berita`,IF(kategori = '3',COUNT(*),0) AS `event` FROM (select * from artikel GROUP BY id_artikel) a group by kategori) b");
 	}
+
+    function simpanArtikel($data){
+        $val = array(
+            'id_artikel' => $data['id_artikel'],
+            'judul_artikel' => $data['judul_artikel'],
+            'isi_artikel' => $data['isi_artikel'],
+            'kategori' =>  $data['kategori'],
+            'status' =>  $data['status'],
+            'foto_cover' =>  $data['foto_cover'],
+            'dibuat_oleh' =>  $data['dibuat_oleh'],
+            'tgl_dibuat' => date("Y-m-d"),
+            'jam_dibuat' => date("H:m:s")
+        );
+  
+        $this->db->insert($this->tabel, $val);
+    }
+  
+    function ubahArtikel($data){
+        $val = array(
+            'id_artikel' => $data['id_artikel'],
+            'judul_artikel' => $data['judul_artikel'],
+            'isi_artikel' => $data['isi_artikel'],
+            'kategori' =>  $data['kategori'],
+            'status' =>  $data['status'],
+            'foto_cover' =>  $data['foto_cover'],
+            'dibuat_oleh' =>  $data['dibuat_oleh'],
+            'tgl_dibuat' => date("Y-m-d"),
+            'jam_dibuat' => date("H:m:s")
+        );
+  
+        $this->db->where("id_artikel",$data['id_artikel'])
+                 ->update($this->tabel, $val);
+    }
+
+    function hapusArtikel($data){
+       
+        $this->db->where("id_artikel",$data['id_artikel'])
+                 ->delete($this->tabel, $val);
+    }
 }
