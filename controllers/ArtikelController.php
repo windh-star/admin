@@ -61,6 +61,57 @@ class ArtikelController extends CI_controller{
 	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
 	         ->_display();
 	    exit;
+    }
+    
+    public function simpanArtikel(){
+	    parse_str(file_get_contents('php://input'), $data);
+	    $this->ArtikelModel->ArtikelBahan($data);
+
+	    $response = array(
+	      'Success' => true,
+	      'Info' => 'Data bahan berhasil disimpan.'
+	    );
+
+	    $this->output
+	         ->set_status_header(201)
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	         ->_display();
+	    exit;
 	}
 
+  	public function ubahArtikel(){
+	    parse_str(file_get_contents('php://input'), $data);
+	    $this->ArtikelModel->ArtikelBahan($data);
+
+	    $response = array(
+	      'Success' => true,
+	      'Info' => 'Data Artikel berhasil diperbaharui.'
+	    );
+
+	    $this->output
+	         ->set_status_header(201)
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	         ->_display();
+	    exit;
+	}
+
+
+    public function hapusArtikel(){
+        parse_str(file_get_contents('php://input'), $data);
+        $this->ArtikelModel->hapusArtikel($data);
+        
+        $response = array(
+            'Success' => true,
+            'Info' => 'Data Artikel berhasil dihapus.'
+        );
+        
+        $this->output
+             ->set_status_header(201)
+             ->set_content_type('application/json')
+             ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+             ->_display();
+        exit();
+    }
 }

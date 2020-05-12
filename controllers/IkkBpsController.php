@@ -47,4 +47,22 @@ class IkkBpsController extends CI_controller{
         exit;
     }
 
+    public function ubahIkkBps(){
+        parse_str(file_get_contents('php://input'), $data);
+        $this->IkkBpsModel->ubahIkkBps($data);
+        
+        $response = array(
+            'Success' => true,
+            'Info' => 'Data IKK BPS berhasil diperbaharui.'
+        );
+        
+        $this->output
+             ->set_status_header(201)
+             ->set_content_type('application/json')
+             ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+             ->_display();
+        exit();
+    }
+
+
 }

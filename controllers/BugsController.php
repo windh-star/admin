@@ -29,7 +29,7 @@ class BugsController extends CI_controller{
                                            'jam_dibuat'
                                         );
 
-            return $this->BuaBpsModel->getTabelBUABPS($datatable);
+            return $this->BugsModel->getTabelBugs($datatable);
         }
     }
     public function getListbugs(){

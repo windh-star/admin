@@ -149,8 +149,8 @@ class WilayahController extends CI_Controller
 	  }
 
 	  //Rekap Jumlah Kategori BUA BPS, A = Bahan, B = Upah, C = Alat
-	  public function getRingkasanKategoriBuaBps($id_kategori){
-	    $response = $this->WilayahModel->getRingkasanKategoriBuaBps($id_kategori)->row();
+	  public function getRingkasanKategoriBuaBps(){
+	    $response = $this->WilayahModel->getRingkasanKategoriBuaBps()->row();
 
 	    $this->output
 	         ->set_status_header(201)
@@ -208,8 +208,8 @@ class WilayahController extends CI_Controller
 	  }
 
 	   //Rekap Jumlah Kategori Artikel, 1 = Artikel, 2 = Berita, 3 = Event
-	   public function getRingkasanKategoriArtikel($id_artikel){
-	    $response = $this->BahanModel->getRingkasanKategoriArtikel($id_artikel)->row();
+	   public function getRingkasanKategoriArtikel(){
+	    $response = $this->WilayahModel->getRingkasanKategoriArtikel()->row();
 
 	    $this->output
 	         ->set_status_header(201)
