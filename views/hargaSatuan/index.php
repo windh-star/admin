@@ -2,17 +2,32 @@
     <!-- Start content -->
     <div class="content">
         <div class="container">
-          
+
             <?php $this->load->view('layout/breadcrumb') ?>
 
             <div class="row">
+                <!-- section untuk filtering -->
                 <div class="col-md-12">
-                    <button type="button" id="btn-tambah" class="btn btn-primary waves-effect waves-light" onclick="tampilTambahAHS()"><strong><i class="fa  fa-plus-circle"></i> TAMBAH <?php echo $menu ?></strong></button>
-                    <button type="button" id="btn-impor" class="btn btn-danger waves-effect waves-light" onclick="tampilImporAHS()"><strong><i class="fa fa-upload"></i> IMPOR <?php echo $menu ?></strong></button>
-                    <button type="button" id="btn-impor-bua" class="btn btn-danger waves-effect waves-light" onclick="tampilImporBUA()"><strong><i class="fa fa-upload"></i> IMPOR BUA</strong></button>
-                    <br><br>
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">PILIH KATEGORI</h3>
+                      </div>
+                      <div class="panel-body">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                        <select id="filter_kategori" name="kategori" class="form-control" onchange="">
+                                          <option value="">- Pilih -</option>
+                                          <option value="A">Bahan</option>
+                                          <option value="B">Upah</option>
+                                          <option value="C">Alat</option>
+                                        </select>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
                 </div>
-          </div>
 
                 <!-- <div class="col-md-12"> -->
                     <!-- section tombol aksi -->
@@ -166,27 +181,70 @@
                         </div> 
                     </div>
                 </div> -->
-
+                
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title"><?php echo "DATA ".strtoupper($menu) ?></h3>
                         </div>
+                        <div class="panel-body">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                  <div class="panel panel-primary">
+                                      <div class="panel-heading">
+                                          <h3 class="panel-title">Ringkasan Kategori</h3>
+                                      </div>
+                                      <div class="panel-body">
+                                          <ul class="list-group">
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-warning" id="jum_bahan" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  Bahan
+                                              </li>
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-danger" id="jum_upah" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  Upah
+                                              </li>
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-success" id="jum_alat" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  Alat
+                                              </li>
+                                          </ul>
+                                      </div>
+                                      <div class="panel-footer">
+                                        <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah <span class="badge badge-primary pull-right" id="jum_semua" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <table id="tabel-ikk-bps" class="table table-striped table-bordered" style="width: 100%">
+                                    <table id="tabel-harga-satuan" class="table table-striped table-bordered" style="width: 100%">
                                         <thead>
                                             <tr>
-                                                <th width="3%">No</th>
-                                                <th width="10%">Wilayah</th>
-                                                <th width="20%">IKK</th>
-                                                <th width="20%">Aksi</th>
+                                                <th width="2%">No</th>
+                                                <th width="10%">ID Harga Satuan</th>
+                                                <th width="10%">Nama Pekerjaan</th>
+                                                <th width="20%">Satuan</th>
+                                                <th width="5%">Level</th>
+                                                <th width="20%">Total Harga</th>
+                                                <th width="10%">Sumber</th>
+                                                <th width="20%">Tgl Dibuat</th>
+                                                <th width="20%">Jam Dibuat</th>
+                                                <th width="5%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
                                 </div>
                             </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+
 
         </div> <!-- container -->
                    
@@ -330,7 +388,7 @@
   var tabel;
   $(document).ready(function() {
       $('#menu_master').click();
-      $('#menu_ikk_bps').prop('class','active');
+      $('#menu_harga_satuan').prop('class','active');
       getRingkasanKategori($('#filter_kategori').val());
       
 
@@ -346,7 +404,7 @@
         };
       };
 
-      tabel = $("#tabel-ikk-bps").DataTable({
+      tabel = $("#tabel-harga-satuan").DataTable({
         "language": {
           "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
           "sInfoEmpty": "",
@@ -368,7 +426,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-          "url": "<?php echo base_url('api/getTabelIkkBps') ?>",
+          "url": "<?php echo base_url('api/getTabelBUABPS') ?>",
           "type": "POST",
           data: function (data) {
             data.kategori = $('#filter_kategori').val();

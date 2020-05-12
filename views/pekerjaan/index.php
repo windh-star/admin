@@ -54,7 +54,7 @@
                           <h3 class="panel-title">TABEL PEKERJAAN</h3>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <br><br>
-                                            <table id="tabel-pekerjaan" height="200px" class="table table-striped table-bordered">
+                                            <table id="tabel-pekerjaan" height="50px" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center" width="3%">No.</th>
@@ -88,6 +88,9 @@ function tampilTambahPekerjaan(){
     $('#btn-tambah-pekerjaan').hide();
 }
       $(document).ready(function(){
+        $('#menu_master').click();
+        $('#menu_pekerjaan').prop('class','active');
+
         $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
             {
               return {

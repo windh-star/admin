@@ -224,11 +224,11 @@
                                     <table id="tabel-bua-bps" class="table table-striped table-bordered" style="width: 100%">
                                         <thead>
                                             <tr>
-                                                <th width="3%">No</th>
+                                                <th width="2%">No</th>
                                                 <th width="10%">Kategori</th>
-                                                <th width="20%">ID Kategori</th>
+                                                <th width="10%">ID Kategori</th>
                                                 <th width="20%">Nama Kategori</th>
-                                                <th width="10%">Satuan</th>
+                                                <th width="5%">Satuan</th>
                                                 <th width="20%">Spesifikasi</th>
                                                 <th width="10%">Merk</th>
                                                 <th width="20%">Harga Dasar</th>

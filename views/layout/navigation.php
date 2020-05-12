@@ -28,49 +28,49 @@
                         <li id="menu_upah"><a href="<?php echo base_url('upah') ?>">Upah</a></li>
                         <li id="menu_alat"><a href="<?php echo base_url('alat') ?>">Alat</a></li>
                         <li id="menu_bua_bps"><a href="<?php echo base_url('bua_bps') ?>">BUA BPS</a></li>
-                        <li id="menu_ikk_bps"><a href="<?php echo base_url('ikk_bps') ?>">IKK BPS</a></li>
-                        <li class="has_sub" id="menu_pengguna"><a class="waves-effect" href="<?php echo base_url('pengguna') ?>">Pengguna</a>
-                        <ul>
-                        <li id="menu_sesi_pengguna"><a href="<?php echo base_url('sesi_pengguna') ?>">Sesi Pengguna</a></li>
-                        </ul>
-                        </li>
-                        <li id="menu_proyek"><a href="<?php echo base_url('proyek') ?>">Proyek</a></li>
                         <li id="menu_kategori_pekerjaan"><a href="<?php echo base_url('kategori_pekerjaan') ?>">Kategori Pekerjaan</a></li>
                         <li id="menu_pekerjaan"><a href="<?php echo base_url('pekerjaan') ?>">Pekerjaan</a></li>
+                        <li class="has_sub" id="menu_pengguna"><a href="<?php echo base_url('pengguna') ?>">Pengguna</a>
+                            <ul>
+                              <li id="menu_sesi_pengguna">
+                                <a href="<?php echo base_url('sesi_pengguna')?>">Sesi Pengguna</a></li>
+                            </ul>
+                        </li>
                         <li id="menu_wilayah"><a href="<?php echo base_url('wilayah') ?>">Wilayah</a></li>
-                       <li id="menu_artikel"><a href="<?php echo base_url('artikel') ?>">Artikel</a></li>
+                        <li id="menu_ikk_bps"><a href="<?php echo base_url('ikk_bps') ?>">IKK BPS</a></li>
+                        <li id="menu_artikel"><a href="<?php echo base_url('artikel') ?>">Artikel</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
-                    <a href="#" id="menu_master" class="waves-effect"><i class="md md-now-widgets"></i><span> Estimasi </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <a href="#" id="menu_estimasi" class="waves-effect"><i class="md md-now-widgets"></i><span> Estimasi </span><span class="pull-right"><i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
                         <li id="menu_proyek"><a href="<?php echo base_url('proyek') ?>">Proyek</a></li>
                         <li id="menu_ahs"><a href="<?php echo base_url('ahs') ?>">AHS</a></li>
                         <li id="menu_harga_satuan"><a href="<?php echo base_url('harga_satuan') ?>">Harga Satuan</a></li>
                         <li id="menu_volume"><a href="<?php echo base_url('volume') ?>">Volume</a></li>
                     </ul>
-                </li>
+                  </li>
 
                 <li class="has_sub">
                     <a href="#" id="menu_master" class="waves-effect"><i class="md md-now-widgets"></i><span> Suplier </span><span class="pull-right"><i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
                         <li id="menu_suplier"><a href="<?php echo base_url('suplier') ?>">Suplier</a></li>
                         <li id="menu_produk"><a href="<?php echo base_url('produk') ?>">Produk</a></li>
-                        <li id="menu_wilayah_produk"><a href="<?php echo base_url('wilayah_produk') ?>">Wilayah Produk</a></li>
-                        <li id="menu_kategori_produk"><a href="<?php echo base_url('kategori_produk') ?>">Kategori Produk</a></li>
+                        <li id="menu_wilayah"><a href="<?php echo base_url('wilayah') ?>">Wilayah Produk</a></li>
+                        <li id="menu_kategori_produk"><a href="<?php echo base_url('kategori_prduk') ?>">Kategori Produk</a></li>
                         <li id="menu_merk"><a href="<?php echo base_url('merk') ?>">Merk</a></li>
-                        <li id="menu_voucher"><a href="<?php echo base_url('voucher') ?>">Voucher</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
-                    <a href="#" id="menu_master" class="waves-effect"><i class="md md-now-widgets"></i><span> Templates </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <a href="#" id="menu_master" class="waves-effect"><i class="md md-now-widgets"></i><span> Template </span><span class="pull-right"><i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
                         <li id="menu_template_proyek"><a href="<?php echo base_url('template_proyek') ?>">Template Proyek</a></li>
                         <li id="menu_template_kategori_pekerjaan"><a href="<?php echo base_url('template_kategori_pekerjaan') ?>">Template Kategori Pekerjaan</a></li>
                         <li id="menu_template_pekerjaan"><a href="<?php echo base_url('template_pekerjaan') ?>">Template Pekerjaan</a></li>
-                        <li id="menu_template_ahs"><a href="<?php echo base_url('templapte_ahs') ?>">Template AHS</a></li>
+                        <li id="menu_template_ahs"><a href="<?php echo base_url('template_ahs') ?>">Template AHS</a></li>
+                        <li id="menu_template_harga"><a href="<?php echo base_url('template_harga') ?>">Template Harga</a></li>
                     </ul>
                 </li>
 
@@ -78,10 +78,10 @@
                     <a href="#" id="menu_master" class="waves-effect"><i class="md md-now-widgets"></i><span> Ekstra </span><span class="pull-right"><i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
                         <li id="menu_bugs"><a href="<?php echo base_url('bugs') ?>">Bugs</a></li>
-                        <li id="menu_rating_pengguna"><a href="<?php echo base_url('rating_pengguna') ?>">Rating Pengguna</a></li>
+                        <li id="menu_rating_penggunaan"><a href="<?php echo base_url('rating_pengguna') ?>">Rating Penggunaan</a></li>
                         <li id="menu_rating_proyek"><a href="<?php echo base_url('rating_proyek') ?>">Rating Proyek</a></li>
                         <li id="menu_rating_produk"><a href="<?php echo base_url('rating_produk') ?>">Rating Produk</a></li>
-                        <li id="menu_rating_suplier"><a href="<?php echo base_url('rating_suplier') ?>">Rating Suplier</a></li>
+                        <li id="menu_rating_suplier"><a href="<?php echo base_url('rating_supplier') ?>">Rating Supplier</a></li>
                     </ul>
                 </li>
             </ul>

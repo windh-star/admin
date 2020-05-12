@@ -588,7 +588,7 @@
           }
       });
 
-      $('#harga_dasar,#ubah_harga_dasar').inputmask('decimal',
+      $('#harga_dasar, #ubah_harga_dasar').inputmask('decimal',
         { 'alias': 'numeric',
           'groupSeparator': '.',
           'autoGroup': true,
@@ -643,7 +643,7 @@
                return markup;
           },
           ajax: {
-            url: "<?php echo base_url() ?>api/getListWilayah",
+            url: "<?php echo base_url('api/getListWilayah') ?>",
             dataType: 'json',
             delay: 250,
             data: function (params) {

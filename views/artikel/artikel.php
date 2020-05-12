@@ -7,22 +7,30 @@
 
             <div class="row">
                 <!-- section untuk filtering -->
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="panel panel-default">
                       <div class="panel-heading">
-                          <h3 class="panel-title">PILIH KATEGORI</h3>
+                          <h3 class="panel-title" style= "width: 100%;">FILTERING</h3>
                       </div>
                       <div class="panel-body">
                           <div class="row">
                               <div class="col-md-6">
-                                  <div class="form-group">
-                                        <select id="filter_kategori" name="kategori" class="form-control" onchange="">
-                                          <option value="">- Pilih -</option>
-                                          <option value="A">Bahan</option>
-                                          <option value="B">Upah</option>
-                                          <option value="C">Alat</option>
-                                        </select>
-                                  </div>
+                                  <label> Filtering Kategori </label>
+                                  <select id="filter_kategori" name="kategori" class="form-control" onchange="">
+                                    <option value="">- Pilih Kategori -</option>
+                                    <option value="A">Artikel</option>
+                                    <option value="B">Berita</option>
+                                    <option value="C">Event</option>
+                                  </select>
+                              </div>
+                              <div class="col-md-6">
+                                  <label> Filtering Status </label>
+                                  <select id="filter_kategori" name="kategori" class="form-control" onchange="">
+                                      <option value="">- Pilih Status -</option>
+                                      <option value="D">Publishing</option>
+                                      <option value="E">Berita</option>
+                                      <option value="F">Event</option>
+                                  </select>
                               </div>
                           </div>
                       </div>
@@ -199,21 +207,21 @@
                                       <div class="panel-body">
                                           <ul class="list-group">
                                               <li class="list-group-item">
-                                                  <span class="badge badge-warning" id="jum_bahan" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  Bahan
+                                                  <span class="badge badge-warning" id="jum_artikel" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  Artikel
                                               </li>
                                               <li class="list-group-item">
-                                                  <span class="badge badge-danger" id="jum_upah" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  Upah
+                                                  <span class="badge badge-danger" id="jum_berita" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  Berita
                                               </li>
                                               <li class="list-group-item">
-                                                  <span class="badge badge-success" id="jum_alat" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  Alat
+                                                  <span class="badge badge-success" id="jum_event" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  Event
                                               </li>
                                           </ul>
                                       </div>
                                       <div class="panel-footer">
-                                        <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah <span class="badge badge-primary pull-right" id="jum_semua" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
+                                        <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah Kategori <span class="badge badge-primary pull-right" id="jum_semua" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
                                       </div>
                                   </div>
                               </div>
@@ -221,17 +229,17 @@
 
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <table id="tabel-bua-bps" class="table table-striped table-bordered" style="width: 100%">
+                                    <table id="tabel-artikel" class="table table-striped table-bordered" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th width="3%">No</th>
                                                 <th width="10%">Judul Artikel</th>
                                                 <th width="20%">Kategori</th>
                                                 <th width="20%">Status</th>
-                                                <th width="10%">Foto coer</th>
-                                                <th width="20%">tgl dibat</th>
-                                                <th width="10%">jam dibuat</th>
-                                                <th width="20%">aksi</th>
+                                                <th width="10%">Foto cover</th>
+                                                <th width="20%">Tanggal Dibuat</th>
+                                                <th width="10%">Jam Dibuat</th>
+                                                <th width="20%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -371,14 +379,14 @@
   function getRingkasanKategori(id_kategori){
     if (id_kategori == '') id_kategori = '0'; else id_kategori = id_kategori;
     $.ajax({
-        url : "<?php echo base_url('api//getRingkasanKategoriBuaBps/') ?>"+id_kategori,
+        url : "<?php echo base_url('api//getRingkasanKategoriArtikel/') ?>"+id_kategori,
         type: "POST",
         dataType: "JSON",
         success: function(data){
-          $('#jum_bahan').html(data.bahan);
-          $('#jum_upah').html(data.upah);
-          $('#jum_alat').html(data.alat);
-          $('#jum_semua').html(parseInt(data.bahan) + parseInt(data.ubah) + parseInt(data.alat));
+          $('#jum_artikel').html(data.artikel);
+          $('#jum_berita').html(data.berita);
+          $('#jum_event').html(data.event);
+          $('#jum_semua').html(parseInt(data.artikel) + parseInt(data.berita) + parseInt(data.event));
         }
     });
   }
@@ -386,8 +394,8 @@
   var tabel;
   $(document).ready(function() {
       $('#menu_master').click();
-      $('#menu_bua_bps').prop('class','active');
-      getRingkasanKategori($('#filter_kategori').val());
+      $('#menu_artikel').prop('class','active');
+      getRingkasanKategoriArtikel($('#filter_kategori').val());
       
 
       $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings){
@@ -402,7 +410,7 @@
         };
       };
 
-      tabel = $("#tabel-bua-bps").DataTable({
+      tabel = $("#tabel-artikel").DataTable({
         "language": {
           "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
           "sInfoEmpty": "",

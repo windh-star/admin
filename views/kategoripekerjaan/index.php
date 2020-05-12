@@ -68,11 +68,11 @@
                           <h3 class="panel-title">TABEL KATEGORI PEKERJAAN</h3>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <br><br>
-                                            <table id="tabel-kategori" height="400px" class="table table-striped table-bordered">
+                                            <table id="tabel-kategori" height="50px" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center" width="3%">No.</th>
-                                                        <th style="text-align: center" width="30%">ID Kategori</th>
+                                                        <th style="text-align: center" width="10%">ID Kategori</th>
                                                         <th style="text-align: center" width="30%">Nama Proyek</th>
                                                         <th style="text-align: center" width="25%">Kategori Pekerjaan</th>
                                                         <th style="text-align: center" width="8%">Aksi</th>
@@ -169,6 +169,9 @@
     
     ///ready function
     $(document).ready(function(){
+        $('#menu_master').click();
+        $('#menu_kategori_pekerjaan').prop('class','active');
+
         $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings){
           return {
               "iStart": oSettings._iDisplayStart,

@@ -587,7 +587,7 @@
           }
       });
       
-      $('#harga_dasar,#ubah_harga_dasar').inputmask('decimal',
+      $('#harga_dasar, #ubah_harga_dasar').inputmask('decimal',
         { 'alias': 'numeric',
           'groupSeparator': '.',
           'autoGroup': true,
