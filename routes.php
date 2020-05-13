@@ -174,8 +174,85 @@ $route['ikk_bps'] = 'IkkBpsController/index';
 $route['api/getTabelIkkBps'] = 'IkkBpsController/getTabelIkkBps';
 
 //sesi pengguna
-$route['sesi_pengguna'] = 'IkkBpsController/index';
+$route['sesi_pengguna'] = 'SesiPenggunaController/index';
 $route['api/getTabelSesiPengguna'] = 'SesiPenggunaController/getTabelSesiPengguna';
+
+//harga satuan
+$route['harga_satuan'] = 'HargaSatuanController/index';
+$route['api/getTabelHargaSatuan'] = 'HargaSatuanController/getTabelHargaSatuan';
+
+//volume
+$route['volume'] = 'VolumeController/index';
+$route['api/getTabelVolume'] = 'VolumeController/getTabelVolume';
+
+//rating pengguna
+$route['rating_pengguna'] = 'RatingPenggunasController/index';
+$route['api/getTabelRatingPengguna'] = 'RatingPenggunaController/getTabelRatingPengguna';
+
+//rating proyek
+$route['rating_proyek'] = 'RatingProyekController/index';
+$route['api/getTabelRatingProyek'] = 'RatingProyekController/getTabelRatingProyek';
+
+//rating Produk
+$route['rating_produk'] = 'RatingProdukController/index';
+$route['api/getTabelRatingProduk'] = 'RatingProdukController/getTabelRatingProduk';
+
+//rating suplier
+$route['rating_suplier'] = 'RatingSuplierController/index';
+$route['api/getTabelRatingSuplier'] = 'RatingSuplierController/getTabelRatingSuplier';
+
+//suplier
+$route['suplier'] = 'SuplierController/index';
+$route['api/getTabelSuplier'] = 'SuplierController/getTabelSuplier';
+
+//produk
+$route['produk'] = 'ProdukController/index';
+$route['api/getTabelProduk'] = 'ProdukController/getTabelProduk';
+
+//featured produk
+$route['featured_produk'] = 'FeaturedProdukController/index';
+$route['api/getTabelFeaturedProduk'] = 'FeaturedProdukController/getTabelFeaturedProduk';
+
+//foto produk
+$route['foto_produk'] = 'FotoProdukController/index';
+$route['api/getTabelFotoProduk'] = 'FotoProdukController/getTabelFotoProduk';
+
+//wilayah produk
+$route['wilayah_produk'] = 'WilayahProdukController/index';
+$route['api/getTabelWilayahProduk'] = 'WilayahProdukController/getTabelWilayahProduk';
+
+//kategori produk
+$route['kategori_produk'] = 'KategoriProdukController/index';
+$route['api/getTabelKategoriProduk'] = 'KategoriProdukController/getTabelKategoriProduk';
+
+//sub kategori produk
+$route['sub_kategori_produk'] = 'SubKategoriProdukController/index';
+$route['api/getTabelSubKategoriProduk'] = 'SubKategoriProdukController/getTabelSubKategoriProduk';
+
+//merk
+$route['merk'] = 'MerkController/index';
+$route['api/getTabelMerk'] = 'MerkController/getTabelMerk';
+
+//voucher
+$route['voucher'] = 'VoucherController/index';
+$route['api/getTabelVoucher'] = 'VoucherController/getTabelVoucher';
+
+//template proyek
+$route['template_proyek'] = 'TemplateProyekController/index';
+$route['api/getTabelTemplateProyek'] = 'TemplateProyekController/getTabelTemplateProyek';
+
+//template kategori pekerjaan
+$route['template_kategori_pekerjaan'] = 'TemplateKategoriPekerjaanController/index';
+$route['api/getTabelTemplateKategoriPekerjaan'] = 'TemplateKategoriPekerjaanController/getTabelTemplateKategoriPekerjaan';
+
+//template pekerjaan
+$route['template_pekerjaan'] = 'TemplatePekerjaanController/index';
+$route['api/getTabelTemplatePekerjaan'] = 'TemplatePekerjaanController/getTabelTemplatePekerjaan';
+
+//template harga satuan
+$route['template_harga_satuan'] = 'TemplateHargaSatuanController/index';
+$route['api/getTabelTemplateHargaSatuan'] = 'TemplateHargaSatuanController/getTabelTemplateHargaSatuan';
+
 
 //Tambahan 
 $route['api/getListKategoriWilayah'] = 'WilayahController/getListKategoriWilayah';
