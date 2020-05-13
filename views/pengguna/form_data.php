@@ -142,7 +142,7 @@
                               <h3 class="panel-title">TABEL PENGGUNA</h3>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <br>
-                                    <table id="tabel-pengguna" height="200px" class="table table-striped table-bordered">
+                                    <table id="tabel-pengguna" height="50px" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
                                                 <th style="text-align: center" width="3%">No.</th>

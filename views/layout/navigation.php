@@ -33,6 +33,7 @@
                         <li class="has_sub" id="menu_pengguna"><a href="<?php echo base_url('pengguna') ?>">Pengguna</a>
                             <ul>
                               <li id="menu_sesi_pengguna">
+                                <a href="<?php echo base_url('pengguna')?>">Pengguna</a></li>
                                 <a href="<?php echo base_url('sesi_pengguna')?>">Sesi Pengguna</a></li>
                             </ul>
                         </li>

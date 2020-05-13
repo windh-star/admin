@@ -435,7 +435,7 @@
           "url": "<?php echo base_url('api/getTabelArtikel') ?>",
           "type": "POST",
           data: function (data) {
-            data.kategori = $('#filter_kategori').val();
+            // data.kategori = $('#filter_kategori').val();
           }
         },
         // "columnDefs": [

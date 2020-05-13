@@ -465,7 +465,7 @@
   $(document).ready(function() {
       var thn_sekarang = new Date().getFullYear();
       $('[id*=spinner-tahun]').spinner({value: thn_sekarang, min: thn_sekarang-3, max: thn_sekarang+1});
-      $('#menu_master').click();
+      $('#menu_estimasi').click();
       $('#menu_ahs').prop('class','active');
 
       function formatData (data) {

@@ -262,6 +262,9 @@
    
     ///ready function 
     $(document).ready(function(){
+        $('#menu_estimasi').click();
+        $('#menu_proyek').prop('class','active');
+
         $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
         {
         return {

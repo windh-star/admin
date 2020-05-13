@@ -372,7 +372,7 @@
   function getRingkasanKategori(id_kategori){
     if (id_kategori == '') id_kategori = '0'; else id_kategori = id_kategori;
     $.ajax({
-        url : "<?php echo base_url('api//getRingkasanKategoriBuaBps/') ?>"+id_kategori,
+        url : "<?php echo base_url('api//getListKategoriBuaBps/') ?>"+id_kategori,
         type: "POST",
         dataType: "JSON",
         success: function(data){

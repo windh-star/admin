@@ -7,29 +7,22 @@
 
             <div class="row">
                 <!-- section untuk filtering -->
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="panel panel-default">
                       <div class="panel-heading">
-                          <h3 class="panel-title" style= "width: 100%;">FILTERING</h3>
+                          <h3 class="panel-title">PILIH KATEGORI</h3>
                       </div>
                       <div class="panel-body">
                           <div class="row">
                               <div class="col-md-6">
-                                  <label> Filtering Kategori </label>
-                                  <select id="filter_kategori" name="kategori" class="form-control" onchange="">
-                                      <option value="">- Pilih Kategori -</option>
-                                      <option value="1">Wilayah</option>
-                                      <option value="2">Kab/Kota</option>
-                                  </select>
-                              </div>
-                              <div class="col-md-6">
-                                  <label> Filtering Provinsi </label>
-                                  <select class="select2-provinsi required" style="width: 100%;" id="provinsi" name="provinsi" onchange="getInfoProvinsi($(this).val())">
-                                      <option value=""></option>
-                                      <input type="hidden" id="id_wilayah" name="id_wilayah">
-                                      <input type="hidden" id="id_provinsi" name="id_provinsi">
-                                  </select>
-                              </div>
+                                  <div class="form-group">
+                                        <select id="filter_kategori" name="kategori" class="form-control" onchange="">
+                                          <option value="">- Pilih -</option>
+                                          <option value="A">Bahan</option>
+                                          <option value="B">Upah</option>
+                                          <option value="C">Alat</option>
+                                        </select>
+                                  </div>
                               </div>
                           </div>
                       </div>
@@ -190,20 +183,55 @@
                 </div> -->
                 
             </div>
+            <div class="row">
+                <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title"><?php echo "DATA ".strtoupper($menu) ?></h3>
                         </div>
-                        <div class="panel-body"><div class="row">
+                        <div class="panel-body">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                  <div class="panel panel-primary">
+                                      <div class="panel-heading">
+                                          <h3 class="panel-title">Ringkasan Kategori</h3>
+                                      </div>
+                                      <div class="panel-body">
+                                          <ul class="list-group">
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-warning" id="jum_bahan" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  Bahan
+                                              </li>
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-danger" id="jum_upah" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  Upah
+                                              </li>
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-success" id="jum_alat" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  Alat
+                                              </li>
+                                          </ul>
+                                      </div>
+                                      <div class="panel-footer">
+                                        <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah <span class="badge badge-primary pull-right" id="jum_semua" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <table id="tabel-wilayah" class="table table-striped table-bordered" style="width: 100%">
+                                    <table id="tabel-bua-bps" class="table table-striped table-bordered" style="width: 100%">
                                         <thead>
                                             <tr>
-                                                <th width="3%">No</th>
-                                                <th width="10%">ID Wilayah</th>
-                                                <th width="20%">Wilayah</th>
-                                                <th width="20%">Kategori</th>
-                                                <th width="10%">Provinsi</th>
+                                                <th width="2%">No</th>
+                                                <th width="10%">ID Volume</th>
+                                                <th width="10%">Nama Pekerjaan</th>
+                                                <th width="20%">Proyek</th>
+                                                <th width="5%">Pelaksanan</th>
+                                                <th width="20%">Tot Volume</th>
+                                                <th width="10%">Tgl Dibuat</th>
+                                                <th width="20%">Jam Dibuat</th>
                                                 <th width="20%">Aksi</th>
                                             </tr>
                                         </thead>
@@ -213,7 +241,11 @@
                             </div>
                         </div>
                     </div>
-                    </div> <!-- container -->
+                </div>
+            </div>
+
+
+        </div> <!-- container -->
                    
     </div> <!-- content -->
 
@@ -355,98 +387,10 @@
   var tabel;
   $(document).ready(function() {
       $('#menu_master').click();
-      $('#menu_wilayah').prop('class','active');
+      $('#menu_volume').prop('class','active');
       getRingkasanKategori($('#filter_kategori').val());
+      
 
-      $(".select2-provinsi").select2({
-          theme: "bootstrap",
-          placeholder: "Pilih Provinsi",
-          allowClear: true,
-          tags: true,
-          "language": {
-            "noResults": function() {
-               return "<center><img src='<?php echo base_url() ?>assets/not-found.svg' width='30' /><br><strong>Tidak ada hasil ditemukan</strong></center>";
-            },
-            searching: function () {
-               return "<center><img src='<?php echo base_url() ?>assets/searching.gif' width='30' /><br>Mencari hasil...</center>";
-            },
-            loadingMore: function () {
-               return "<center><img src='<?php echo base_url() ?>assets/ajax-loader.svg' width='30'/></center>";
-            }
-          },
-          escapeMarkup: function (markup) {
-               return markup;
-          },
-          ajax: {
-            url: "<?php echo $this->config->item('url_server') ?>api/getJumlahListKategoriWilayah/",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-              return {
-                q: params.term,
-                page_limit: 10,
-                page: params.page
-              };
-            },
-            processResults: function (data, params) {
-              params.page = params.page || 1;
-    
-              return {
-                results: data.results,
-                pagination: {
-                  more: (params.page * 10) < data.total_count
-                }
-              };
-            },
-            cache: true
-          }
-      });
-
-      ///filtering kategori
-      $(".select2-pengguna").select2({
-            theme: "bootstrap",
-            placeholder: "Pilih Pengguna",
-            allowClear: true,
-            tags: true,
-            "language": {
-                "noResults" : function() {
-                    return "<center><img src='<?php echo base_url() ?>assets/not-found.svg' width='30' /><br><strong>Tidak ada hasil ditemukan</strong></center>";
-                },
-                searching: function() {
-                    return "<center><img src='<?php echo base_url() ?>assets/searching.gif' width='30' /><br>Mencari hasil...</center>";
-                },
-                loadingMore: function() {
-                    return "<center><img src='<?php echo base_url() ?>assets/ajax-loader.svg' width='30'/></center>";
-                }
-            },
-            escapeMarkup: function (markup) {
-                 return markup;
-            },
-            ajax: {
-                url: "<?php echo base_url() ?>api/getListPengguna",
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        q:params.term,
-                        page_limit: 10,
-                        page: params.page
-                    };
-                },
-                processResults: function(data, params) {
-                    params.page = params.page || 1;
-                    
-                    return {
-                        results: data.results,
-                        pagination: {
-                            more: (params.page * 10) < data.total_count
-                        }
-                    };
-                },
-                cache: true
-            }
-        });
-        
       $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings){
         return {
           "iStart": oSettings._iDisplayStart,
@@ -459,7 +403,7 @@
         };
       };
 
-      tabel = $("#tabel-wilayah").DataTable({
+      tabel = $("#tabel-volume").DataTable({
         "language": {
           "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
           "sInfoEmpty": "",
@@ -481,7 +425,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-          "url": "<?php echo base_url('api/getTabelWilayah') ?>",
+          "url": "<?php echo base_url('api/getTabelBUABPS') ?>",
           "type": "POST",
           data: function (data) {
             data.kategori = $('#filter_kategori').val();
