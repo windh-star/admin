@@ -70,8 +70,7 @@ class RatingSuplierModel extends CI_Model{
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) {
             $field = $columnd[$i];
-            if ($i == 6) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
-            else $data[] = $row->$field;
+           $data[] = $row->$field;
          }
          $option['data'][] = $data;
       }

@@ -10,7 +10,7 @@ class SubKategoriProdukModel extends CI_Model{
 
     function getTabelKategoriProduk($datatable){
       $columns = implode(', ', $datatable['col-display']);
-      $query  = "(SELECT sub_kategori_produk.*,kategori_produk.kategori FROM sub_kategori_produk,kategori_produk WHERE sub_kategori_produk.id_kategori=kategori_produk.id_kategori) a";
+      $query  = "(SELECT sub_kategori_produk.id_sub_kategori,sub_kategori_produk.id_kategori,sub_kategori_produk.sub_kategori,sub_kategori_produk.icon,kategori_produk.kategori FROM sub_kategori_produk,kategori_produk WHERE sub_kategori_produk.id_kategori=kategori_produk.id_kategori) a";
 
       $sql  = "SELECT {$columns} FROM {$query}";
 
@@ -70,8 +70,7 @@ class SubKategoriProdukModel extends CI_Model{
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) {
             $field = $columnd[$i];
-            if ($i == 6) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
-            else $data[] = $row->$field;
+           $data[] = $row->$field;
          }
          $option['data'][] = $data;
       }

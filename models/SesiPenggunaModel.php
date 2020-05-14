@@ -70,6 +70,10 @@ class SesiPenggunaModel extends CI_Model{
         foreach ($data->result() as $row) {
            $data = array();
            $data[] = null;
+           for ($i=0; $i < $count_c; $i++) {
+            $field = $columnd[$i];
+            $data[] = $row->$field;
+          }
            $option['data'][] = $data;
         }
   

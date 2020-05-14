@@ -27,20 +27,6 @@ class VolumeModel extends CI_Model{
       $search = $datatable['search']['value'];
       $where = '';
 
-      //filter
-      $kategori = $this->input->post('kategori');
-      if ($kategori != '') $where .= "kategori = '{$kategori}'";
-
-      if ($search != '') {
-          if ($where != '') $where .= ' AND ('; else $where .= ' (';
-          for ($i=0; $i < $count_c ; $i++) {
-              $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
-              if ($i < $count_c - 1) {
-                  $where .= ' OR ';
-              }
-          }
-          $where .= ')';
-      }
       
       if ($where != '') {
           $sql .= " WHERE " . $where;
@@ -67,12 +53,11 @@ class VolumeModel extends CI_Model{
 
       foreach ($data->result() as $row) {
          $data = array();
-         $data[] = null;
+         $data[] = 'null';
          for ($i=0; $i < $count_c; $i++) {
-            $field = $columnd[$i];
-            if ($i == 5) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
-            else $data[] = $row->$field;
-         }
+         $field = $columnd[$i];
+         $data[] = $row->$field;
+       }
          $option['data'][] = $data;
       }
 

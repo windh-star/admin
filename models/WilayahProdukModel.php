@@ -70,7 +70,7 @@ class WilayahProdukModel extends CI_Model{
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) {
             $field = $columnd[$i];
-            if ($i == 5) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
+            if ($i == 4) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
             else $data[] = $row->$field;
          }
          $option['data'][] = $data;

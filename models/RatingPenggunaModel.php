@@ -10,7 +10,7 @@ class RatingPenggunaModel extends CI_Model{
 
     function getTabelRatingPengguna($datatable){
       $columns = implode(', ', $datatable['col-display']);
-      $query  = "(SELECT rating_pengguna.id_pengguna,pengguna.nama_pengguna,rating_pengguna.rating,rating_pengguna.tanggapan,rating_pengguna.tgl_dibuat,rating_pengguna.jam_dibuat FROM rating_pengguna,pengguna WHERE rating_pengguna.id_pengguna=pengguna.id_pengguna) a";
+      $query  = "(SELECT rating_pengguna.id_rating,pengguna.nama_pengguna,rating_pengguna.rating,rating_pengguna.tanggapan,rating_pengguna.tgl_dibuat,rating_pengguna.jam_dibuat FROM rating_pengguna,pengguna WHERE rating_pengguna.id_pengguna=pengguna.id_pengguna) a";
 
       $sql  = "SELECT {$columns} FROM {$query}";
 
@@ -27,21 +27,7 @@ class RatingPenggunaModel extends CI_Model{
       $search = $datatable['search']['value'];
       $where = '';
 
-      //filter
-      $kategori = $this->input->post('kategori');
-      if ($kategori != '') $where .= "kategori = '{$kategori}'";
-
-      if ($search != '') {
-          if ($where != '') $where .= ' AND ('; else $where .= ' (';
-          for ($i=0; $i < $count_c ; $i++) {
-              $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
-              if ($i < $count_c - 1) {
-                  $where .= ' OR ';
-              }
-          }
-          $where .= ')';
-      }
-      
+    
       if ($where != '') {
           $sql .= " WHERE " . $where;
       }
@@ -70,8 +56,7 @@ class RatingPenggunaModel extends CI_Model{
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) {
             $field = $columnd[$i];
-            if ($i == 6) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
-            else $data[] = $row->$field;
+            $data[] = $row->$field;
          }
          $option['data'][] = $data;
       }
