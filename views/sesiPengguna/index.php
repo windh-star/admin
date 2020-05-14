@@ -388,6 +388,7 @@
   var tabel;
   $(document).ready(function() {
       $('#menu_master').click();
+      $('#menu_pengguna').click();
       $('#menu_sesi_pengguna').prop('class','active');
       getRingkasanKategori($('#filter_kategori').val());
       

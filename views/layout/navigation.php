@@ -54,7 +54,7 @@
                   </li>
 
                 <li class="has_sub">
-                    <a href="#" id="menu_master" class="waves-effect"><i class="md md-now-widgets"></i><span> Suplier </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <a href="#" id="menu_suplier" class="waves-effect"><i class="md md-now-widgets"></i><span> Suplier </span><span class="pull-right"><i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
                         <li id="menu_suplier"><a href="<?php echo base_url('suplier') ?>">Suplier</a></li>
                         <li id="menu_produk"><a href="<?php echo base_url('produk') ?>">Produk</a></li>
@@ -65,7 +65,7 @@
                 </li>
 
                 <li class="has_sub">
-                    <a href="#" id="menu_master" class="waves-effect"><i class="md md-now-widgets"></i><span> Template </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <a href="#" id="menu_template" class="waves-effect"><i class="md md-now-widgets"></i><span> Template </span><span class="pull-right"><i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
                         <li id="menu_template_proyek"><a href="<?php echo base_url('template_proyek') ?>">Template Proyek</a></li>
                         <li id="menu_template_kategori_pekerjaan"><a href="<?php echo base_url('template_kategori_pekerjaan') ?>">Template Kategori Pekerjaan</a></li>
@@ -76,7 +76,7 @@
                 </li>
 
                 <li class="has_sub">
-                    <a href="#" id="menu_master" class="waves-effect"><i class="md md-now-widgets"></i><span> Ekstra </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <a href="#" id="menu_ekstra" class="waves-effect"><i class="md md-now-widgets"></i><span> Ekstra </span><span class="pull-right"><i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
                         <li id="menu_bugs"><a href="<?php echo base_url('bugs') ?>">Bugs</a></li>
                         <li id="menu_rating_penggunaan"><a href="<?php echo base_url('rating_pengguna') ?>">Rating Penggunaan</a></li>

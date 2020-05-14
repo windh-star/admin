@@ -387,7 +387,7 @@
 
   var tabel;
   $(document).ready(function() {
-      $('#menu_master').click();
+      $('#menu_estimasi').click();
       $('#menu_harga_satuan').prop('class','active');
       getRingkasanKategori($('#filter_kategori').val());
       

@@ -152,7 +152,7 @@
                                                 <th style="text-align: center" width="8%">Perusahaan</th>
                                                 <th style="text-align: center" width="10%">Email</th>
                                                 <th style="text-align: center" width="10%">No Telepon</th>
-                                                <th style="text-align: center" width="10%">Aksi</th>
+                                                <th style="text-align: center" width="20%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
