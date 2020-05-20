@@ -1,3 +1,93 @@
+<style>
+td.details-control {
+    background: url('assets/img/favicon_1.ico') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('assets/img/favicon_1.ico') no-repeat center center;
+}
+</style>
+
+<html>
+<body>
+    <table id="example" class="display" style="width:100%">
+      <thead>
+          <tr>
+              <th></th>
+              <th style="text-align: center" width="3%">No.</th>
+              <th style="text-align: center" width="15%">Nama Proyek</th>
+              <th style="text-align: center" width="20%">Nama Pekerjaan</th>
+              <th style="text-align: center" width="15%">Satuan Pekerjaan</th>
+              <th style="text-align: center" width="10%">Tahun</th>
+              <th style="text-align: center" width="13%">Sumber</th>
+              <th style="text-align: center" width="5%">Aksi</th>
+          </tr>
+      </thead>
+      <tfoot></tfoot>
+    </table>
+</body>
+</html>
+
+/* Formatting function for row details - modify as you need */
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.name+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.extn+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+    '</table>';
+}
+     
+$(document).ready(function() {
+    var table = $('#example').DataTable( {
+        "ajax": "../ajax/data/objects.txt",
+        "columns": [
+            {
+                "className":      'details-control',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            },
+            { "data": "No" },
+            { "data": "nama_proyek" },
+            { "data": "nama_pekerjaan" },
+            { "data": "satuan" },
+            { "data": "tahun" },
+            { "data": "sumber" },
+            { "data": "keterangan" },
+        ],
+        "order": [[1, 'asc']]
+    } );
+     
+    // Add event listener for opening and closing details
+    $('#example tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
+} );
+
+
+
 <div class="content-page">
     <!-- Start content -->
     <div class="content">
@@ -183,15 +273,27 @@
                         </div> 
                     </div>
 
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                          <h3 class="panel-title">PILIH WILAYAH</h3>
-                      </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                              <h3 class="panel-title">FILTERING</h3>
+                          </div>
                       <div class="panel-body">
                           <div class="row">
-                              <div class="col-md-6">
+                              <div class="col-md-4">
+                                  <label>Filtering Proyek</label>
                                   <div class="form-group">
-                                      <select class="select2-wilayah" style="width: 100%;" id="wilayah">
+                                      <select class="select2-proyek required" style="width: 100%;" id="proyek-wilayah">
+                                        <option value=""></option>
+                                      </select>
+                                  </div>
+                              </div>
+                              
+                              <div class="col-md-4">
+                                <label>Filtering Pengguna</label>
+                                  <div class="form-group">
+                                      <select class="select2-pengguna required" style="width: 100%;" id="proyek-pengguna">
                                         <option value=""></option>
                                       </select>
                                   </div>
@@ -199,7 +301,7 @@
                           </div>
                       </div>
                     </div>
-                    
+                                        
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title"><?php echo "DATA ".$menu ?></h3>
@@ -209,17 +311,25 @@
                               <div class="col-lg-6">
                                   <div class="panel panel-primary">
                                       <div class="panel-heading">
-                                          <h3 class="panel-title">Ringkasan Status</h3>
+                                          <h3 class="panel-title">Ringkasan Sumber</h3>
                                       </div>
                                       <div class="panel-body">
                                           <ul class="list-group">
                                               <li class="list-group-item">
-                                                  <span class="badge badge-success" id="jum_lengkap" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  Lengkap
+                                                  <span class="badge badge-success" id="jum-pupr" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  PUPR
                                               </li>
                                               <li class="list-group-item">
-                                                  <span class="badge badge-danger" id="jum_belum_lengkap" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  Belum Lengkap
+                                                  <span class="badge badge-danger" id="jum-sni" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  SNI
+                                              </li>
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-danger" id="jum-estimatorid" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  ESTIMATORID
+                                              </li>
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-danger" id="jum-empiris" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  EMPIRIS
                                               </li>
                                           </ul>
                                       </div>
@@ -235,11 +345,12 @@
                                         <thead>
                                             <tr>
                                                 <th style="text-align: center" width="3%">No.</th>
-                                                <th style="text-align: center" width="18%">Wilayah</th>
-                                                <th style="text-align: center" width="46%">Nama Pekerjaan</th>
-                                                <th style="text-align: center" width="12%">Satuan</th>
-                                                <th style="text-align: center" width="10%">Sumber</th>
-                                                <th style="text-align: center" width="13%">Status</th>
+                                                <th style="text-align: center" width="15%">Nama Proyek</th>
+                                                <th style="text-align: center" width="20%">Nama Pekerjaan</th>
+                                                <th style="text-align: center" width="15%">Satuan Pekerjaan</th>
+                                                <th style="text-align: center" width="10%">Tahun</th>
+                                                <th style="text-align: center" width="13%">Sumber</th>
+                                                <th style="text-align: center" width="5%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -440,26 +551,21 @@
     }
   }
 
-  function getRingkasanStatus(id_wilayah){
-    if (id_wilayah != '') {
-        $.ajax({
-            url : "<?php echo base_url('api/getRingkasanStatusAHS/') ?>"+id_wilayah,
-            type: "POST",
-            dataType: "JSON",
-            success: function(data){
-              $('#jum_lengkap').html(data.lengkap);
-              $('#jum_belum_lengkap').html(data.belum_lengkap);
-              $('#jum_ahs').html(parseInt(data.lengkap) + parseInt(data.belum_lengkap));
-              reloadData();
-            }
-        });
-    } else {
-        $('#jum_lengkap').html(0);
-        $('#jum_belum_lengkap').html(0);
-        $('#jum_ahs').html(0);
-        reloadData();
-    }
-  }
+  // function getRingkasanStatus(){
+  //       $.ajax({
+  //           url : "<?php echo base_url('api/getRingkasanSumberAHS/') ?>",
+  //           type: "POST",
+  //           dataType: "JSON",
+  //           success: function(data){
+  //             $('#jum-pupr').html(data.PUPR);
+  //             $('#jum-sni').html(data.SNI);
+  //             $('#jum-estimatorid').html(data.ESTIMATORID);
+  //             $('#jum-empiris').html(data.EMPIRIS);
+  //             $('#jum-ahs').html(parseInt(data.PUPR) + parseInt(data.SNI)) + parseInt(data.ESTIMATORID)) + parseInt(data.EMPIRIS));
+  //             reloadData();
+  //           }
+  //       });
+  // }
 
   var tabel;
   $(document).ready(function() {
@@ -477,9 +583,9 @@
           }
       }
     
-      $(".select2-wilayah").select2({
+      $(".select2-proyek").select2({
           theme: "bootstrap",
-          placeholder: "Pilih Wilayah",
+          placeholder: "Pilih proyek",
           allowClear: true,
           "language": {
             "noResults": function() {
@@ -496,7 +602,7 @@
                return markup;
           },
           ajax: {
-            url: "<?php echo base_url('api/getListWilayah') ?>",
+            url: "<?php echo base_url('api/getListProyek') ?>",
             dataType: 'json',
             delay: 250,
             data: function (params) {
@@ -521,9 +627,9 @@
           templateResult: formatData
       });
       
-      $(".select2-satuan").select2({
+      $(".select2-pengguna").select2({
           theme: "bootstrap",
-          placeholder: "Pilih Satuan",
+          placeholder: "Pilih Pengguna",
           allowClear: true,
           tags: true,
           "language": {
@@ -541,7 +647,7 @@
                return markup;
           },
           ajax: {
-            url: "<?php echo $this->config->item('url_server') ?>api/getListSatuan/",
+            url: "<?php echo $this->config->item('url_server') ?>api/getListPengguna/",
             dataType: 'json',
             delay: 250,
             data: function (params) {

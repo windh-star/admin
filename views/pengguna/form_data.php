@@ -3,6 +3,64 @@
     <div class="content">
         <div class="container">
              <?php $this->load->view('layout/breadcrumb') ?>
+             <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">FILTERING</h3>
+                        </div>
+                      <div class="panel-body">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <label>Wilayah</label>
+                                  <div class="form-group">
+                                      <select class="select2-wilayah required" style="width: 100%;" id="proyek-wilayah">
+                                        <option value=""></option>
+                                      </select>
+                                  </div>
+                              </div>
+                              
+                               <div class="col-md-4">
+                                  <label>Status Verifikasi</label>
+                                   <div class="form-group">
+                                        <select id="filter-status-verifikasi" name="status" class="form-control" onchange="">
+                                          <option value="">- Pilih -</option>
+                                          <option value="1">Sudah Terverifikasi</option>
+                                          <option value="0">Belum Terverifikasi</option>
+                                        </select>
+                                    </div>
+                                  </div>
+                          </div>
+                      </div>
+                    </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Ringkasan Status Verifikasi</h3>
+                            </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge badge-success" id="jum_sudah_verifikasi" style="font-size:10pt; font-weight: bold;">0</span>
+                                    Sudah Terverifikasi
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge badge-danger" id="jum_belum_verifikasi" style="font-size:10pt; font-weight: bold;">0</span>
+                                    Belum Terverifikasi
+                                </li>
+                            </ul>
+                            </div>
+                            <div class="panel-footer">
+                                <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah Status <span class="badge badge-primary pull-right" id="jum_ahs" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                 
                 <!-- Form Ubah Proyek -->  
                 <div id="panel-ubah-pengguna" class="panel panel-default" style="display: none">
                         <div class="panel-heading"> 
@@ -133,8 +191,7 @@
                 </div>
 
             </div>
-             
-                
+                             
                 <div class="row" id="pengguna-tabel">
                     <div class="col-md-12">
                       <div class="panel panel-default">
@@ -149,6 +206,7 @@
                                                 <th style="text-align: center" width="3%">ID Pengguna.</th>
                                                 <th style="text-align: center" width="10%">Nama Pengguna</th>
                                                 <th style="text-align: center" width="40%">Alamat Pengguna</th>
+                                                <th style="text-align: center" width="20%">Nama Wilayah</th>
                                                 <th style="text-align: center" width="8%">Perusahaan</th>
                                                 <th style="text-align: center" width="10%">Email</th>
                                                 <th style="text-align: center" width="10%">No Telepon</th>
@@ -327,6 +385,15 @@
             scrollCollapse: true
     });
         
+    function formatData (data) {
+          if (!data.id) { return data.text; }
+          if (data.kategori != "2") {
+            return "<b>"+data.text+"</b>";
+          } else {
+            return "<span style='padding-left:20px'>"+data.text+"</span>";
+          }
+      }
+
     ///select wilayah
     $(".select2-wilayah").select2({
         theme: "bootstrap",
@@ -369,7 +436,8 @@
                 };
             },
             cache: true
-        }
+        },
+        templateResult: formatData
     });
     //end select wilayah
  

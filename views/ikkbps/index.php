@@ -7,12 +7,10 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <button type="button" id="btn-tambah" class="btn btn-primary waves-effect waves-light" onclick="tampilTambahAHS()"><strong><i class="fa  fa-plus-circle"></i> TAMBAH <?php echo $menu ?></strong></button>
                     <button type="button" id="btn-impor" class="btn btn-danger waves-effect waves-light" onclick="tampilImporAHS()"><strong><i class="fa fa-upload"></i> IMPOR <?php echo $menu ?></strong></button>
-                    <button type="button" id="btn-impor-bua" class="btn btn-danger waves-effect waves-light" onclick="tampilImporBUA()"><strong><i class="fa fa-upload"></i> IMPOR BUA</strong></button>
                     <br><br>
                 </div>
-          </div>
+           </div>
 
                 <!-- <div class="col-md-12"> -->
                     <!-- section tombol aksi -->
@@ -177,9 +175,9 @@
                                         <thead>
                                             <tr>
                                                 <th width="3%">No</th>
-                                                <th width="10%">Wilayah</th>
-                                                <th width="20%">IKK</th>
-                                                <th width="20%">Aksi</th>
+                                                <th width="30%">Wilayah</th>
+                                                <th width="10%">IKK</th>
+                                                <th width="5%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>

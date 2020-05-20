@@ -3,6 +3,18 @@
     <div class="content">
         <div class="container">
              <?php $this->load->view('layout/breadcrumb') ?>
+             <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Filtering Proyek</label>
+                        <div class="form-group">
+                            <select class="select2-proyek required" style="width: 100%;" id="proyek-wilayah">
+                            <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
               <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
@@ -44,7 +56,7 @@
                             </div>
                             <center>
                               <button type="button" id="btn-tambah-kategori" class="btn btn-success waves-effect waves-light" onclick="simpanKategori()"><strong><i class="fa fa-check"></i> SIMPAN</strong></button>
-                              <button type="button" id="btn-batal-tambah" class="btn btn-warning waves-effect waves-light" onclick="batalTambahAlat()"><strong><i class="fa fa-times"></i> BATAL</strong></button>
+                              <button type="button" id="btn-batal-tambah" class="btn btn-warning waves-effect waves-light" onclick="batalTambahPekerjaan()"><strong><i class="fa fa-times"></i> BATAL</strong></button>
                             <center>
                           </form>
                         </div> 
@@ -54,12 +66,13 @@
                           <h3 class="panel-title">TABEL PEKERJAAN</h3>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <br><br>
-                                            <table id="tabel-pekerjaan" height="50px" class="table table-striped table-bordered">
+                                            <table id="tabel-pekerjaan" height="200px" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center" width="3%">No.</th>
+                                                        <th style="text-align: center" width="10%">ID Pekerjaan</th>
+                                                        <th style="text-align: center" width="40%">Nama Proyek</th>
                                                         <th style="text-align: center" width="40%">Nama Pekerjaan</th>
-                                                        <th style="text-align: center" width="40%">Proyek</th>
                                                         <th style="text-align: center" width="8%">Satuan</th>
                                                         <th style="text-align: center" width="10%">Aksi</th>
                                                     </tr>
@@ -87,6 +100,33 @@ function tampilTambahPekerjaan(){
     $('#panel-tambah-pekerjaan').show();
     $('#btn-tambah-pekerjaan').hide();
 }
+
+function batalTambahPekerjaan(){
+    $('#panel-tambah-pekerjaan').hide();
+    $('#btn-tambah').show();
+  }
+
+var simpan_bahan = 0;
+    function simpanBahan() {
+    simpan_bahan++;
+    if (simpan_bahan == 1) {
+        $.ajax({
+            url : "<?php echo base_url('api/simpanBahan') ?>",
+            type: "POST",
+            data: $('#frm-tambah-bahan').serialize(),
+            dataType: "JSON",
+            success: function(data){
+            tampilNotifikasi(data.Info, 'success');
+            $("#frm-tambah-bahan")[0].reset();
+            reloadData();
+            // reloadDataLengkapi();
+            simpan_bahan = 0;
+            batalTambahBahan();
+            }
+        });
+    }
+}
+
       $(document).ready(function(){
         $('#menu_master').click();
         $('#menu_pekerjaan').prop('class','active');

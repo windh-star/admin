@@ -6,23 +6,10 @@
             <div class="row">
                 <div class="col-md-12">
                   <div class="panel panel-default">
-                      <div class="panel-heading">
-                          <h3 class="panel-title">PILIH PROYEK</h3>
-                      </div>
-                      <div class="panel-body">
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <div class="form-group">
-                                      <select class="select2-proyek required" style="width: 100%;" id="kategori-proyek">
-                                        <option value=""></option>
-                                      </select>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
                   </div>
                 </div>
             </div>
+            
             <!-- Form Ubah Kategori -->  
             <div id="panel-ubah-kategori" class="panel panel-default" style="display: none">
                     <div class="panel-heading"> 
@@ -38,7 +25,7 @@
                                     <input type="hidden" id="kategori_ubah">
                                     <input type="hidden" id="ubah_id_proyek" name="id_proyek">
                                     <input type="hidden" id="ubah_id_pelaksana" name="id_pelaksana">
-                                    <input type="hidden" id="ubah_level" name="level">
+                                   
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Proyek</label>
@@ -49,6 +36,10 @@
                                 <div class="form-group">
                                     <label>Kategori Pekerjaan</label>
                                     <input type="text" id="ubah_kategori" name="kategori" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Level</label>
+                                    <input type="text" id="ubah_level" name="level" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -75,6 +66,7 @@
                                                         <th style="text-align: center" width="10%">ID Kategori</th>
                                                         <th style="text-align: center" width="30%">Nama Proyek</th>
                                                         <th style="text-align: center" width="25%">Kategori Pekerjaan</th>
+                                                        <th style="text-align: center" width="25%">Level</th>
                                                         <th style="text-align: center" width="8%">Aksi</th>
                                                     </tr>
                                                 </thead>
@@ -104,7 +96,7 @@
         tabel.ajax.reload(); 
     }
      //end fungsi auto reload tata
- 
+
     ///Tampil form ubah kategori
     function TampilubahKategori(id_kategori){
         $.ajax({
@@ -117,7 +109,7 @@
                 $('#ubah_kategori').val(data.kategori);
                 $('#ubah_id_proyek').val(data.id_proyek);
                 $('#ubah_id_pelaksana').val(data.id_pelaksana);
-                $('#ubah_level').val(data.ubah_level);
+                $('#ubah_level').val(data.level);
             }
         });
         

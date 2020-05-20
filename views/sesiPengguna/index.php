@@ -5,31 +5,7 @@
 
             <?php $this->load->view('layout/breadcrumb') ?>
 
-            <div class="row">
-                <!-- section untuk filtering -->
-                <div class="col-md-12">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                          <h3 class="panel-title">PILIH KATEGORI</h3>
-                      </div>
-                      <div class="panel-body">
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <div class="form-group">
-                                        <select id="filter_kategori" name="kategori" class="form-control" onchange="">
-                                          <option value="">- Pilih -</option>
-                                          <option value="A">Bahan</option>
-                                          <option value="B">Upah</option>
-                                          <option value="C">Alat</option>
-                                        </select>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-
-                <!-- <div class="col-md-12"> -->
+                    <!-- <div class="col-md-12"> -->
                     <!-- section tombol aksi -->
                     <!-- <button type="button" id="btn-tambah" class="btn btn-primary waves-effect waves-light" onclick="tampilTambahBahan()"><strong><i class="fa fa-plus-circle"></i> TAMBAH <?php echo strtoupper($menu) ?></strong></button>
                     <br><br> -->
@@ -191,49 +167,15 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                              <div class="col-lg-6">
-                                  <div class="panel panel-primary">
-                                      <div class="panel-heading">
-                                          <h3 class="panel-title">Ringkasan Kategori</h3>
-                                      </div>
-                                      <div class="panel-body">
-                                          <ul class="list-group">
-                                              <li class="list-group-item">
-                                                  <span class="badge badge-warning" id="jum_bahan" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  Bahan
-                                              </li>
-                                              <li class="list-group-item">
-                                                  <span class="badge badge-danger" id="jum_upah" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  Upah
-                                              </li>
-                                              <li class="list-group-item">
-                                                  <span class="badge badge-success" id="jum_alat" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  Alat
-                                              </li>
-                                          </ul>
-                                      </div>
-                                      <div class="panel-footer">
-                                        <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah <span class="badge badge-primary pull-right" id="jum_semua" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>
-
-                            <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <table id="tabel-sesi-pengguna" class="table table-striped table-bordered" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th width="2%">No</th>
                                                 <th width="10%">IP Address</th>
-                                                <th width="25%">Nama Pengguna</th>
                                                 <th width="10%">Platform</th>
                                                 <th width="10%">Browser</th>
-                                                <th width="10%">foto</th>
-                                                <th width="10%">Waktu</th>
-                                                <th width="10%">Proyek</th>
-                                                <th width="5%">Status</th>
-                                                <th width="10%">Aksi</th>
+                                                <th width="25%">Nama Pengguna</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>

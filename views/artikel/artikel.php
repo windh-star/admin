@@ -6,29 +6,13 @@
             <?php $this->load->view('layout/breadcrumb') ?>
 
             <div class="row">
-                <!-- section untuk filtering -->
                 <div class="col-md-12">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                          <h3 class="panel-title">PILIH KATEGORI</h3>
-                      </div>
-                      <div class="panel-body">
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <div class="form-group">
-                                        <select id="filter_kategori" name="kategori" class="form-control" onchange="">
-                                          <option value="">- Pilih Kategori -</option>
-                                          <option value="A">Artikel</option>
-                                          <option value="B">Berita</option>
-                                          <option value="C">Event</option>
-                                        </select>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+                    <button type="button" id="btn-tambah" class="btn btn-primary waves-effect waves-light" onclick="tampilTambahArtikel()"><strong><i class="fa  fa-plus-circle"></i> TAMBAH <?php echo $menu ?></strong></button>
                 </div>
+            </div><br>
 
+            <div class="row">
+                
                 <!-- <div class="col-md-12"> -->
                     <!-- section tombol aksi -->
                     <!-- <button type="button" id="btn-tambah" class="btn btn-primary waves-effect waves-light" onclick="tampilTambahBahan()"><strong><i class="fa fa-plus-circle"></i> TAMBAH <?php echo strtoupper($menu) ?></strong></button>
@@ -225,14 +209,10 @@
                                         <thead>
                                             <tr>
                                                 <th width="3%">No</th>
-                                                <th width="10%">Judul Artikel</th>
+                                                <th width="30%">Judul Artikel</th>
                                                 <th width="20%">Kategori</th>
-                                                <th width="20%">Status</th>
-                                                <th width="10%">Foto coer</th>
-                                                <th width="20%">tgl dibat</th>
-                                                <th width="10%">jam dibuat</th>
-                                                <th width="10%">jam dibuat</th>
-                                                <th width="20%">aksi</th>
+                                                <th width="20%">Tgl Dibuat</th>
+                                                <th width="5%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
