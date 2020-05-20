@@ -10,7 +10,7 @@ class TemplateHargaSatuanModel extends CI_Model{
 
     function getTabelTemplateHargaSatuan($datatable){
       $columns = implode(', ', $datatable['col-display']);
-      $query  = "(SELECT  template_harga_satuan.*,pengguna.nama_pengguna FROM template_harga_satuan,pengguna WHERE  template_harga_satuan.id_pengguna=pengguna.id_penggua) a";
+      $query  = "(SELECT  template_harga_satuan.id_harga_satuan,template_harga_satuan.id_template,template_harga_satuan.id_pekerjaan,template_harga_satuan.nama_pekerjaan,template_harga_satuan.satuan,template_harga_satuan.id_kategori,template_harga_satuan.level,template_harga_satuan.have_sub,template_harga_satuan.total_harga,template_harga_satuan.temp_total_harga,template_harga_satuan.sumber,template_harga_satuan.tgl_dibuat,template_harga_satuan.jam_dibuat FROM template_harga_satuan) a";
 
       $sql  = "SELECT {$columns} FROM {$query}";
 
@@ -70,7 +70,7 @@ class TemplateHargaSatuanModel extends CI_Model{
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) {
             $field = $columnd[$i];
-            if ($i == 7) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
+            if ($i == 8) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
             else $data[] = $row->$field;
          }
          $option['data'][] = $data;

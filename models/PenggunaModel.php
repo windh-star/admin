@@ -78,14 +78,36 @@ class PenggunaModel extends CI_Model{
         foreach ($data->result() as $row) {
             $data = array();
             $data[] = null;
-            for ($i=0; $i < $count_c; $i++) { 
+            for ($i=0; $i < $count_c; $i++) {
                  $data[] = $row->$columnd[$i];
             }
+
+            // for ($i=0; $i < $count_c; $i++) { 
+            //     if ('status==1') { 
+            //         "<td style='background-color:yellow;'>".$data."</td>";
+                    
+            //       } else "<td style='background-color:white;'>".$data."</td>";
+             
+            // }
+
+            // for ($i=0; $i < $count_c; $i++) { 
+            //     if ("status==1") { 
+            //       if ($row->$columnd[$i] == "PUPR") $data[] = "<span class='label label-success'>".$row->$columnd[$i]."</span>";
+            //       else $data[] = "<td style='background-color:yellow;'>".$row->$columnd[$i]."</td>";
+            //     } else $data[] = $row->$columnd[$i];
+            //  }
+
+
              $data[] = "<div class='btn-group'>".
 					   "<button type='button' class='btn btn-success btn-sm' id='btn-ubah-pengguna' onClick='TampilUbahPengguna(".$data[1].")' title='Ubah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
 					   "<button type='button' class='btn btn-primary btn-sm' id='btn-detail-pengguna' onClick='TampilDetailPengguna(".$data[1].")' title='Detail' data-id='$data[1]'><i class='fa fa-eye'></i></button>".
-					   "</div>";
+                       "</div>";
+                       
+
             $option['data'][] = $data;
+            // if ('status==1') { 
+            //    "<td style='background-color:yellow;'>".$data."</td>";
+            // } else "<td style='background-color:white;'>".$data."</td>";
         }
         return print_r(json_encode($option));
     }

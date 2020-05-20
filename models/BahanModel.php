@@ -23,7 +23,7 @@ class BahanModel extends CI_Model {
       else $tabel_bahan = $this->lengkapi_tabel;
 
       $columns = implode(', ', $datatable['col-display']);
-      $sql  = "SELECT {$columns} FROM {$tabel_bahan}";
+      $sql  = "(SELECT {$columns},id_wilayah FROM {$tabel}, wilayah where bahan.id_wilayah= wilayah.id_wilayah)";
 
       // get total data
       $data = $this->db->query($sql);
@@ -78,9 +78,11 @@ class BahanModel extends CI_Model {
       foreach ($data->result() as $row) {
        $data = array();
          $data[] = null;
-         for ($i=0; $i < $count_c; $i++) { 
-            $data[] = $row->$columnd[$i];
-         }
+         $data[] = "<div class='btn-group'>".
+           "<button type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+           "<button type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+       "</div>";
+
          $option['data'][] = $data;
       }
 
@@ -93,8 +95,9 @@ class BahanModel extends CI_Model {
     //   $columns = str_replace('id_wilayah', 'bahan.id_wilayah', $columns);
     //   $join = "INNER JOIN {$this->tabel_rf1} ON {$this->foreign_key1} = {$this->primary_key_rf1}";
     //   $sql  = "SELECT {$columns} FROM {$this->tabel} {$join}";
-      $sql  = "SELECT {$columns} FROM {$this->view}";
+      $query  = "(SELECT bahan.id_bahan,bahan.id_wilayah, bahan.id_proyek, bahan.nama_bahan, bahan.satuan, bahan.merk, bahan.spesifikasi, bahan.harga_dasar, bahan.tahun, bahan.sumber, bahan.keterangan, wilayah.wilayah, proyek.nama_proyek FROM bahan, wilayah, proyek WHERE bahan.id_wilayah=wilayah.id_wilayah AND bahan.id_proyek=proyek.id_proyek) a";
 
+      $sql="SELECT {$columns} FROM {$query}";
       // get total data
       $data = $this->db->query($sql);
       $total_data = $data->num_rows();
@@ -120,7 +123,7 @@ class BahanModel extends CI_Model {
                   $where .= ' OR ';
               }
           }
-          $where .= ')';
+          $where .= '';
       }
       
       if ($where != '') {
@@ -155,16 +158,13 @@ class BahanModel extends CI_Model {
        $data = array();
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) { 
-            if ($i == 6) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
-            else if ($i == 7) { 
-              if ($row->$columnd[$i-1] == "0") $data[] = "<span class='label label-warning'>Belum Lengkap</span>";
-              else {
-                if ($row->$columnd[$i] == "1") $data[] = "<span class='label label-success'>Terverifikasi</span>";
-                else $data[] = "<span class='label label-danger'>Belum Terverifikasi</span>";
-              }
-            } else $data[] = $row->$columnd[$i];
+             $field=$columnd[$i];
+            $data[] = $row->$field;
          }
-         $data[] = null;
+         $data[] = "<div class='btn-group'>".
+         "<button type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+         "<button type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+     "</div>";
          $option['data'][] = $data;
       }
 
@@ -318,4 +318,9 @@ class BahanModel extends CI_Model {
 
       $this->db->update($this->tabel, $val);
   }
+
+  function getRingkasanSumberBahan(){
+    return $this->db->query("SELECT id_bahan,SUM(shbj) as shbj,SUM(estimatorid) as estimatorid, SUM(survey) as survey from (SELECT id_bahan,IF(sumber = '1',COUNT(*),0) AS `shbj`, IF(sumber = '2',COUNT(*),0) AS `estimatorid`,IF(sumber = '3',COUNT(*),0) AS `survey` FROM (select * from bahan GROUP BY id_bahan) a group by sumber) b");
+}
+
 }

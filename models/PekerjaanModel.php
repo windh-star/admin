@@ -29,29 +29,31 @@ class PekerjaanModel extends CI_Model{
         
         $search = $datatable['search']['value'];
         $where ='';
-        
-        if ($search != '') {   ///Jika where nya ada value nya
-            if ($where != '') {
-              $where .= ' AND (';
-              for ($i=0; $i < $count_c ; $i++) {
-                  $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
-                  if ($i < $count_c - 1) {
-                      $where .= ' OR ';
-                  }
-              }
-              $where .= ')';
-            } else { //JIka where tak ada value nya
-              for ($i=0; $i < $count_c ; $i++) {
-                  $where .= $columnd[$i] . ' LIKE "%'. $search .'%"';
-                  if ($i < $count_c - 1) {
-                      $where .= ' OR ';
-                    }
-                }
-            }
-        }
-        if ($where != '') {
-            $sql .= " WHERE " . $where;  
-        }
+           ///filter 
+           $proyek = $this->input->post('proyek');
+           if($proyek != ''){ 
+           $where .= $this->foreign_key1 .'=" '. $proyek .'"';
+           if($search != '' ) {
+               if($where != '') $where .= ' AND ('; else $where .= '(';
+               for($i=0; $i<$count_c; $i++){
+                   $where .= $columnd[$i] . ' LIKE "%' . $search .'%"';
+                   if($i<$count_c -1 ){
+                       $where .= ' OR ';
+                   }
+               }
+               $where .= ')';
+           }
+           }else{
+             for ($i=0; $i < $count_c ; $i++) {
+                 $where .= $columnd[$i] . ' LIKE "%'. $search .'%"';
+                 if ($i < $count_c - 1) {
+                     $where .= ' OR ';
+                   }
+               }
+           }
+           if($where != ''){
+               $sql .= " WHERE " . $where;
+           }
              ///get total filtered
         $data = $this->db->query($sql);
         $total_filter = $data->num_rows();

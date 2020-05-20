@@ -10,7 +10,7 @@ class MerkModel extends CI_Model{
 
     function getTabelMerk($datatable){
       $columns = implode(', ', $datatable['col-display']);
-      $query  = "(SELECT * FROM merk) a";
+      $query  = "(SELECT merk.id_merk,merk.merk, merk.logo FROM merk) a";
 
       $sql  = "SELECT {$columns} FROM {$query}";
 
@@ -70,8 +70,7 @@ class MerkModel extends CI_Model{
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) {
             $field = $columnd[$i];
-            if ($i == 6) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
-            else $data[] = $row->$field;
+           $data[] = $row->$field;
          }
          $option['data'][] = $data;
       }

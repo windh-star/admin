@@ -8,7 +8,7 @@ ini_set('max_execution_time', 1800);
 class SubKategoriProdukModel extends CI_Model{
     public $tabel = "sub_kategori_produk";
 
-    function getTabelKategoriProduk($datatable){
+    function getTabelSubKategoriProduk($datatable){
       $columns = implode(', ', $datatable['col-display']);
       $query  = "(SELECT sub_kategori_produk.id_sub_kategori,sub_kategori_produk.id_kategori,sub_kategori_produk.sub_kategori,sub_kategori_produk.icon,kategori_produk.kategori FROM sub_kategori_produk,kategori_produk WHERE sub_kategori_produk.id_kategori=kategori_produk.id_kategori) a";
 

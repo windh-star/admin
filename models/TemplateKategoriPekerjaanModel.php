@@ -10,7 +10,7 @@ class TemplateKategoriPekerjaanModel extends CI_Model{
 
     function getTabelTemplateKategoriPekerjaan($datatable){
       $columns = implode(', ', $datatable['col-display']);
-      $query  = "(SELECT * FROM template_kategori_pekerjaan) a";
+      $query  = "(SELECT template_kategori_pekerjaan.id_kategori,template_kategori_pekerjaan.id_template,template_kategori_pekerjaan.level,template_kategori_pekerjaan.kategori FROM template_kategori_pekerjaan) a";
 
       $sql  = "SELECT {$columns} FROM {$query}";
 
@@ -70,8 +70,7 @@ class TemplateKategoriPekerjaanModel extends CI_Model{
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) {
             $field = $columnd[$i];
-            if ($i == 6) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
-            else $data[] = $row->$field;
+           $data[] = $row->$field;
          }
          $option['data'][] = $data;
       }

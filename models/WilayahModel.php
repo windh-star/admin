@@ -8,7 +8,7 @@ class WilayahModel extends CI_Model {
 	public $tabel = "wilayah";
 	public $id_kategori ="id_kategori";
 	public $tabel_buabps = "tabel_buabps";
-
+	public $tabel_wilayah = "wilayah";
 
     function getTabelWilayah($datatable){
 		$columns = implode(', ', $datatable['col-display']);

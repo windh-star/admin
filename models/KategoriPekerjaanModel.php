@@ -29,6 +29,7 @@ class KategoriPekerjaanModel extends CI_model{
         
         $search = $datatable['search']['value'];
         $where ='';
+
         ///filter 
         $proyek = $this->input->post('proyek');
         if($proyek != ''){ 
@@ -82,8 +83,9 @@ class KategoriPekerjaanModel extends CI_model{
                 $data[] = $row->$columnd[$i];
             }
             $data[] = "<div class='btn-group'>".
-					     "<button type='button' class='btn btn-success btn-sm' id='btn-ubah-kategori' onclick='TampilubahKategori(".$data[1].")' title='Ubah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
-					 "</div>";
+           "<button type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]' onclick='TampilUbahProyek(".$data[1].")'><i class='fa fa-edit'></i></button>".
+           "<button type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+       "</div>";
             $option['data'][] = $data;
         }
         return print_r(json_encode($option));
@@ -109,9 +111,6 @@ class KategoriPekerjaanModel extends CI_model{
      }
      function ubahKategori($data){
          $val = array(
-             'id_kategori' => $data['id_kategori'],
-             'id_proyek' => $data['id_proyek'],
-             'id_pelaksana' => $data['id_pelaksana'],
              'level' => $data['level'],
              'kategori' => $data['kategori']
              );

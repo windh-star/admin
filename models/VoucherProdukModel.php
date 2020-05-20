@@ -10,7 +10,7 @@ class VoucherProdukModel extends CI_Model{
 
     function getTabelVoucherProduk($datatable){
       $columns = implode(', ', $datatable['col-display']);
-      $query  = "(SELECT voucher_produk.*,proyek.nama_proyek,produk.nama_produk FROM proyek,produk,voucher_produk WHERE voucher_produk.id_proyek=proyek.id_proyek AND voucher_produk.id_produk=produk.id_produk) a";
+      $query  = "(SELECT voucher_produk.id_voucher,voucher_produk.kode_voucher,voucher_produk.id_proyek,voucher_produk.id_produk,voucher_produk.harga_diskon,voucher_produk.klaim,voucher_produk.id_pengguna,voucher_produk.tgl_klaim,voucher_produk.jam_klaim, voucher_produk.batas_tgl_klaim, voucher_produk.status,proyek.nama_proyek,produk.nama_produk,pengguna.nama_pengguna FROM proyek,produk,voucher_produk,pengguna WHERE voucher_produk.id_proyek=proyek.id_proyek AND voucher_produk.id_produk=produk.id_produk AND voucher_produk.id_pengguna=pengguna.id_pengguna) a";
 
       $sql  = "SELECT {$columns} FROM {$query}";
 
@@ -70,7 +70,7 @@ class VoucherProdukModel extends CI_Model{
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) {
             $field = $columnd[$i];
-            if ($i == 6) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
+            if ($i == 4) $data[] = "Rp ".number_format($row->$field, 2, ",", ".");
             else $data[] = $row->$field;
          }
          $option['data'][] = $data;
