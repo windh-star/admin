@@ -5,7 +5,7 @@ header("Access-Control-Allow-Origin: *");
 class TemplateKategoriPekerjaanController extends CI_controller{
     public function __construct(){
         parent::__construct();
-        $this->load->model("TemplateKategoriPekerjaankModel");
+        $this->load->model("TemplateKategoriPekerjaanModel");
     }
     
     public function index(){

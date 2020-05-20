@@ -44,14 +44,17 @@ class BahanController extends CI_Controller {
 	            $datatable  = $_POST;
 
 	            $datatable['col-display'] = array(
-		    								   'urut',
-		    								   'wilayah',
+		    								   'nama_proyek',
+		    								   'id_bahan',
+	            	    		               'wilayah',
 	            	    		               'nama_bahan',
 	            	    		               'satuan',
-	            	    		               'spesifikasi',
 	            	    		               'merk',
-	            	    		               'harga_dasar',
-	            	    		               'status'
+	            	    		               'spesifikasi',
+											   'harga_dasar',
+											   'tahun',
+											   'sumber',
+											   'keterangan'
 	            	    		             );
 
 		    	return $this->BahanModel->getTabelBahan($datatable);
@@ -213,6 +216,16 @@ class BahanController extends CI_Controller {
 	      'Success' => true,
 	      'Info' => 'Data bahan berhasil diverifikasi semua.'
 	    );
+
+	    $this->output
+	         ->set_status_header(201)
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	         ->_display();
+	    exit;
+	}
+	public function getRingkasanSumberBahan(){
+	    $response = $this->BahanModel->getRingkasanSumberBahan()->row();
 
 	    $this->output
 	         ->set_status_header(201)

@@ -26,11 +26,12 @@ class AHSController extends CI_Controller {
 	            $datatable  = $_POST;
 
 	            $datatable['col-display'] = array(
-		    								   'wilayah',
+		    								   'nama_proyek',
 		    								   'nama_pekerjaan',
-		    								   'satuan',
-		    								   'sumber',
-		    								   'status'
+		    								   'satuan_pekerjaan',
+		    								   'tahun',
+											   'ket_sumber',
+											   'keterangan'
 	            	    		             );
 
 		    	return $this->AHSModel->getTabelAHS($datatable);
@@ -56,6 +57,28 @@ class AHSController extends CI_Controller {
 	      'Success' => true,
 	      'Info' => 'Data AHS berhasil disimpan.'
 	    );
+
+	    $this->output
+	         ->set_status_header(201)
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	         ->_display();
+	    exit;
+	}
+
+	public function getRincianAHS($proyek,$id_pekerjaan){
+		$response = $this->AHSModel->getRincianAHS($proyek,$id_pekerjaan)->result();
+
+	  $this->output
+			 ->set_status_header(200)
+			 ->set_content_type('application/json')
+			 ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+			 ->_display();
+	  exit;
+	}
+
+	public function getRingkasanSumberAHS(){
+	    $response = $this->AHSModel->getRingkasanSumberAHS()->row();
 
 	    $this->output
 	         ->set_status_header(201)

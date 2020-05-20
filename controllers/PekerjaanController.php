@@ -22,8 +22,9 @@ class PekerjaanController extends CI_Controller{
 	            $datatable  = $_POST;
 
 	            $datatable['col-display'] = array(
-		    								   'nama_pekerjaan',
+                                               'id_pekerjaan',
 		    								   'nama_proyek',
+		    								   'nama_pekerjaan',
 	            	    		               'satuan',
 	            	    		             );
 		    	return $this->PekerjaanModel->getTabelPekerjaan($datatable);

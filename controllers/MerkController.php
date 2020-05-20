@@ -15,7 +15,7 @@ class MerkController extends CI_controller{
         $this->load->view('layout', $data);
     }
 
-    public function getTabelRatingProduk(){
+    public function getTabelMerk(){
         if (
             isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
             !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 

@@ -24,7 +24,9 @@ class KategoriPekerjaanController extends CI_controller{
 	            $datatable['col-display'] = array(
 	                                           'id_kategori',
 	                                           'nama_proyek',
-		    								   'kategori',
+                                               'kategori',
+                                               'status',
+                                               'level'
 	            	    		             );
 		    	return $this->KategoriPekerjaanModel->getTabelKategoriPekerjaan($datatable);
     		}
