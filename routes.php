@@ -72,6 +72,7 @@ $route['api/getBahanKriteria/(:any)/(:any)'] = 'BahanController/getBahanKriteria
 $route['api/getRincianBahan/(:any)'] = 'BahanController/getRincianBahan/$1';
 $route['api/getLengkapiBahanKriteria/(:any)/(:any)'] = 'BahanController/getLengkapiBahanKriteria/$1/$2';
 $route['api/getListBahan'] = 'BahanController/getListBahan';
+$route['api/getRingkasanSumberBahan'] = 'BahanController/getRingkasanSumberBahan';
 
 $route['alat'] = 'AlatController/index';
 $route['api/getRingkasanStatusAlat/(:any)'] = 'AlatController/getRingkasanStatus/$1';
@@ -109,6 +110,8 @@ $route['ahs'] = 'AHSController/index';
 $route['api/getRingkasanStatusAHS/(:any)'] = 'AHSController/getRingkasanStatus/$1';
 $route['api/simpanAHS'] = 'AHSController/simpanAHS';
 $route['api/getTabelAHS'] = 'AHSController/getTabelAHS';
+$route['api/getRincianAHS'] = 'AHSController/getRincianAHS/$1/$2';
+$route['api/getRingkasanSumberAHS'] = 'AHSController/getRingkasanSumberAHS';
 
 $route['impor'] = 'ImporEksporController/impor';
 $route['imporBUA'] = 'ImporEksporController/imporBUA';
@@ -234,8 +237,8 @@ $route['merk'] = 'MerkController/index';
 $route['api/getTabelMerk'] = 'MerkController/getTabelMerk';
 
 //voucher
-$route['voucher'] = 'VoucherController/index';
-$route['api/getTabelVoucher'] = 'VoucherController/getTabelVoucher';
+$route['voucher'] = 'VoucherProdukController/index';
+$route['api/getTabelVoucherProduk'] = 'VoucherProdukController/getTabelVoucherProduk';
 
 //template proyek
 $route['template_proyek'] = 'TemplateProyekController/index';
@@ -248,6 +251,10 @@ $route['api/getTabelTemplateKategoriPekerjaan'] = 'TemplateKategoriPekerjaanCont
 //template pekerjaan
 $route['template_pekerjaan'] = 'TemplatePekerjaanController/index';
 $route['api/getTabelTemplatePekerjaan'] = 'TemplatePekerjaanController/getTabelTemplatePekerjaan';
+
+//template ahs
+$route['template_ahs'] = 'TemplateAhsController/index';
+$route['api/getTabelTemplateAhs'] = 'TemplateAhsController/getTabelTemplateAhs';
 
 //template harga satuan
 $route['template_harga_satuan'] = 'TemplateHargaSatuanController/index';
