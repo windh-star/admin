@@ -57,6 +57,16 @@ $route['beranda'] = 'BerandaController/index';
 $route['login'] = 'LoginController/index';
 $route['api/loginPengguna'] = 'LoginController/loginPengguna';
 
+$route['bahanterpakai'] = 'BahanTerpakaiController/index';
+$route['api/getTabelBahanTerpakai'] = 'BahanTerpakaiController/getTabelBahanTerpakai';
+$route['api/getRincianBahanTerpakai/(:any)/(:any)/(:any)'] = 'BahanTerpakaiController/getRincianBahanTerpakai/$1/$2/$3';
+$route['api/getRincianJumlahBahanTerpakai/(:any)/(:any)/(:any)'] = 'BahanTerpakaiController/getRincianJumlahBahanTerpakai/$1/$2/$3';
+
+$route['alatterpakai'] = 'AlatTerpakaiController/index';
+$route['api/getTabelAlatTerpakai'] = 'AlatTerpakaiController/getTabelAlatTerpakai';
+$route['api/getRincianAlatTerpakai/(:any)/(:any)/(:any)'] = 'AlatTerpakaiController/getRincianAlatTerpakai/$1/$2/$3';
+$route['api/getRincianJumlahAlatTerpakai/(:any)/(:any)/(:any)'] = 'AlatTerpakaiController/getRincianJumlahAlatTerpakai/$1/$2/$3';
+
 $route['bahan'] = 'BahanController/index';
 $route['api/getRingkasanStatusBahan/(:any)'] = 'BahanController/getRingkasanStatus/$1';
 $route['api/getTabelBahan'] = 'BahanController/getTabelBahan';
@@ -73,6 +83,9 @@ $route['api/getRincianBahan/(:any)'] = 'BahanController/getRincianBahan/$1';
 $route['api/getLengkapiBahanKriteria/(:any)/(:any)'] = 'BahanController/getLengkapiBahanKriteria/$1/$2';
 $route['api/getListBahan'] = 'BahanController/getListBahan';
 $route['api/getRingkasanSumberBahan'] = 'BahanController/getRingkasanSumberBahan';
+$route['api/hapusBahan'] = 'BahanController/hapusBahan';
+$route['api/getInfoBahan/(:any)'] = 'BahanController/getInfoBahan/$1';
+
 
 $route['alat'] = 'AlatController/index';
 $route['api/getRingkasanStatusAlat/(:any)'] = 'AlatController/getRingkasanStatus/$1';
@@ -89,6 +102,9 @@ $route['api/getAlatKriteria/(:any)/(:any)'] = 'AlatController/getAlatKriteria/$1
 $route['api/getRincianAlat/(:any)'] = 'AlatController/getRincianAlat/$1';
 $route['api/getLengkapiAlatKriteria/(:any)/(:any)'] = 'AlatController/getLengkapiAlatKriteria/$1/$2';
 $route['api/getListAlat'] = 'AlatController/getListAlat';
+$route['api/getInfoAlat/(:any)'] = 'AlatController/getInfoAlat/$1';
+$route['api/getRingkasanSumberAlat'] = 'AlatController/getRingkasanSumberAlat';
+
 
 $route['upah'] = 'UpahController/index';
 $route['api/getRingkasanStatusUpah/(:any)'] = 'UpahController/getRingkasanStatus/$1';
@@ -105,12 +121,15 @@ $route['api/getUpahKriteria/(:any)/(:any)'] = 'UpahController/getUpahKriteria/$1
 $route['api/getRincianUpah/(:any)'] = 'UpahController/getRincianUpah/$1';
 $route['api/getLengkapiUpahKriteria/(:any)/(:any)'] = 'UpahController/getLengkapiUpahKriteria/$1/$2';
 $route['api/getListUpah'] = 'UpahController/getListUpah';
+$route['api/getInfoUpah/(:any)'] = 'UpahController/getInfoUpah/$1';
+$route['api/getRingkasanSumberUpah'] = 'UpahController/getRingkasanSumberUpah';
+
 
 $route['ahs'] = 'AHSController/index';
 $route['api/getRingkasanStatusAHS/(:any)'] = 'AHSController/getRingkasanStatus/$1';
 $route['api/simpanAHS'] = 'AHSController/simpanAHS';
 $route['api/getTabelAHS'] = 'AHSController/getTabelAHS';
-$route['api/getRincianAHS'] = 'AHSController/getRincianAHS/$1/$2';
+$route['api/getRincianAHS/(:any)/(:any)'] = 'AHSController/getRincianAHS/$1/$2';
 $route['api/getRingkasanSumberAHS'] = 'AHSController/getRingkasanSumberAHS';
 
 $route['impor'] = 'ImporEksporController/impor';
@@ -118,6 +137,7 @@ $route['imporBUA'] = 'ImporEksporController/imporBUA';
 
 $route['api/getListWilayah'] = 'WilayahController/getListWilayah';
 $route['api/getWilayahKriteria/(:any)/(:any)'] = 'WilayahController/getWilayahKriteria/$1/$2';
+
 
 ///Pengguna
 $route['pengguna'] = 'PenggunaController/index';
@@ -131,6 +151,8 @@ $route['api/getTabelProyek'] = 'ProyekController/getTabelProyek';
 ///Pekerjaan
 $route['pekerjaan'] = 'PekerjaanController/index';
 $route['api/getTabelPekerjaan'] = 'PekerjaanController/getTabelPekerjaan';
+$route['api/ubahPekerjaan'] = 'PekerjaanController/ubahPekerjaan';
+$route['api/hapusPekerjaan'] = 'PekerjaanController/hapusPekerjaan';
 
 //Kategori Pekerjaan
 $route['kategori_pekerjaan'] = 'KategoriPekerjaanController/index';
@@ -140,10 +162,13 @@ $route['api/simpanKategori'] = 'KategoriPekerjaanController/simpanKategori';
 //$route['api/getRingkasanProyek/(:any)']  = 'KategoriPekerjaanController/getRingkasanProyek/$1';
 $route['api/getInfoKategori/(:any)'] = 'KategoriPekerjaanController/getInfoKategori/$1';
 $route['api/ubahKategori'] = 'KategoriPekerjaanController/ubahKategori';
+$route['api/hapusKategori'] = 'KategoriPekerjaanController/hapusKategori';
+
 ///proyek
 $route['api/getListProyek'] = 'ProyekController/getListProyek';
 $route['api/getInfoProyek/(:any)'] = 'ProyekController/getInfoProyek/$1';
 $route['api/ubahProyek'] = 'ProyekController/ubahProyek';
+
 ///Penngguna
 $route['api/getInfoPengguna/(:any)'] = 'PenggunaController/getInfoPengguna/$1';
 $route['api/ubahPengguna'] = 'PenggunaController/ubahPengguna';
@@ -247,6 +272,7 @@ $route['api/getTabelTemplateProyek'] = 'TemplateProyekController/getTabelTemplat
 //template kategori pekerjaan
 $route['template_kategori_pekerjaan'] = 'TemplateKategoriPekerjaanController/index';
 $route['api/getTabelTemplateKategoriPekerjaan'] = 'TemplateKategoriPekerjaanController/getTabelTemplateKategoriPekerjaan';
+
 
 //template pekerjaan
 $route['template_pekerjaan'] = 'TemplatePekerjaanController/index';
