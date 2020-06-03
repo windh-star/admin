@@ -4,82 +4,38 @@
         <div class="container">
              <?php $this->load->view('layout/breadcrumb') ?>
              <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Filtering Proyek</label>
-                        <div class="form-group">
-                            <select class="select2-proyek required" style="width: 100%;" id="proyek-wilayah">
-                            <option value=""></option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
+                
               <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-12">
-                    <button type="button" id="btn-tambah" class="btn btn-primary waves-effect waves-light" onclick="tampilTambahPekerjaan()"><strong><i class="fa fa-plus-circle"></i> TAMBAH <?php echo strtoupper($menu) ?></strong></button>
-                    <br><br>
-                    <div id="panel-tambah-pekerjaan" class="panel panel-default" style="display: none">
-                        <div class="panel-heading"> 
-                            <h3 class="panel-title">TAMBAH <?php echo strtoupper($menu) ?></h3> 
-                        </div> 
-                        <div class="panel-body"> 
-                          <form role="form" id="frm-tambah-alat">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <div class="form-group">
-                                       <label>Nama Pekerjaan</label>
-                                        <input type="text" id="pekerjaan" name="nama_pekerjaaan" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Proyek</label>
-                                        <select class="select2-proyek required" style="width: 100%" id="proyek" name="id_proyek">
-                                          <option value=""></option>
-                                        </select>
-                                    </div>
-                                    </div>
-                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <div class="form-group">
-                                        <label>Pelaksana</label>
-                                        <select class="select2-pelaksana required" style="width: 100%" id="proyek" name="id_pelaksana">
-                                          <option value=""></option>
-                                        </select>
-                                    </div>
-                                     <div class="form-group">
-                                        <label>Level</label>
-                                        <select class="select2-level required" style="width: 100%" id="proyek" name="level">
-                                          <option value=""></option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <center>
-                              <button type="button" id="btn-tambah-kategori" class="btn btn-success waves-effect waves-light" onclick="simpanKategori()"><strong><i class="fa fa-check"></i> SIMPAN</strong></button>
-                              <button type="button" id="btn-batal-tambah" class="btn btn-warning waves-effect waves-light" onclick="batalTambahPekerjaan()"><strong><i class="fa fa-times"></i> BATAL</strong></button>
-                            <center>
-                          </form>
-                        </div> 
-                    </div>
                   <div class="panel panel-default">
                       <div class="panel-heading">
                           <h3 class="panel-title">TABEL PEKERJAAN</h3>
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <br><br>
-                                            <table id="tabel-pekerjaan" height="200px" class="table table-striped table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="text-align: center" width="3%">No.</th>
-                                                        <th style="text-align: center" width="10%">ID Pekerjaan</th>
-                                                        <th style="text-align: center" width="40%">Nama Proyek</th>
-                                                        <th style="text-align: center" width="40%">Nama Pekerjaan</th>
-                                                        <th style="text-align: center" width="8%">Satuan</th>
-                                                        <th style="text-align: center" width="10%">Aksi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <br><br>
+                                    <label> Proyek </label>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <select class="select2-proyek required" style="width: 100%;" id="proyek-wilayah">
+                                                    <option value=""></option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
+                                    <table id="tabel-pekerjaan" height="200px" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: center" width="3%">No.</th>
+                                                <th style="text-align: center" width="10%">ID Pekerjaan</th>
+                                                <th style="text-align: center" width="40%">Nama Proyek</th>
+                                                <th style="text-align: center" width="40%">Nama Pekerjaan</th>
+                                                <th style="text-align: center" width="8%">Satuan</th>
+                                                <th style="text-align: center" width="10%">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                       </div>
                       <div class="panel-body">
                           <div class="row">
@@ -92,8 +48,8 @@
                   </div>
                 </div>
             </div>
-</div>
-</div>
+        </div>
+    </div>
 </div>
 <script type"text/javascript">
 function tampilTambahPekerjaan(){

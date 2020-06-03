@@ -62,12 +62,12 @@
                                             <table id="tabel-kategori" height="50px" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th style="text-align: center" width="3%">No.</th>
-                                                        <th style="text-align: center" width="10%">ID Kategori</th>
-                                                        <th style="text-align: center" width="30%">Nama Proyek</th>
-                                                        <th style="text-align: center" width="25%">Kategori Pekerjaan</th>
-                                                        <th style="text-align: center" width="25%">Level</th>
-                                                        <th style="text-align: center" width="8%">Aksi</th>
+                                                        <th style="text-align: center" width="3%" height="10%">No.</th>
+                                                        <th style="text-align: center" width="10%" height="10%">ID Kategori</th>
+                                                        <th style="text-align: center" width="40%" height="10%">Nama Proyek</th>
+                                                        <th style="text-align: center" width="25%" height="10%">Kategori Pekerjaan</th>
+                                                        <th style="text-align: center" width="5%" height="10%">Level</th>
+                                                        <th style="text-align: center" width="8%" height="10%">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>
@@ -259,7 +259,7 @@
               var length = info.iLength;
               var index = page * length + (iDisplayIndex + 1);
               $('td:eq(0)', row).html(index);
-              $('td:eq(0),td:eq(3),td:eq(7),td:eq(8)', row).prop('align','center');
+              $('td:eq(0),td:eq(4),td:eq(7),td:eq(8)', row).prop('align','center');
               $('td:eq(6)', row).prop('align','right');
             },
             scrollY: 300,

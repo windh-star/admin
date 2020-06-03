@@ -58,9 +58,10 @@
                     <ul class="list-unstyled">
                         <li id="menu_suplier"><a href="<?php echo base_url('suplier') ?>">Suplier</a></li>
                         <li id="menu_produk"><a href="<?php echo base_url('produk') ?>">Produk</a></li>
-                        <li id="menu_wilayah"><a href="<?php echo base_url('wilayah') ?>">Wilayah Produk</a></li>
+                        <li id="menu_wilayah_produk"><a href="<?php echo base_url('wilayah_produk') ?>">Wilayah Produk</a></li>
                         <li id="menu_kategori_produk"><a href="<?php echo base_url('kategori_produk') ?>">Kategori Produk</a></li>
                         <li id="menu_merk"><a href="<?php echo base_url('merk') ?>">Merk</a></li>
+                        <li id="menu_voucher"><a href="<?php echo base_url('voucher') ?>">Voucher Produk</a></li>
                     </ul>
                 </li>
 

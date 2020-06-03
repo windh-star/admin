@@ -6,24 +6,65 @@
             <?php $this->load->view('layout/breadcrumb') ?>
 
             <div class="row">
-                <div class="col-md-12">
+            <div class="col-lg-6">
+                                          <div class="panel panel-primary">
+                                              <div class="panel-heading">
+                                                  <h3 class="panel-title">Ringkasan Sumber</h3>
+                                              </div>
+                                              <div class="panel-body">
+                                                  <ul class="list-group">
+                                                      <li class="list-group-item">
+                                                          <span class="badge badge-warning" id="jum_shbj" style="font-size:10pt; font-weight: bold;">0</span>
+                                                          SHBJ
+                                                      </li>
+                                                      <li class="list-group-item">
+                                                          <span class="badge badge-danger" id="jum_estimatorid" style="font-size:10pt; font-weight: bold;">0</span>
+                                                          ESTIMATORID
+                                                      </li>
+                                                      <li class="list-group-item">
+                                                          <span class="badge badge-success" id="jum_survei" style="font-size:10pt; font-weight: bold;">0</span>
+                                                          SURVEI
+                                                      </li>
+                                                  </ul>
+                                              </div>
+                                              <div class="panel-footer">
+                                                <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah Bahan <span class="badge badge-primary pull-right" id="jum_bahan" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
+                                              </div>
+                                          </div>
+                                      </div>
+                <!-- <div class="col-md-12">
                   <div class="panel panel-default">
                       <div class="panel-heading">
                           <h3 class="panel-title">PILIH WILAYAH</h3>
                       </div>
                       <div class="panel-body">
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <div class="form-group">
-                                      <select class="select2-wilayah required" style="width: 100%;" id="wilayah_bahan">
-                                        <option value=""></option>
-                                      </select>
-                                  </div>
-                              </div>
-                          </div>
+                      <div class="row">
+                                <div class="col-md-4">
+                                    <label>Wilayah</label>
+                                    <div class="form-group">
+                                        <select class="select2-wilayah required" style="width: 100%;" id="proyek-wilayah">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Tahun</label>
+                                    <div class="form-group">
+                                            <input type="text" id="proyek-tahun" name="tahun" class="form-control" placeholder="Tulis Tahun">
+                                        </div>
+                                    </div>
+                                <div class="col-md-4">
+                                    <label>Pengguna</label>
+                                    <div class="form-group">
+                                        <select class="select2-pengguna required" style="width: 100%;" id="proyek-pengguna">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                       </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="col-md-12">
                     <button type="button" id="btn-tambah" class="btn btn-primary waves-effect waves-light" onclick="tampilTambahBahan()"><strong><i class="fa fa-plus-circle"></i> TAMBAH <?php echo strtoupper($menu) ?></strong></button>
                     <br><br>
@@ -167,7 +208,7 @@
                                 </div>
                             </div>
                             <center>
-                              <button type="button" id="btn-ubah-bahan" class="btn btn-success waves-effect waves-light" onclick="ubahBahan($('#kategori_ubah').val())"><strong><i class="fa fa-check"></i> PERBAHARUI</strong></button>
+                              <button type="button" id="btn-ubah-bahan" class="btn btn-success waves-effect waves-light" onclick="UbahBahan($('#kategori_ubah').val())"><strong><i class="fa fa-check"></i> PERBAHARUI</strong></button>
                               <button type="button" id="btn-batal-ubah" class="btn btn-warning waves-effect waves-light" onclick="batalUbahBahan()"><strong><i class="fa fa-times"></i> BATAL</strong></button>
                             <center>
                           </form>
@@ -224,7 +265,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
-                                      <div class="col-lg-6">
+                                      <!-- <div class="col-lg-6">
                                           <div class="panel panel-primary">
                                               <div class="panel-heading">
                                                   <h3 class="panel-title">Ringkasan Status</h3>
@@ -232,16 +273,16 @@
                                               <div class="panel-body">
                                                   <ul class="list-group">
                                                       <li class="list-group-item">
-                                                          <span class="badge badge-warning" id="jum_belum_lengkap" style="font-size:10pt; font-weight: bold;">0</span>
-                                                          Belum Lengkap
+                                                          <span class="badge badge-warning" id="jum_shbj" style="font-size:10pt; font-weight: bold;">0</span>
+                                                          SHBJ
                                                       </li>
                                                       <li class="list-group-item">
-                                                          <span class="badge badge-danger" id="jum_belum_terverifikasi" style="font-size:10pt; font-weight: bold;">0</span>
-                                                          Belum Terverifikasi
+                                                          <span class="badge badge-danger" id="jum_estimatorid" style="font-size:10pt; font-weight: bold;">0</span>
+                                                          ESTIMATORID
                                                       </li>
                                                       <li class="list-group-item">
-                                                          <span class="badge badge-success" id="jum_terverifikasi" style="font-size:10pt; font-weight: bold;">0</span>
-                                                          Terverifikasi
+                                                          <span class="badge badge-success" id="jum_survei" style="font-size:10pt; font-weight: bold;">0</span>
+                                                          SURVEI
                                                       </li>
                                                   </ul>
                                               </div>
@@ -249,25 +290,57 @@
                                                 <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah Bahan <span class="badge badge-primary pull-right" id="jum_bahan" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
                                               </div>
                                           </div>
-                                      </div>
+                                      </div> -->
                                     </div>
+
+                                    <div class="row">
+                                <div class="col-md-4">
+                                    <label>Nm Proyek</label>
+                                    <div class="form-group">
+                                        <select class="select2-wilayah required" style="width: 100%;" id="proyek-wilayah">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Wilayah</label>
+                                    <div class="form-group">
+                                        <select class="select2-wilayah required" style="width: 100%;" id="proyek-wilayah">
+                                            <option value=""></option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                <div class="col-md-4">
+                                    <label>Sumber</label>
+                                    <div class="form-group">
+                                        <input type="text" id="proyek-tahun" name="tahun" class="form-control" placeholder="Pilih Sumber">   
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                      <!-- </div> -->
+
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <button type="button" id="btn-verifikasi-semua" class="btn btn-success waves-effect waves-light" onclick="verifikasiSemuaBahan()"><strong><i class="fa fa-check-square-o"></i> VERIFIKASI SEMUA</strong></button>
+                                            <!-- <button type="button" id="btn-verifikasi-semua" class="btn btn-success waves-effect waves-light" onclick="verifikasiSemuaBahan()"><strong><i class="fa fa-check-square-o"></i> VERIFIKASI SEMUA</strong></button> -->
                                             <br><br>
                                             <table id="tabel-bahan" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center" width="3%">No.</th>
-                                                        <th>Urut</th>
-                                                        <th style="text-align: center" width="10%">Wilayah</th>
-                                                        <th style="text-align: center" width="40%">Nama Bahan</th>
-                                                        <th style="text-align: center" width="8%">Satuan</th>
-                                                        <th style="text-align: center" width="10%">Spesifikasi</th>
+                                                        <th>Urut</th>                 
+                                                        <th style="text-align: center" width="10%">ID Bahan</th>
+                                                        <th style="text-align: center" width="40%">Nm Proyek</th>
+                                                        <th style="text-align: center" width="8%">Wilayah</th>
+                                                        <th style="text-align: center" width="10%">Nm Bahan</th>
+                                                        <th style="text-align: center" width="10%">Satuan</th>
                                                         <th style="text-align: center" width="10%">Merk</th>
-                                                        <th style="text-align: center" width="10%">Harga Dasar</th>
-                                                        <th style="text-align: center" width="10%">Status</th>
-                                                        <th style="text-align: center" width="7%">Verifikasi</th>
+                                                        <th style="text-align: center" width="10%">Spes</th>
+                                                        <th style="text-align: center" width="10%">Hrg Dasar</th>
+                                                        <th style="text-align: center" width="10%">Thn</th>
+                                                        <th style="text-align: center" width="10%">Sumber</th>
+                                                        <th style="text-align: center" width="10%">Ket</th>
+                                                        <th style="text-align: center" width="10%">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>
@@ -297,37 +370,37 @@
     getRingkasanStatus($('#wilayah_bahan').val());
   }
   
-  function getSuggestTahun(aksi) {
-    var sumber;
-    if (aksi == "1") sumber = $('#sumber').val(); else sumber = $('#ubah_sumber').val(); 
-    $.ajax({
-        url : "<?php echo base_url() ?>api/getSuggestTahunBahan/"+sumber+"/"+$('#wilayah_bahan').val(),
-        type: "POST",
-        dataType: "JSON",
-        success: function(data){
-          if (data != null) {
-            if (aksi == "1") $('#tahun').val(data.tahun); else $('#ubah_tahun').val(data.tahun);
-          } else {
-            if (aksi == "1") $('#tahun').val(new Date().getFullYear()); else $('#ubah_tahun').val(new Date().getFullYear());
-          }
-        }
-    });
-  }
+  // function getSuggestTahun(aksi) {
+  //   var sumber;
+  //   if (aksi == "1") sumber = $('#sumber').val(); else sumber = $('#ubah_sumber').val(); 
+  //   $.ajax({
+  //       url : "<?php echo base_url() ?>api/getSuggestTahunBahan/"+sumber+"/"+$('#wilayah_bahan').val(),
+  //       type: "POST",
+  //       dataType: "JSON",
+  //       success: function(data){
+  //         if (data != null) {
+  //           if (aksi == "1") $('#tahun').val(data.tahun); else $('#ubah_tahun').val(data.tahun);
+  //         } else {
+  //           if (aksi == "1") $('#tahun').val(new Date().getFullYear()); else $('#ubah_tahun').val(new Date().getFullYear());
+  //         }
+  //       }
+  //   });
+  // }
   
-  function getSuggestKeterangan(aksi) {
-    var sumber;
-    if (aksi == "1") sumber = $('#sumber').val(); else sumber = $('#ubah_sumber').val(); 
-    $.ajax({
-        url : "<?php echo base_url() ?>api/getSuggestKeteranganBahan/"+sumber+"/"+$('#wilayah_bahan').val(),
-        type: "POST",
-        dataType: "JSON",
-        success: function(data){
-          if (data != null) {
-            if (aksi == "1") $('#keterangan').val(data.keterangan); else $('#ubah_keterangan').val(data.keterangan);
-          }
-        }
-    });
-  }
+  // function getSuggestKeterangan(aksi) {
+  //   var sumber;
+  //   if (aksi == "1") sumber = $('#sumber').val(); else sumber = $('#ubah_sumber').val(); 
+  //   $.ajax({
+  //       url : "<?php echo base_url() ?>api/getSuggestKeteranganBahan/"+sumber+"/"+$('#wilayah_bahan').val(),
+  //       type: "POST",
+  //       dataType: "JSON",
+  //       success: function(data){
+  //         if (data != null) {
+  //           if (aksi == "1") $('#keterangan').val(data.keterangan); else $('#ubah_keterangan').val(data.keterangan);
+  //         }
+  //       }
+  //   });
+  // }
 
   function tampilTambahBahan(){
     if ($('#wilayah_bahan').val() != '') {
@@ -347,7 +420,30 @@
     $('#btn-tambah').show();
   }
 
-  function tampilUbahBahan(){
+     ///Tampil form ubah bahan
+     function TampilUbahBahan(id_bahan){
+        $.ajax({
+            url: "<?php echo base_url() ?>api/getInfoBahan/"+id_bahan,
+            type: "POST",
+            dataType: "json",
+            success: function(data){
+                $('#ubah_id_bahan').val(data.id_bahan);
+                $('#ubah_id_wilayah').val(data.id_wilayah);
+                $('#ubah_id_proyek').val(data.id_proyek);
+                $('#ubah_nama_bahan')val(data.nama_bahan);
+                $('#ubah_spesifikasi').val(data.spesifikasi);
+                $('#ubah_merk').val(data.merk);
+                $('#ubah_satuan').val(data.satuan;
+                $('#ubah_harga_dasar').val(data.harga_dasar);
+                $('#ubah_tahun').val(data.tahun);
+                $('#ubah_sumber').val(data.sumber);
+                $('#ubah_keterangan').val(data.keterangan);
+                $('#ubah_status').val(data.status);
+                $('#ubah_tgl_dibuat').val(data.tgl_dibuat);
+                $('#ubah_jam_dibuat').val(data.jam_dibuat);
+            }
+        });
+
     $('#panel-ubah-bahan').show();
     $('html, body').animate({scrollTop: '0px'}, 0);
     $('#ubah_sumber').val('1');
@@ -485,39 +581,39 @@
     }
   }
 
-  var verifikasi_bahan = 0;
-  function verifikasiBahan(urut) {
-    verifikasi_bahan++;
-    if (verifikasi_bahan == 1) {
-      $.ajax({
-          url : "<?php echo base_url('api/verifikasiBahan/') ?>"+urut,
-          type: "POST",
-          dataType: "JSON",
-          success: function(data){
-            tampilNotifikasi(data.Info, 'success');
-            reloadData();
-            verifikasi_bahan = 0;
-          }
-      });
-    }
-  }
+  // var verifikasi_bahan = 0;
+  // function verifikasiBahan(urut) {
+  //   verifikasi_bahan++;
+  //   if (verifikasi_bahan == 1) {
+  //     $.ajax({
+  //         url : "<?php echo base_url('api/verifikasiBahan/') ?>"+urut,
+  //         type: "POST",
+  //         dataType: "JSON",
+  //         success: function(data){
+  //           tampilNotifikasi(data.Info, 'success');
+  //           reloadData();
+  //           verifikasi_bahan = 0;
+  //         }
+  //     });
+  //   }
+  // }
 
-  var verifikasi_bahan = 0;
-  function verifikasiSemuaBahan() {
-    verifikasi_bahan++;
-    if (verifikasi_bahan == 1) {
-      $.ajax({
-          url : "<?php echo base_url('api/verifikasiSemuaBahan') ?>",
-          type: "POST",
-          dataType: "JSON",
-          success: function(data){
-            tampilNotifikasi(data.Info, 'success');
-            reloadData();
-            verifikasi_bahan = 0;
-          }
-      });
-    }
-  }
+  // var verifikasi_bahan = 0;
+  // function verifikasiSemuaBahan() {
+  //   verifikasi_bahan++;
+  //   if (verifikasi_bahan == 1) {
+  //     $.ajax({
+  //         url : "<?php echo base_url('api/verifikasiSemuaBahan') ?>",
+  //         type: "POST",
+  //         dataType: "JSON",
+  //         success: function(data){
+  //           tampilNotifikasi(data.Info, 'success');
+  //           reloadData();
+  //           verifikasi_bahan = 0;
+  //         }
+  //     });
+  //   }
+  // }
 
   function getRingkasanStatus(id_wilayah){
     if (id_wilayah == '') id_wilayah = '0'; else id_wilayah = id_wilayah;
@@ -526,10 +622,10 @@
         type: "POST",
         dataType: "JSON",
         success: function(data){
-          $('#jum_belum_lengkap').html(data.belum_lengkap);
-          $('#jum_terverifikasi').html(data.terverifikasi);
-          $('#jum_belum_terverifikasi').html(data.belum_terverifikasi);
-          $('#jum_bahan').html(parseInt(data.belum_lengkap) + parseInt(data.terverifikasi) + parseInt(data.belum_terverifikasi));
+          $('#jum_shbj').html(data.shbj);
+          $('#jum_estimatorid').html(data.estimatorid);
+          $('#jum_survei').html(data.survei);
+          $('#jum_bahan').html(parseInt(data.shbj) + parseInt(data.estimatorid) + parseInt(data.survei));
         }
     });
   }
@@ -544,49 +640,49 @@
       $('#menu_bahan').prop('class','active');
       getRingkasanStatus($('#wilayah_bahan').val());
       
-      $(".select2-satuan").select2({
-          theme: "bootstrap",
-          placeholder: "Pilih Satuan",
-          allowClear: true,
-          tags: true,
-          "language": {
-            "noResults": function() {
-               return "<center><img src='<?php echo base_url() ?>assets/not-found.svg' width='30' /><br><strong>Tidak ada hasil ditemukan</strong></center>";
-            },
-            searching: function () {
-               return "<center><img src='<?php echo base_url() ?>assets/searching.gif' width='30' /><br>Mencari hasil...</center>";
-            },
-            loadingMore: function () {
-               return "<center><img src='<?php echo base_url() ?>assets/ajax-loader.svg' width='30'/></center>";
-            }
-          },
-          escapeMarkup: function (markup) {
-               return markup;
-          },
-          ajax: {
-            url: "<?php echo $this->config->item('url_server') ?>api/getListSatuan/",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-              return {
-                q: params.term,
-                page_limit: 10,
-                page: params.page
-              };
-            },
-            processResults: function (data, params) {
-              params.page = params.page || 1;
+      // $(".select2-satuan").select2({
+      //     theme: "bootstrap",
+      //     placeholder: "Pilih Satuan",
+      //     allowClear: true,
+      //     tags: true,
+      //     "language": {
+      //       "noResults": function() {
+      //          return "<center><img src='<?php echo base_url() ?>assets/not-found.svg' width='30' /><br><strong>Tidak ada hasil ditemukan</strong></center>";
+      //       },
+      //       searching: function () {
+      //          return "<center><img src='<?php echo base_url() ?>assets/searching.gif' width='30' /><br>Mencari hasil...</center>";
+      //       },
+      //       loadingMore: function () {
+      //          return "<center><img src='<?php echo base_url() ?>assets/ajax-loader.svg' width='30'/></center>";
+      //       }
+      //     },
+      //     escapeMarkup: function (markup) {
+      //          return markup;
+      //     },
+      //     ajax: {
+      //       url: "<?php echo $this->config->item('url_server') ?>api/getListSatuan/",
+      //       dataType: 'json',
+      //       delay: 250,
+      //       data: function (params) {
+      //         return {
+      //           q: params.term,
+      //           page_limit: 10,
+      //           page: params.page
+      //         };
+      //       },
+      //       processResults: function (data, params) {
+      //         params.page = params.page || 1;
     
-              return {
-                results: data.results,
-                pagination: {
-                  more: (params.page * 10) < data.total_count
-                }
-              };
-            },
-            cache: true
-          }
-      });
+      //         return {
+      //           results: data.results,
+      //           pagination: {
+      //             more: (params.page * 10) < data.total_count
+      //           }
+      //         };
+      //       },
+      //       cache: true
+      //     }
+      // });
 
       $('#harga_dasar, #ubah_harga_dasar').inputmask('decimal',
         { 'alias': 'numeric',
@@ -828,20 +924,20 @@
         scrollCollapse: true
       });
 
-    //   $('#tabel-lengkapi-bahan tbody').on('dblclick', 'tr', function () {
-    //       if ($('#wilayah_bahan').val() != '') {
-    //         var data = tabel_lengkapi.row(this).data();
-    //         konfirmasiLengkapi(data[1]);
-    //         tampilUbahBahan();
-    //       } else {
-    //         $.Notification.autoHideNotify('warning', 'top right', 'Peringatan', 'Silakan pilih wilayah dulu!');
-    //       }
-    //   });
+      $('#tabel-lengkapi-bahan tbody').on('dblclick', 'tr', function () {
+          if ($('#wilayah_bahan').val() != '') {
+            var data = tabel_lengkapi.row(this).data();
+            konfirmasiLengkapi(data[1]);
+            tampilUbahBahan();
+          } else {
+            $.Notification.autoHideNotify('warning', 'top right', 'Peringatan', 'Silakan pilih wilayah dulu!');
+          }
+      });
 
       $('#tabel-bahan tbody').on('dblclick', 'tr', function () {
           var data = tabel.row(this).data();
           konfirmasiUbah(data[1]);
-          tampilUbahBahan();
+          TampilUbahBahan();
       });
 
       $('#wilayah_bahan').on('change', function() {

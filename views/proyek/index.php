@@ -5,14 +5,14 @@
              <?php $this->load->view('layout/breadcrumb') ?>
                  <div class="row">
                     <div class="col-md-12">
-                        <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <!-- <div class="panel panel-default"> -->
+                        <!-- <div class="panel-heading">
                             <h3 class="panel-title">FILTERING</h3>
-                        </div>
-                      <div class="panel-body">
+                        </div> -->
+                      <!-- <div class="panel-body">
                           <div class="row">
                               <div class="col-md-4">
-                                  <label>Filtering Wilayah</label>
+                                  <label>Wilayah</label>
                                   <div class="form-group">
                                       <select class="select2-wilayah required" style="width: 100%;" id="proyek-wilayah">
                                         <option value=""></option>
@@ -21,14 +21,14 @@
                               </div>
                               
                                <div class="col-md-4">
-                                  <label>Filtering Tahun</label>
+                                  <label>Tahun</label>
                                    <div class="form-group">
                                         <input type="text" id="proyek-tahun" name="tahun" class="form-control" placeholder="Tulis Tahun">
                                     </div>
                                   </div>
                               
                              <div class="col-md-4">
-                              <label>Filtering Pengguna</label>
+                              <label>Pengguna</label>
                               <div class="form-group">
                                   <select class="select2-pengguna required" style="width: 100%;" id="proyek-pengguna">
                                     <option value=""></option>
@@ -37,7 +37,7 @@
                             </div>
                             </div>
                           </div>
-                      </div>
+                      </div> -->
                     </div>
                 </div>
                 
@@ -128,7 +128,33 @@
                           <div class="panel-heading">
                               <h3 class="panel-title">TABEL PROYEK</h3>
                                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <br>
+                                                <br><br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Wilayah</label>
+                                    <div class="form-group">
+                                        <select class="select2-wilayah required" style="width: 100%;" id="proyek-wilayah">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <label>Tahun</label>
+                                    <div class="form-group">
+                                            <input type="text" id="proyek-tahun" name="tahun" class="form-control" placeholder="Tulis Tahun">
+                                        </div>
+                                    </div>
+                                
+                                <div class="col-md-4">
+                                    <label>Pengguna</label>
+                                    <div class="form-group">
+                                        <select class="select2-pengguna required" style="width: 100%;" id="proyek-pengguna">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                                                 <table id="tabel-proyek" height="50px" class="table table-bordered">
                                                     <thead>
                                                         <tr>
@@ -254,7 +280,7 @@
                 $('#ubah_jam_dibuat').val(data.jam_dibuat);
             }
         });
-        
+
     $('#panel-ubah-proyek').show();
     $('html, body').animate({scrollTop: '0px'}, 0);
     }

@@ -221,18 +221,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <table id="tabel-volume" class="table table-striped table-bordered" style="width: 100%">
+                                    <table id="tabel-suplier" class="table table-striped table-bordered" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th width="2%">No</th>
-                                                <th width="10%">ID Volume</th>
-                                                <th width="10%">Nama Pekerjaan</th>
-                                                <th width="20%">Proyek</th>
-                                                <th width="5%">Pelaksanan</th>
-                                                <th width="20%">Tot Volume</th>
-                                                <th width="10%">Tgl Dibuat</th>
-                                                <th width="20%">Jam Dibuat</th>
-                                                <th width="20%">Aksi</th>
+                                                <th width="10%">ID Produk</th>
+                                                <th width="10%">Nama Wilayah</th>
+                                                <th width="20%">Provinsi</th>
+                                                <th width="15%">Harga Dasar</th>
+                                                <th width="20%">Keterangan</th>
+                                                <th width="5%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -386,11 +384,10 @@
 
   var tabel;
   $(document).ready(function() {
-      $('#menu_estimasi').click();
-      $('#menu_volume').prop('class','active');
-      getRingkasanKategori($('#filter_kategori').val());
+      $('#menu_suplier').click();
+      $('#menu_wilayah_produk').prop('class','active');
+      // getRingkasanKategori($('#filter_kategori').val());
       
-
       $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings){
         return {
           "iStart": oSettings._iDisplayStart,
@@ -403,7 +400,7 @@
         };
       };
 
-      tabel = $("#tabel-volume").DataTable({
+      tabel = $("#tabel-suplier").DataTable({
         "language": {
           "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
           "sInfoEmpty": "",
@@ -425,9 +422,11 @@
         processing: true,
         serverSide: true,
         ajax: {
-          "url": "<?php echo base_url('api/getTabelVolume') ?>",
+          "url": "<?php echo base_url('api/getTabelWilayahProduk') ?>",
           "type": "POST",
-          data: function (data) {}
+          data: function (data) {
+            data.kategori = $('#filter_kategori').val();
+          }
         },
         // "columnDefs": [
         //   {

@@ -202,15 +202,15 @@
                                     <table id="tabel-pengguna" height="50px" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
-                                                <th style="text-align: center" width="3%">No.</th>
-                                                <th style="text-align: center" width="3%">ID Pengguna.</th>
-                                                <th style="text-align: center" width="10%">Nama Pengguna</th>
-                                                <th style="text-align: center" width="40%">Alamat Pengguna</th>
-                                                <th style="text-align: center" width="20%">Nama Wilayah</th>
-                                                <th style="text-align: center" width="8%">Perusahaan</th>
-                                                <th style="text-align: center" width="10%">Email</th>
-                                                <th style="text-align: center" width="10%">No Telepon</th>
-                                                <th style="text-align: center" width="20%">Aksi</th>
+                                                <th style="text-align: center" width="2%" height="10%">No.</th>
+                                                <th style="text-align: center" width="3%" height="10%">ID Pengguna.</th>
+                                                <th style="text-align: center" width="10%" height="10%">Nama Pengguna</th>
+                                                <th style="text-align: center" width="40%" height="10%">Alamat Pengguna</th>
+                                                <th style="text-align: center" width="20%" height="10%">Wilayah</th>
+                                                <th style="text-align: center" width="10%" height="10%">Email</th>
+                                                <th style="text-align: center" width="10%" height="10%">No Telepon</th>
+                                                <th style="text-align: center" width="20%" height="10%">Status</th>
+                                                <th style="text-align: center" width="20%" height="10%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -364,9 +364,15 @@
             "next": "Berikutnya"
           }
         },
+        "columnDefs": [
+          {
+            "targets": [ 7 ],
+            "visible": false,
+            "searchable": false
+          }
+        ],
             "processing": true, 
             "serverSide": true, 
-           /* "order": [],*/ 
              
             "ajax": {
                 "url": "<?php echo base_url('api/getTabelPengguna')?>",
