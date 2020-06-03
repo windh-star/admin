@@ -30,6 +30,24 @@ class PenggunaModel extends CI_Model{
         $search = $datatable['search']['value'];
         $where = '';
         //filter
+        $status = $this->input->post('status_verifikasi');
+		if ($status != '') $where .= "status_verifikasi = '{$status}'";
+  
+		if ($search != '') {
+			if ($where != '') $where .= ' AND ('; else $where .= ' (';
+			for ($i=0; $i < $count_c ; $i++) {
+				$where .= $columnd[$i] .' LIKE "%'. $search .'%"';
+				if ($i < $count_c - 1) {
+					$where .= ' OR ';
+				}
+			}
+			$where .= ')';
+		}
+		
+		if ($where != '') {
+			$sql .= " WHERE " . $where;
+		}
+
         // $produk = $this->input->post('nama_produk');
         // if ($produk != '') $where = 'nama_produk = "'. $produk .'"'; 
         if($search !=''){
@@ -192,4 +210,8 @@ class PenggunaModel extends CI_Model{
         );
         $this->db->insert($this->tabel, $val);
     }
+
+    function getRingkasanVerifikasi(){
+		return $this->db->query("SELECT id_pengguna,SUM(belum) as belum,SUM(sudah) as sudah from (SELECT id_pengguna,IF(status_verifikasi = '0',COUNT(*),0) AS `belum`, IF(status_verifikasi = '1',COUNT(*),0) AS `sudah` FROM (select * from pengguna GROUP BY id_pengguna) a group by status_verifikasi) b");
+	}
 }

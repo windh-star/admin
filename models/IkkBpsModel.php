@@ -130,7 +130,7 @@ class IkkBpsModel extends CI_Model{
           else if (trim($worksheet[$i]["B"]) != $id_pekerjaan) $id_pekerjaan = trim($worksheet[$i]["B"]);
           $val = array(
           
-            "id_wilayah"    => $id_wilayag,
+            "id_wilayah"    => $id_wilayah,
             "ikk"    => trim($worksheet[$i]["B"])
           
           );

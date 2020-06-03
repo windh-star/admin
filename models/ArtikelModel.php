@@ -12,7 +12,7 @@ class ArtikelModel extends CI_Model{
 
     function getTabelArtikel($datatable){
         $columns = implode(', ', $datatable['col-display']);
-        $query  = "(SELECT *,IF(kategori='1','Artikel',IF(kategori='2','Berita','Even')) AS ket_kategori, IF(status='1','Publish','Pending') AS ket_status FROM {$this->tabel}) a";
+        $query  = "(SELECT *,IF(kategori='1','Artikel',IF(kategori='2','Berita','Even')) AS ket_kategori FROM {$this->tabel}) a";
   
         $sql  = "SELECT {$columns} FROM {$query}";
   
@@ -29,43 +29,43 @@ class ArtikelModel extends CI_Model{
         $search = $datatable['search']['value'];
         $where = '';
   
-        //filter kategori
-        $kategori = $this->input->post('kategori');
-        if ($kategori != '') $where .= "kategori = '{$kategori}'";
+        // //filter kategori
+        // $kategori = $this->input->post('kategori');
+        // if ($kategori != '') $where .= "kategori = '{$kategori}'";
   
-        if ($search != '') {
-            if ($where != '') $where .= ' AND ('; else $where .= ' (';
-            for ($i=0; $i < $count_c ; $i++) {
-                $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
-                if ($i < $count_c - 1) {
-                    $where .= ' OR ';
-                }
-            }
-            $where .= ')';
-        }
+        // if ($search != '') {
+        //     if ($where != '') $where .= ' AND ('; else $where .= ' (';
+        //     for ($i=0; $i < $count_c ; $i++) {
+        //         $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
+        //         if ($i < $count_c - 1) {
+        //             $where .= ' OR ';
+        //         }
+        //     }
+        //     $where .= ')';
+        // }
         
-        if ($where != '') {
-            $sql .= " WHERE " . $where;
-        }
+        // if ($where != '') {
+        //     $sql .= " WHERE " . $where;
+        // }
   
-          //filter status
-          $status = $this->input->post('status');
-          if ($status != '') $where .= "status = '{$status}'";
+        //   //filter status
+        //   $status = $this->input->post('status');
+        //   if ($status != '') $where .= "status = '{$status}'";
     
-          if ($search != '') {
-              if ($where != '') $where .= ' AND ('; else $where .= ' (';
-              for ($i=0; $i < $count_c ; $i++) {
-                  $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
-                  if ($i < $count_c - 1) {
-                      $where .= ' OR ';
-                  }
-              }
-              $where .= ')';
-          }
+        //   if ($search != '') {
+        //       if ($where != '') $where .= ' AND ('; else $where .= ' (';
+        //       for ($i=0; $i < $count_c ; $i++) {
+        //           $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
+        //           if ($i < $count_c - 1) {
+        //               $where .= ' OR ';
+        //           }
+        //       }
+        //       $where .= ')';
+        //   }
           
-          if ($where != '') {
-              $sql .= " WHERE " . $where;
-          }
+        //   if ($where != '') {
+        //       $sql .= " WHERE " . $where;
+        //   }
     
         // get total filtered
         $data = $this->db->query($sql);
@@ -95,9 +95,10 @@ class ArtikelModel extends CI_Model{
               else $data[] = $row->$field;
            }
            $data[] = "<div class='btn-group'>".
-           "<button type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
-           "<button type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+           "<button onclick='ubahArtikel(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+           "<button onclick='hapusArtikel(".$data[1].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
        "</div>";
+
            $option['data'][] = $data;
         }
   
@@ -117,7 +118,7 @@ class ArtikelModel extends CI_Model{
     
       //Rekap Jumlah Kategori Artikel, 1 = Artikel, 2 = Berita, 3 = Event
 	function getRingkasanKategoriArtikel(){
-		return $this->db->query("SELECT id_artikel,SUM(artikel) as bahan,SUM(berita) as upah, SUM(event) as event from (SELECT id_artikel,IF(kategori = '1',COUNT(*),0) AS `artikel`, IF(kategori = '2',COUNT(*),0) AS `berita`,IF(kategori = '3',COUNT(*),0) AS `event` FROM (select * from artikel GROUP BY id_artikel) a group by kategori) b");
+		return $this->db->query("SELECT id_artikel,SUM(artikel) as artikel,SUM(berita) as berita, SUM(event) as event from (SELECT id_artikel,IF(kategori = '1',COUNT(*),0) AS `artikel`, IF(kategori = '2',COUNT(*),0) AS `berita`,IF(kategori = '3',COUNT(*),0) AS `event` FROM (select * from artikel GROUP BY id_artikel) a group by kategori) b");
 	}
 
     function simpanArtikel($data){

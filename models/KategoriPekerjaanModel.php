@@ -83,9 +83,10 @@ class KategoriPekerjaanModel extends CI_model{
                 $data[] = $row->$columnd[$i];
             }
             $data[] = "<div class='btn-group'>".
-           "<button type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]' onclick='TampilUbahProyek(".$data[1].")'><i class='fa fa-edit'></i></button>".
-           "<button type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
-       "</div>";
+            "<button onclick='ubahKategoriPekerjaan(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+            "<button onclick='hapusKategoriPekerjaan(".$data[1].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+        "</div>";
+ 
             $option['data'][] = $data;
         }
         return print_r(json_encode($option));
@@ -117,6 +118,7 @@ class KategoriPekerjaanModel extends CI_model{
         $this->db->where("id_kategori", $data['id_kategori'])
                  ->update($this->tabel, $val);
      }
+
      function simpanKategori($data){
          $val = array(
              'id_kategori' => $data['id_kategori'],
@@ -127,4 +129,9 @@ class KategoriPekerjaanModel extends CI_model{
              );
         $this->db->insert($this->tabel, $val);
      }
+
+     public function hapusKategoriPekerjaan($data){
+        $this->db->where('id_kategori',$data['id_kategori']);
+        $this->db->delete('kategori_pekerjaan');
+    }
 }

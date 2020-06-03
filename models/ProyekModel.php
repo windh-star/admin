@@ -56,6 +56,8 @@ class ProyekModel extends CI_model{
             $sql .= " WHERE " . $where;
         }
         
+
+           // get total filtered
         $data = $this->db->query($sql);
         $total_filter = $data->num_rows();
         $data->free_result();
@@ -81,14 +83,15 @@ class ProyekModel extends CI_model{
                 $data[] = $row->$columnd[$i];
             }
             $data[] = "<div class='btn-group'>".
-					     "<button type='button' class='btn btn-success btn-sm' id='btn-ubah-proyek' onclick='TampilUbahProyek(".$data[1].")' title='Perbaharui' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
-					 "</div>";
+           "<button onclick='ubahProyek(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+       "</div>";
+
             $option['data'][] = $data;
             }
         return print_r(json_encode($option));
        }
     function getListProyek($keyword, $page, $limit){
-        return $this->db->select("id_proyek as id, nama_proyek as text, nama_proyek")
+        return $this->db->select("id_proyek as id, nama_proyek as text")
                         ->like("nama_proyek", $keyword)
                         ->get($this->tabel, $limit, $page)->result_array();
     }

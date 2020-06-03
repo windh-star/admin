@@ -12,7 +12,8 @@ class BahanModel extends CI_Model {
 	public $tabel_rf1 = "wilayah";
 	public $primary_key = "id_bahan";
 	public $foreign_key = "id_wilayah";
-	public $foreign_key1 = "bahan.id_wilayah";
+    public $foreign_key1 = "id_wilayah";
+    public $foreign_key2 = "id_proyek";
 	public $primary_key_rf1 = "wilayah.id_wilayah";
 
   function getTabelLengkapiBahan($datatable){
@@ -23,7 +24,7 @@ class BahanModel extends CI_Model {
       else $tabel_bahan = $this->lengkapi_tabel;
 
       $columns = implode(', ', $datatable['col-display']);
-      $sql  = "(SELECT {$columns},id_wilayah FROM {$tabel}, wilayah where bahan.id_wilayah= wilayah.id_wilayah)";
+      $sql  = "(SELECT {$columns},id_wilayah,id_proyek FROM {$tabel}, wilayah,proyek where bahan.id_wilayah= wilayah.id_wilayah AND bahan.id_proyek=proyek.id_proyek)";
 
       // get total data
       $data = $this->db->query($sql);
@@ -79,8 +80,8 @@ class BahanModel extends CI_Model {
        $data = array();
          $data[] = null;
          $data[] = "<div class='btn-group'>".
-           "<button type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
-           "<button type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+           "<button onclick='ubahBahan(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+           "<button onclick='hapusBahan(".$data[1].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
        "</div>";
 
          $option['data'][] = $data;
@@ -111,24 +112,50 @@ class BahanModel extends CI_Model {
       $search = $datatable['search']['value'];
       $where = '';
 
-      //filter
-      $wilayah = $this->input->post('wilayah');
-      if ($wilayah != '') $where .= $this->foreign_key .' = "'. $wilayah .'"'; else $where .= $this->foreign_key .' = ""'; 
+     //filter
 
-      if ($search != '') {
-          if ($where != '') $where .= ' AND ('; else $where .= ' (';
-          for ($i=0; $i < $count_c ; $i++) {
-              $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
-              if ($i < $count_c - 1) {
-                  $where .= ' OR ';
-              }
-          }
-          $where .= '';
-      }
+    
+    $wilayah = $this->input->post('wilayah');
+    $namaproyek = $this->input->post('nama_poyek');
+    $sumber = $this->input->post('sumber');
+    
+    if ($wilayah != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key1 .' = "'. $wilayah .'"';
+    if ($namaproyek != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key2 .' = "'. $nama_proyek .'"';
+    if ($sumber != '') $where .= ($where != '' ? ' AND ' : '').'sumber = "'. $sumber .'"';
+    
+     if ($search != '') {
+           if ($where != '') $where .= ' AND ('; else $where .= ' (';
+           for ($i=0; $i < $count_c ; $i++) {
+               $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
+               if ($i < $count_c - 1) {
+                   $where .= ' OR ';
+               }
+           }
+           $where .= ' )';
+     }
+       
+     if ($where != ''){
+         $sql .= " WHERE " . $where;
+     }
+     
+
+    //   $wilayah = $this->input->post('wilayah');
+    //   if ($wilayah != '') $where .= $this->foreign_key .' = "'. $wilayah .'"'; else $where .= $this->foreign_key .' = ""'; 
+
+    //   if ($search != '') {
+    //       if ($where != '') $where .= ' AND ('; else $where .= ' (';
+    //       for ($i=0; $i < $count_c ; $i++) {
+    //           $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
+    //           if ($i < $count_c - 1) {
+    //               $where .= ' OR ';
+    //           }
+    //       }
+    //       $where .= '';
+    //   }
       
-      if ($where != '') {
-          $sql .= " WHERE " . $where;  
-      }
+    //   if ($where != '') {
+    //       $sql .= " WHERE " . $where;  
+    //   }
 
     //   $sql .= " AND (harga_dasar IS NOT NULL OR harga_dasar <> '')";
 
@@ -158,13 +185,16 @@ class BahanModel extends CI_Model {
        $data = array();
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) { 
+            if ($i == 7) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
+            else
              $field=$columnd[$i];
             $data[] = $row->$field;
          }
          $data[] = "<div class='btn-group'>".
-         "<button type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
-         "<button type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+         "<button onclick='tampilUbahBahan(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+         "<button onclick='hapusBahan(".$data[1].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
      "</div>";
+
          $option['data'][] = $data;
       }
 
@@ -218,7 +248,7 @@ class BahanModel extends CI_Model {
   function getRincianBahan($id){
         return $this->db->query("SELECT id_bahan as id_kategori,nama_bahan as nama_kategori,satuan,sumber FROM temp_bahan WHERE id_bahan='".$id."'
                                  UNION SELECT id_bahan as id_kategori,nama_bahan as nama_kategori,satuan,sumber
-                                 FROM bahan WHERE id_wilayah='34.04' AND id_proyek = '1' AND (sumber = '1' OR sumber = '2') AND id_bahan='".$id."' GROUP BY nama_bahan");
+                                 FROM bahan WHERE id_wilayah='3404' AND id_proyek = '1' AND (sumber = '1' OR sumber = '2') AND id_bahan='".$id."' GROUP BY nama_bahan");
   }
 
   function getLengkapiBahanKriteria($kriteria, $keyword){
@@ -320,7 +350,22 @@ class BahanModel extends CI_Model {
   }
 
   function getRingkasanSumberBahan(){
-    return $this->db->query("SELECT id_bahan,SUM(shbj) as shbj,SUM(estimatorid) as estimatorid, SUM(survey) as survey from (SELECT id_bahan,IF(sumber = '1',COUNT(*),0) AS `shbj`, IF(sumber = '2',COUNT(*),0) AS `estimatorid`,IF(sumber = '3',COUNT(*),0) AS `survey` FROM (select * from bahan GROUP BY id_bahan) a group by sumber) b");
+    return $this->db->query("SELECT id_bahan,SUM(shbj) as shbj,SUM(estimatorid) as estimatorid, SUM(survey) as survey from (SELECT id_bahan,IF(sumber = '1',COUNT(*),0) AS `shbj`, IF(sumber = '2',COUNT(*),0) AS `estimatorid`,IF(sumber = '0',COUNT(*),0) AS `survey` FROM (select * from bahan GROUP BY id_bahan) a group by sumber) b");
+}
+
+public function hapusBahan($data){
+    $this->db->where('id_bahan',$data['id_bahan']);
+    $this->db->delete('bahan',$val);
+}
+
+
+function getInfoBahan($id_bahan){
+    $this->db->select('*');
+    $this->db->from('bahan');
+    $this->db->join('wilayah', 'wilayah.id_wilayah = bahan.id_wilayah' );
+    $this->db->join('proyek', 'proyek.id_proyek = bahan.id_proyek' );
+    $this->db->where('bahan.id_bahan', $id_bahan);
+    return $this->db->get();
 }
 
 }

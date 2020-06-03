@@ -30,7 +30,7 @@ class PekerjaanModel extends CI_Model{
         $search = $datatable['search']['value'];
         $where ='';
            ///filter 
-           $proyek = $this->input->post('proyek');
+           $proyek = $this->input->post('nama_proyek');
            if($proyek != ''){ 
            $where .= $this->foreign_key1 .'=" '. $proyek .'"';
            if($search != '' ) {
@@ -81,12 +81,28 @@ class PekerjaanModel extends CI_Model{
             for ($i=0; $i<$count_c; $i++){
                 $data[] = $row->$columnd[$i];
             }
-              $data[] = "<div class='btn-group'>".
-					     "<button type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
-					     "<button type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
-					 "</div>";
+            $data[] = "<div class='btn-group'>".
+           "<button onclick='ubahPekerjaan(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+           "<button onclick='hapusPekerjaan(".$data[1].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+       "</div>";
+
             $option['data'][] = $data;
         }
         return print_r(json_encode($option));
     }
+
+    function ubahPekerjaan($data){
+        $val = array(
+            'nama_pekerjaan' => $data['nama_pekerjaan'],
+            'satuan' => $data['satuan']
+            );
+       $this->db->where("id_pekerjaan", $data['id_pekerjaan'])
+                ->update($this->tabel, $val);
+    }
+
+    public function hapusPekerjaan($data){
+       $this->db->where('id_pekerjaan',$data['id_pekerjaan']);
+       $this->db->delete('pekerjaan',$val);
+   }
+  
 }

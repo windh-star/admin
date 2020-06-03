@@ -12,7 +12,8 @@ class UpahModel extends CI_Model {
   public $tabel_rf1 = "wilayah";
   public $primary_key = "id_upah";
   public $foreign_key = "id_wilayah";
-  public $foreign_key1 = "upah.id_wilayah";
+  public $foreign_key1 = "id_wilayah";
+  public $foreign_key2 = "id_proyek";
   public $primary_key_rf1 = "wilayah.id_wilayah";
 
   function getTabelLengkapiUpah($datatable){
@@ -93,7 +94,10 @@ class UpahModel extends CI_Model {
     //   $columns = str_replace('id_wilayah', 'upah.id_wilayah', $columns);
     //   $join = "INNER JOIN {$this->tabel_rf1} ON {$this->foreign_key1} = {$this->primary_key_rf1}";
     //   $sql  = "SELECT {$columns} FROM {$this->tabel} {$join}";
-      $sql  = "SELECT {$columns} FROM {$this->view}";
+    $query  = "(SELECT upah.*, wilayah.wilayah from upah, wilayah where upah.id_wilayah=wilayah.id_wilayah) a";
+
+
+  $sql  = "SELECT {$columns} FROM {$query}";
 
       // get total data
       $data = $this->db->query($sql);
@@ -109,23 +113,48 @@ class UpahModel extends CI_Model {
       $where = '';
 
       //filter
-      $wilayah = $this->input->post('wilayah');
-      if ($wilayah != '') $where .= $this->foreign_key .' = "'. $wilayah .'"'; else $where .= $this->foreign_key .' = ""'; 
 
-      if ($search != '') {
-          if ($where != '') $where .= ' AND ('; else $where .= ' (';
-          for ($i=0; $i < $count_c ; $i++) {
-              $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
-              if ($i < $count_c - 1) {
-                  $where .= ' OR ';
-              }
-          }
-          $where .= ')';
-      }
+      $wilayah = $this->input->post('wilayah');
+      $nama_proyek = $this->input->post('nama_poyek');
+      $sumber = $this->input->post('sumber');
       
-      if ($where != '') {
-          $sql .= " WHERE " . $where;  
-      }
+      if ($wilayah != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key1 .' = "'. $wilayah .'"';
+      if ($nama_proyek != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key2 .' = "'. $nama_proyek .'"';
+      if ($sumber != '') $where .= ($where != '' ? ' AND ' : '').'sumber = "'. $sumber .'"';
+      
+       if ($search != '') {
+             if ($where != '') $where .= ' AND ('; else $where .= ' (';
+             for ($i=0; $i < $count_c ; $i++) {
+                 $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
+                 if ($i < $count_c - 1) {
+                     $where .= ' OR ';
+                 }
+             }
+             $where .= ' )';
+       }
+         
+       if ($where != ''){
+           $sql .= " WHERE " . $where;
+       }
+       
+
+    //   $wilayah = $this->input->post('wilayah');
+    //   if ($wilayah != '') $where .= $this->foreign_key .' = "'. $wilayah .'"'; else $where .= $this->foreign_key .' = ""'; 
+
+    //   if ($search != '') {
+    //       if ($where != '') $where .= ' AND ('; else $where .= ' (';
+    //       for ($i=0; $i < $count_c ; $i++) {
+    //           $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
+    //           if ($i < $count_c - 1) {
+    //               $where .= ' OR ';
+    //           }
+    //       }
+    //       $where .= ')';
+    //   }
+      
+    //   if ($where != '') {
+    //       $sql .= " WHERE " . $where;  
+    //   }
 
     //   $sql .= " AND (harga_dasar IS NOT NULL OR harga_dasar <> '')";
 
@@ -143,7 +172,7 @@ class UpahModel extends CI_Model {
       // limit
       $start  = $datatable['start'];
       $length = $datatable['length'];
-      $sql .= "LIMIT {$start}, {$length}";
+      $sql .= " LIMIT {$start}, {$length}";
       $data = $this->db->query($sql);
 
       $option['draw']            = $datatable['draw'];
@@ -156,15 +185,14 @@ class UpahModel extends CI_Model {
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) { 
              if ($i == 6) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
-             else if ($i == 7) { 
-              if ($row->$columnd[$i-1] == "0") $data[] = "<span class='label label-warning'>Belum Lengkap</span>";
-              else {
-                if ($row->$columnd[$i] == "1") $data[] = "<span class='label label-success'>Terverifikasi</span>";
-                else $data[] = "<span class='label label-danger'>Belum Terverifikasi</span>";
-              }
-            } else $data[] = $row->$columnd[$i];
+             else
+            $field=$columnd[$i];
+             $data[] = $row->$field;
          }
-         $data[] = null;
+         $data[] = "<div class='btn-group'>".
+         "<button onclick='tampilUbahUpah(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+         "<button onclick='hapusUpah(".$data[1].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+     "</div>";
          $option['data'][] = $data;
       }
 
@@ -318,4 +346,17 @@ class UpahModel extends CI_Model {
 
       $this->db->update($this->tabel, $val);
   }
+
+  function getInfoUpah($id_upah){
+    $this->db->select('*');
+    $this->db->from('upah');
+    $this->db->join('wilayah', 'wilayah.id_wilayah = upah.id_wilayah' );
+    $this->db->join('proyek', 'proyek.id_proyek = upah.id_proyek' );
+    $this->db->where('upah.id_upah', $id_upah);
+    return $this->db->get();
+}
+
+function getRingkasanSumberUpah(){
+    return $this->db->query("SELECT id_bahan,SUM(shbj) as shbj,SUM(estimatorid) as estimatorid, SUM(survey) as survey from (SELECT id_bahan,IF(sumber = '1',COUNT(*),0) AS `shbj`, IF(sumber = '2',COUNT(*),0) AS `estimatorid`,IF(sumber = '0',COUNT(*),0) AS `survey` FROM (select * from upah GROUP BY id_upah) a group by sumber) b");
+}
 }
