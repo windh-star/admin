@@ -30,7 +30,8 @@ class SesiPenggunaController extends CI_controller{
                                            'nama_pengguna',
                                            'foto',
                                            'nama_proyek',
-                                           'time'
+                                           'time',
+                                           'status'
                                         );
 
             return $this->SesiPenggunaModel->getTabelSesiPengguna($datatable);

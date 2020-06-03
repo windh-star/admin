@@ -25,9 +25,37 @@ class PekerjaanController extends CI_Controller{
                                                'id_pekerjaan',
 		    								   'nama_proyek',
 		    								   'nama_pekerjaan',
-	            	    		               'satuan',
+	            	    		               'satuan'
 	            	    		             );
 		    	return $this->PekerjaanModel->getTabelPekerjaan($datatable);
     		}
+    }
+    public function ubahPekerjaan(){
+        parse_str(file_get_contents('php://input'), $data);
+        $this->PekerjaanModel->ubahPekerjaan($data);
+        
+        $response = array(
+            'Success' => true,
+            'Info' => 'Data Pekerjaan berhasil diperbaharui.'
+        );
+        
+        $this->output
+             ->set_status_header(201)
+             ->set_content_type('application/json')
+             ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+             ->_display();
+        exit();
+    }
+
+    public function hapusPekerjaan(){
+     
+        $this->PekerjaanModel->hapusPekerjaan($data);
+      
+        $this->output
+        ->set_status_header(201)
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        ->_display();
+   exit();
     }
 }

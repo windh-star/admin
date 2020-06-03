@@ -54,7 +54,8 @@ class BahanController extends CI_Controller {
 											   'harga_dasar',
 											   'tahun',
 											   'sumber',
-											   'keterangan'
+											   'keterangan',
+											   'id_proyek'
 	            	    		             );
 
 		    	return $this->BahanModel->getTabelBahan($datatable);
@@ -234,4 +235,27 @@ class BahanController extends CI_Controller {
 	         ->_display();
 	    exit;
 	}
+
+	public function hapusBahan(){
+     
+        $this->BahanModel->hapusBahan($data);
+      
+        $this->output
+        ->set_status_header(201)
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        ->_display();
+   exit();
+	}
+	
+	public function getInfoBahan($id_bahan){
+        $response = $this->BahanModel->getInfoBahan($id_bahan)->row();
+        
+        $this->output
+             ->set_status_header(200)
+             ->set_content_type('application/json')
+             ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+             ->_display();
+        exit();
+    }
 }

@@ -25,10 +25,12 @@ class PenggunaController extends CI_controller{
 	            $datatable['col-display'] = array(
 	                                            'id_pengguna',
 		    								   'nama_pengguna',
-		    								   'alamat',
+                                               'alamat',
+                                               'wilayah',
 	            	    		               'perusahaan',
 	            	    		               'email',
-	            	    		               'no_telp'
+                                               'no_telp',
+                                               'status_verifikasi'
 	            	    		             );
 		    	return $this->PenggunaModel->getTabelPengguna($datatable);
     		}
@@ -101,5 +103,16 @@ class PenggunaController extends CI_controller{
              ->_display();
         exit();
         
+    }
+
+    public function getRingkasanVerifikasi(){
+	    $response = $this->PenggunaModel->getRingkasanVerifikasi()->row();
+
+	    $this->output
+	         ->set_status_header(201)
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	         ->_display();
+	    exit;
     }
 }

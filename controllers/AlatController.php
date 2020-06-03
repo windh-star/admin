@@ -221,4 +221,26 @@ class AlatController extends CI_Controller {
 	         ->_display();
 	    exit;
 	}
+
+	public function getInfoAlat($id_alat){
+        $response = $this->AlatModel->getInfoAlat($id_alat)->row();
+        
+        $this->output
+             ->set_status_header(200)
+             ->set_content_type('application/json')
+             ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+             ->_display();
+        exit();
+	}
+	
+	public function getRingkasanSumberAlat(){
+	    $response = $this->AlatModel->getRingkasanSumberAlat()->row();
+
+	    $this->output
+	         ->set_status_header(201)
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	         ->_display();
+	    exit;
+	}
 }

@@ -25,10 +25,8 @@ class ArtikelController extends CI_controller{
             $datatable['col-display'] = array(
                                            'judul_artikel',
                                            'ket_kategori',
-                                           'ket_status',
-                                           'foto_cover',
                                            'tgl_dibuat',
-                                           'jam_dibuat'
+                                           'status'
                                         );
 
             return $this->ArtikelModel->getTabelArtikel($datatable);
@@ -52,8 +50,8 @@ class ArtikelController extends CI_controller{
     }
 
       //Rekap Jumlah Kategori Artikel, 1 = Artikel, 2 = Berita, 3 = Event
-      public function getRingkasanKategoriArtikel($id_artikel){
-	    $response = $this->ArtikelModel->getRingkasanKategoriArtikel($id_artikel)->row();
+      public function getRingkasanKategoriArtikel(){
+	    $response = $this->ArtikelModel->getRingkasanKategoriArtikel()->row();
 
 	    $this->output
 	         ->set_status_header(201)
@@ -99,7 +97,7 @@ class ArtikelController extends CI_controller{
 
 
     public function hapusArtikel(){
-        parse_str(file_get_contents('php://input'), $data);
+      
         $this->ArtikelModel->hapusArtikel($data);
         
         $response = array(

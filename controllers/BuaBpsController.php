@@ -27,9 +27,9 @@ class BuaBpsController extends CI_controller{
                                            'ket_kategori',
                                            'id_kategori',
                                            'nama_kategori',
-                                           'satuan',
                                            'spesifikasi',
                                            'merk',
+                                           'satuan',
                                            'harga_dasar',
                                            'keterangan'
                                         );

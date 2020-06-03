@@ -91,4 +91,17 @@ class KategoriPekerjaanController extends CI_controller{
              ->_display();
         exit();
     }
+
+    public function hapusKategori(){
+     
+        $this->KategoriPekerjaanModel->hapusKategoriPekerjaan($data);
+       
+
+        $this->output
+        ->set_status_header(201)
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        ->_display();
+   exit();
+    }
 }
