@@ -120,7 +120,7 @@ class BahanModel extends CI_Model {
     $sumber = $this->input->post('sumber');
     
     if ($wilayah != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key1 .' = "'. $wilayah .'"';
-    if ($namaproyek != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key2 .' = "'. $nama_proyek .'"';
+    if ($namaproyek != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key2 .' = "'. $namaproyek .'"';
     if ($sumber != '') $where .= ($where != '' ? ' AND ' : '').'sumber = "'. $sumber .'"';
     
      if ($search != '') {
