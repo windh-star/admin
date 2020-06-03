@@ -300,15 +300,14 @@ class BahanTerpakaiModel extends CI_Model {
 
   function getRincianBahanTerpakai($id_proyekbahan,$id_proyekproyek,$bahan){
     return $this->db->query("SELECT ahs.id_ahs,bahan.id_proyek as id_proyekbahan,proyek.id_proyek as id_proyekproyek, 
-    ahs.id_proyek,ahs.nama_pekerjaan,proyek.nama_proyek,bahan.nama_bahan 
-    FROM ahs,bahan,proyek 
-    WHERE ahs.id_proyek='{$id_proyekbahan}' and ahs.id_proyek='{$id_proyekproyek}' and bahan.nama_bahan='{$bahan}' group by nama_pekerjaan");
+    ahs.id_proyek,ahs.nama_pekerjaan,proyek.nama_proyek,bahan.nama_bahan, bahan.id_bahan as id_bahan FROM ahs,bahan,proyek 
+    WHERE ahs.id_proyek='{$id_proyekbahan}' and ahs.id_proyek='{$id_proyekproyek}' and bahan.id_bahan='{$bahan}' group by nama_pekerjaan");
    }
 
    function getRincianJumlahBahanTerpakai($id_proyekbahan,$id_proyekproyek,$bahan){
     return $this->db->query("SELECT count(DISTINCT nama_pekerjaan) as jumlah
     FROM ahs,bahan,proyek 
-    WHERE ahs.id_proyek='{$id_proyekbahan}' and ahs.id_proyek='{$id_proyekproyek}' and bahan.nama_bahan='{$bahan}' ");
+    WHERE ahs.id_proyek='{$id_proyekbahan}' and ahs.id_proyek='{$id_proyekproyek}' and bahan.id_bahan='{$bahan}' ");
    }
 
 

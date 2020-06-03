@@ -32,6 +32,7 @@ class ProyekModel extends CI_model{
        
        $search = $datatable['search']['value'];
        $where ='';
+   
        //filtering
        $wilayah = $this->input->post('wilayah');
        $pengguna = $this->input->post('pengguna');

@@ -116,7 +116,7 @@ class BahanModel extends CI_Model {
 
     
     $wilayah = $this->input->post('wilayah');
-    $namaproyek = $this->input->post('nama_poyek');
+    $namaproyek = $this->input->post('namaproyek');
     $sumber = $this->input->post('sumber');
     
     if ($wilayah != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key1 .' = "'. $wilayah .'"';
@@ -191,8 +191,8 @@ class BahanModel extends CI_Model {
             $data[] = $row->$field;
          }
          $data[] = "<div class='btn-group'>".
-         "<button onclick='tampilUbahBahan(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
-         "<button onclick='hapusBahan(".$data[1].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+         "<button onclick='TampilUbahBahan(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+         "<button onclick='HapusBahan(".$data[1].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
      "</div>";
 
          $option['data'][] = $data;
@@ -365,7 +365,8 @@ function getInfoBahan($id_bahan){
     $this->db->join('wilayah', 'wilayah.id_wilayah = bahan.id_wilayah' );
     $this->db->join('proyek', 'proyek.id_proyek = bahan.id_proyek' );
     $this->db->where('bahan.id_bahan', $id_bahan);
-    return $this->db->get();
+    $query = $this->db->get();
+    return $query->result();
 }
 
 }

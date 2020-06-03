@@ -118,11 +118,11 @@ class AlatModel extends CI_Model {
       //filter
 
       $wilayah = $this->input->post('wilayah');
-      $nama_proyek = $this->input->post('nama_poyek');
+      $namaproyek = $this->input->post('namaproyek');
       $sumber = $this->input->post('sumber');
       
       if ($wilayah != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key1 .' = "'. $wilayah .'"';
-      if ($nama_proyek != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key2 .' = "'. $nama_proyek .'"';
+      if ($namaproyek != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key2 .' = "'. $namaproyek .'"';
       if ($sumber != '') $where .= ($where != '' ? ' AND ' : '').'sumber = "'. $sumber .'"';
       
        if ($search != '') {
@@ -356,7 +356,8 @@ class AlatModel extends CI_Model {
     $this->db->join('wilayah', 'wilayah.id_wilayah = alat.id_wilayah' );
     $this->db->join('proyek', 'proyek.id_proyek = alat.id_proyek' );
     $this->db->where('alat.id_alat', $id_alat);
-    return $this->db->get();
+    $query = $this->db->get();
+    return $query->result();
 }
 
 function getRingkasanSumberAlat(){

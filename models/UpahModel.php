@@ -115,11 +115,11 @@ class UpahModel extends CI_Model {
       //filter
 
       $wilayah = $this->input->post('wilayah');
-      $nama_proyek = $this->input->post('nama_poyek');
+      $namaproyek = $this->input->post('namaproyek');
       $sumber = $this->input->post('sumber');
       
       if ($wilayah != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key1 .' = "'. $wilayah .'"';
-      if ($nama_proyek != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key2 .' = "'. $nama_proyek .'"';
+      if ($namaproyek != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key2 .' = "'. $namaproyek .'"';
       if ($sumber != '') $where .= ($where != '' ? ' AND ' : '').'sumber = "'. $sumber .'"';
       
        if ($search != '') {
@@ -353,8 +353,18 @@ class UpahModel extends CI_Model {
     $this->db->join('wilayah', 'wilayah.id_wilayah = upah.id_wilayah' );
     $this->db->join('proyek', 'proyek.id_proyek = upah.id_proyek' );
     $this->db->where('upah.id_upah', $id_upah);
-    return $this->db->get();
+    $query = $this->db->get();
+    return $query->result();
 }
+
+// function getInfoUpah($id_upah){
+//     $this->db->select('*');
+//     $this->db->from('upah');
+//     $this->db->join('wilayah', 'wilayah.id_wilayah = upah.id_wilayah' );
+//     $this->db->join('proyek', 'proyek.id_proyek = upah.id_proyek' );
+//     $this->db->where('upah.id_upah', $id_upah);
+//     return $this->db->get();
+// }
 
 function getRingkasanSumberUpah(){
     return $this->db->query("SELECT id_bahan,SUM(shbj) as shbj,SUM(estimatorid) as estimatorid, SUM(survey) as survey from (SELECT id_bahan,IF(sumber = '1',COUNT(*),0) AS `shbj`, IF(sumber = '2',COUNT(*),0) AS `estimatorid`,IF(sumber = '0',COUNT(*),0) AS `survey` FROM (select * from upah GROUP BY id_upah) a group by sumber) b");
