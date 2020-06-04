@@ -15,87 +15,132 @@ class BahanTerpakaiModel extends CI_Model {
 	public $foreign_key1 = "bahan.id_wilayah";
 	public $primary_key_rf1 = "wilayah.id_wilayah";
 
-  function getTabelLengkapiBahan($datatable){
+
+    function getTabelBahan($datatable){
+        $columns = implode(', ', $datatable['col-display']);
+      //   $columns = str_replace('id_wilayah', 'bahan.id_wilayah', $columns);
+      //   $join = "INNER JOIN {$this->tabel_rf1} ON {$this->foreign_key1} = {$this->primary_key_rf1}";
+      //   $sql  = "SELECT {$columns} FROM {$this->tabel} {$join}";
+        $query  = "(SELECT bahan.id_bahan,bahan.id_wilayah, bahan.id_proyek AS id_proyekbahan, bahan.nama_bahan, bahan.satuan, bahan.merk, bahan.spesifikasi, bahan.harga_dasar, bahan.tahun, bahan.sumber, bahan.keterangan, wilayah.wilayah,proyek.id_proyek AS id_proyekproyek, proyek.nama_proyek FROM bahan, wilayah, proyek WHERE bahan.id_wilayah=wilayah.id_wilayah AND bahan.id_proyek=proyek.id_proyek) a";
+  
+        $sql="SELECT {$columns} FROM {$query}";
+        // get total data
+        $data = $this->db->query($sql);
+        $total_data = $data->num_rows();
+        $data->free_result();
+  
+        // pengkondisian aksi seperti next, search dan limit
+        $columnd = $datatable['col-display'];
+        $count_c = count($columnd);
+  
+        // search
+        $search = $datatable['search']['value'];
+        $where = '';
+  
+       //filter
+  
+      
       $wilayah = $this->input->post('wilayah');
-      $jum_data = $this->db->where("id_wilayah",$wilayah)
-                           ->get($this->lengkapi_tabel)->num_rows();
-      if ($jum_data == 0) $tabel_bahan = "lengkapi_bahan_kosong";
-      else $tabel_bahan = $this->lengkapi_tabel;
-
-      $columns = implode(', ', $datatable['col-display']);
-      $sql  = "(SELECT {$columns},bahan.id_proyek as id_proyekbahan,proyek.id_proyek as id_proyekproyek,id_wilayah FROM {$tabel},ahs,proyek,wilayah where bahan.id_wilayah= wilayah.id_wilayah AND ahs.id_proyek=bahan.id_proyek and ahs.id_proyek=proyek.id_proyek)";
+      $namaproyek = $this->input->post('namaproyek');
+      $sumber = $this->input->post('sumber');
       
-      // get total data
-      $data = $this->db->query($sql);
-      $total_data = $data->num_rows();
-      $data->free_result();
-
-      // pengkondisian aksi seperti next, search dan limit
-      $columnd = $datatable['col-display'];
-      $count_c = count($columnd);
-
-      // search
-      $search = $datatable['search']['value'];
-      $where = '';
-
-      //filter
-      if ($jum_data != 0) if ($wilayah != '') $where .= 'id_wilayah = "'. $wilayah .'"';
-
-      if ($search != '') {
-          if ($where != '') $where .= ' AND ('; else $where .= ' (';
-          for ($i=0; $i < $count_c ; $i++) {
-              $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
-              if ($i < $count_c - 1) {
-                  $where .= ' OR ';
-              }
-          }
-          $where .= ')';
-      }
+      if ($wilayah != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key1 .' = "'. $wilayah .'"';
+      if ($namaproyek != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key2 .' = "'. $namaproyek .'"';
+      if ($sumber != '') $where .= ($where != '' ? ' AND ' : '').'sumber = "'. $sumber .'"';
       
-      if ($where != '') {
-          $sql .= " WHERE " . $where;  
-      }
-
-      // get total filtered
-      $data = $this->db->query($sql);
-      $total_filter = $data->num_rows();
-      $data->free_result();
-
-      // sorting
-      // $sql .= " ORDER BY {$columnd[($datatable['order'][0]['column'])-1]} {$datatable['order'][0]['dir']}";
-      
-      // limit
-      $start  = $datatable['start'];
-      $length = $datatable['length'];
-      $sql .= " LIMIT {$start}, {$length}";
-      $data = $this->db->query($sql);
-
-      $option['draw']            = $datatable['draw'];
-      $option['recordsTotal']    = $total_data;
-      $option['recordsFiltered'] = $total_filter;
-      $option['data']            = array();
-
-      foreach ($data->result() as $row) {
-       $data = array();
-         $data[] = null;
-         $data[] = "<div class='btn-group'>".
-           "<button type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
-           "<button type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+       if ($search != '') {
+             if ($where != '') $where .= ' AND ('; else $where .= ' (';
+             for ($i=0; $i < $count_c ; $i++) {
+                 $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
+                 if ($i < $count_c - 1) {
+                     $where .= ' OR ';
+                 }
+             }
+             $where .= ' )';
+       }
+         
+       if ($where != ''){
+           $sql .= " WHERE " . $where;
+       }
+       
+  
+      //   $wilayah = $this->input->post('wilayah');
+      //   if ($wilayah != '') $where .= $this->foreign_key .' = "'. $wilayah .'"'; else $where .= $this->foreign_key .' = ""'; 
+  
+      //   if ($search != '') {
+      //       if ($where != '') $where .= ' AND ('; else $where .= ' (';
+      //       for ($i=0; $i < $count_c ; $i++) {
+      //           $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
+      //           if ($i < $count_c - 1) {
+      //               $where .= ' OR ';
+      //           }
+      //       }
+      //       $where .= '';
+      //   }
+        
+      //   if ($where != '') {
+      //       $sql .= " WHERE " . $where;  
+      //   }
+  
+      //   $sql .= " AND (harga_dasar IS NOT NULL OR harga_dasar <> '')";
+  
+        // get total filtered
+        $data = $this->db->query($sql);
+        $total_filter = $data->num_rows();
+        $data->free_result();
+        
+        //group
+        $sql .= " GROUP BY ".$this->foreign_key.",".$this->primary_key.",id_proyekbahan";
+  
+        // sorting
+        $sql .= " ORDER BY {$columnd[($datatable['order'][0]['column'])-1]} {$datatable['order'][0]['dir']}";
+        
+        // limit
+        $start  = $datatable['start'];
+        $length = $datatable['length'];
+        $sql .= " LIMIT {$start}, {$length}";
+        $data = $this->db->query($sql);
+  
+        $option['draw']            = $datatable['draw'];
+        $option['recordsTotal']    = $total_data;
+        $option['recordsFiltered'] = $total_filter;
+        $option['data']            = array();
+  
+        foreach ($data->result() as $row) {
+         $data = array();
+           $data[] = null;
+           $data[] = null;
+           for ($i=0; $i < $count_c; $i++) { 
+              if ($i == 8) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
+              else
+               $field=$columnd[$i];
+              $data[] = $row->$field;
+           }
+           $data[] = "<div class='btn-group'>".
+           "<button onclick='TampilUbahBahan(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+           "<button onclick='HapusBahan(".$data[1].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
        "</div>";
+  
+           $option['data'][] = $data;
+        }
+  
+        // eksekusi json
+        return print_r(json_encode($option));
+    }
 
-         $option['data'][] = $data;
-      }
-
-      // eksekusi json
-      return print_r(json_encode($option));
-	}
 
   function getTabelBahanTerpakai($datatable){
       $columns = implode(', ', $datatable['col-display']);
     //   $columns = str_replace('id_wilayah', 'bahan.id_wilayah', $columns);
     //   $join = "INNER JOIN {$this->tabel_rf1} ON {$this->foreign_key1} = {$this->primary_key_rf1}";
     //   $sql  = "SELECT {$columns} FROM {$this->tabel} {$join}";
-      $query  = "(SELECT bahan.id_bahan,bahan.id_wilayah, bahan.id_proyek as id_proyekbahan,proyek.id_proyek as id_proyekproyek, bahan.nama_bahan, bahan.satuan, bahan.merk, bahan.spesifikasi, bahan.harga_dasar, bahan.tahun, bahan.sumber, bahan.keterangan, wilayah.wilayah, proyek.nama_proyek FROM bahan, wilayah, proyek WHERE bahan.id_wilayah=wilayah.id_wilayah AND bahan.id_proyek=proyek.id_proyek) a";
+    $id_proyekbahan = $this->input->post('id_proyekbahan');
+    $id_proyekproyek = $this->input->post('id_proyekproyek');
+    $id_bahan = $this->input->post('id_bahan'); 
+    
+    $query  = "(SELECT ahs.id_ahs,bahan.id_proyek as id_proyekbahan,proyek.id_proyek as id_proyekproyek, 
+      ahs.id_proyek,ahs.nama_pekerjaan,proyek.nama_proyek,bahan.nama_bahan, bahan.id_bahan as id_bahan FROM ahs,bahan,proyek 
+      WHERE ahs.id_proyek='{$id_proyekbahan}' and ahs.id_proyek='{$id_proyekproyek}' and bahan.id_bahan='{$id_bahan}' group by nama_pekerjaan) a";
 
       $sql="SELECT {$columns} FROM {$query}";
       // get total data
@@ -132,7 +177,6 @@ class BahanTerpakaiModel extends CI_Model {
 
       foreach ($data->result() as $row) {
        $data = array();
-         $data[] = null;
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) { 
              $field=$columnd[$i];
@@ -298,16 +342,16 @@ class BahanTerpakaiModel extends CI_Model {
 }
 
 
-  function getRincianBahanTerpakai($id_proyekbahan,$id_proyekproyek,$bahan){
+  function getRincianBahanTerpakai($id_proyekbahan,$id_proyekproyek,$id_bahan){
     return $this->db->query("SELECT ahs.id_ahs,bahan.id_proyek as id_proyekbahan,proyek.id_proyek as id_proyekproyek, 
     ahs.id_proyek,ahs.nama_pekerjaan,proyek.nama_proyek,bahan.nama_bahan, bahan.id_bahan as id_bahan FROM ahs,bahan,proyek 
-    WHERE ahs.id_proyek='{$id_proyekbahan}' and ahs.id_proyek='{$id_proyekproyek}' and bahan.id_bahan='{$bahan}' group by nama_pekerjaan");
+    WHERE ahs.id_proyek='{$id_proyekbahan}' and ahs.id_proyek='{$id_proyekproyek}' and bahan.id_bahan='{$id_bahan}' group by nama_pekerjaan");
    }
 
    function getRincianJumlahBahanTerpakai($id_proyekbahan,$id_proyekproyek,$bahan){
     return $this->db->query("SELECT count(DISTINCT nama_pekerjaan) as jumlah
     FROM ahs,bahan,proyek 
-    WHERE ahs.id_proyek='{$id_proyekbahan}' and ahs.id_proyek='{$id_proyekproyek}' and bahan.id_bahan='{$bahan}' ");
+    WHERE ahs.id_proyek='{$id_proyekbahan}' and ahs.id_proyek='{$id_proyekproyek}' and bahan.id_bahan='{$id_bahan}' ");
    }
 
 

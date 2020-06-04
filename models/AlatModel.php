@@ -98,7 +98,7 @@ class AlatModel extends CI_Model {
     //   $join = "INNER JOIN {$this->tabel_rf1} ON {$this->foreign_key1} = {$this->primary_key_rf1}";
     //   $sql  = "SELECT {$columns} FROM {$this->tabel} {$join}";
     
-    $query  = "(SELECT alat.*, wilayah.wilayah from alat, wilayah where alat.id_wilayah=wilayah.id_wilayah) a";
+    $query  = "(SELECT alat.id_alat,alat.id_wilayah, alat.id_proyek, alat.nama_alat, alat.satuan, alat.merk, alat.spesifikasi, alat.harga_dasar, alat.tahun, alat.sumber, alat.keterangan, wilayah.wilayah, proyek.nama_proyek FROM alat, wilayah, proyek WHERE alat.id_wilayah=wilayah.id_wilayah AND alat.id_proyek=proyek.id_proyek) a";
 
     $sql  = "SELECT {$columns} FROM {$this->view}";
 
@@ -187,7 +187,7 @@ class AlatModel extends CI_Model {
        $data = array();
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) { 
-             if ($i == 6) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
+             if ($i == 7) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
              else 
              $field=$columnd[$i];
              $data[] = $row->$field;
@@ -361,6 +361,6 @@ class AlatModel extends CI_Model {
 }
 
 function getRingkasanSumberAlat(){
-    return $this->db->query("SELECT id_bahan,SUM(shbj) as shbj,SUM(estimatorid) as estimatorid, SUM(survey) as survey from (SELECT id_bahan,IF(sumber = '1',COUNT(*),0) AS `shbj`, IF(sumber = '2',COUNT(*),0) AS `estimatorid`,IF(sumber = '0',COUNT(*),0) AS `survey` FROM (select * from alat GROUP BY id_alat) a group by sumber) b");
+    return $this->db->query("SELECT id_alat,SUM(shbj) as shbj,SUM(estimatorid) as estimatorid, SUM(survey) as survey from (SELECT id_alat,IF(sumber = '1',COUNT(*),0) AS `shbj`, IF(sumber = '2',COUNT(*),0) AS `estimatorid`,IF(sumber = '0',COUNT(*),0) AS `survey` FROM (select * from alat GROUP BY id_alat) a group by sumber) b");
 }
 }

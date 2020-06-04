@@ -96,7 +96,7 @@ class BahanModel extends CI_Model {
     //   $columns = str_replace('id_wilayah', 'bahan.id_wilayah', $columns);
     //   $join = "INNER JOIN {$this->tabel_rf1} ON {$this->foreign_key1} = {$this->primary_key_rf1}";
     //   $sql  = "SELECT {$columns} FROM {$this->tabel} {$join}";
-      $query  = "(SELECT bahan.id_bahan,bahan.id_wilayah, bahan.id_proyek, bahan.nama_bahan, bahan.satuan, bahan.merk, bahan.spesifikasi, bahan.harga_dasar, bahan.tahun, bahan.sumber, bahan.keterangan, wilayah.wilayah, proyek.nama_proyek FROM bahan, wilayah, proyek WHERE bahan.id_wilayah=wilayah.id_wilayah AND bahan.id_proyek=proyek.id_proyek) a";
+      $query  = "(SELECT bahan.id_bahan,bahan.id_wilayah, bahan.id_proyek AS id_proyekbahan, bahan.nama_bahan, bahan.satuan, bahan.merk, bahan.spesifikasi, bahan.harga_dasar, bahan.tahun, bahan.sumber, bahan.keterangan, wilayah.wilayah,proyek.id_proyek AS id_proyekproyek, proyek.nama_proyek FROM bahan, wilayah, proyek WHERE bahan.id_wilayah=wilayah.id_wilayah AND bahan.id_proyek=proyek.id_proyek) a";
 
       $sql="SELECT {$columns} FROM {$query}";
       // get total data
@@ -165,7 +165,7 @@ class BahanModel extends CI_Model {
       $data->free_result();
       
       //group
-      $sql .= " GROUP BY ".$this->foreign_key.",".$this->primary_key.",id_proyek";
+      $sql .= " GROUP BY ".$this->foreign_key.",".$this->primary_key.",id_proyekbahan";
 
       // sorting
       $sql .= " ORDER BY {$columnd[($datatable['order'][0]['column'])-1]} {$datatable['order'][0]['dir']}";
@@ -183,9 +183,10 @@ class BahanModel extends CI_Model {
 
       foreach ($data->result() as $row) {
        $data = array();
+       
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) { 
-            if ($i == 7) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
+            if ($i == 8) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
             else
              $field=$columnd[$i];
             $data[] = $row->$field;

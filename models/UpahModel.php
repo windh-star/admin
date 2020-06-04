@@ -94,7 +94,7 @@ class UpahModel extends CI_Model {
     //   $columns = str_replace('id_wilayah', 'upah.id_wilayah', $columns);
     //   $join = "INNER JOIN {$this->tabel_rf1} ON {$this->foreign_key1} = {$this->primary_key_rf1}";
     //   $sql  = "SELECT {$columns} FROM {$this->tabel} {$join}";
-    $query  = "(SELECT upah.*, wilayah.wilayah from upah, wilayah where upah.id_wilayah=wilayah.id_wilayah) a";
+    $query  = "(SELECT upah.id_upah,upah.id_wilayah, upah.id_proyek, upah.nama_upah, upah.satuan, upah.merk, upah.spesifikasi, upah.harga_dasar, upah.tahun, upah.sumber, upah.keterangan, wilayah.wilayah, proyek.nama_proyek FROM upah, wilayah, proyek WHERE upah.id_wilayah=wilayah.id_wilayah AND upah.id_proyek=proyek.id_proyek) a";
 
 
   $sql  = "SELECT {$columns} FROM {$query}";
@@ -184,7 +184,7 @@ class UpahModel extends CI_Model {
        $data = array();
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) { 
-             if ($i == 6) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
+             if ($i == 7) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
              else
             $field=$columnd[$i];
              $data[] = $row->$field;
@@ -367,6 +367,6 @@ class UpahModel extends CI_Model {
 // }
 
 function getRingkasanSumberUpah(){
-    return $this->db->query("SELECT id_bahan,SUM(shbj) as shbj,SUM(estimatorid) as estimatorid, SUM(survey) as survey from (SELECT id_bahan,IF(sumber = '1',COUNT(*),0) AS `shbj`, IF(sumber = '2',COUNT(*),0) AS `estimatorid`,IF(sumber = '0',COUNT(*),0) AS `survey` FROM (select * from upah GROUP BY id_upah) a group by sumber) b");
+    return $this->db->query("SELECT id_upah,SUM(shbj) as shbj,SUM(estimatorid) as estimatorid, SUM(survey) as survey from (SELECT id_upah,IF(sumber = '1',COUNT(*),0) AS `shbj`, IF(sumber = '2',COUNT(*),0) AS `estimatorid`,IF(sumber = '0',COUNT(*),0) AS `survey` FROM (select * from upah GROUP BY id_upah) a group by sumber) b");
 }
 }
