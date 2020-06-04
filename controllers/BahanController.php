@@ -44,18 +44,16 @@ class BahanController extends CI_Controller {
 	            $datatable  = $_POST;
 
 	            $datatable['col-display'] = array(
-		    								   'nama_proyek',
-		    								   'id_bahan',
-	            	    		               'wilayah',
-	            	    		               'nama_bahan',
-	            	    		               'satuan',
-	            	    		               'merk',
-	            	    		               'spesifikasi',
-											   'harga_dasar',
-											   'tahun',
-											   'sumber',
-											   'keterangan',
-											   'id_proyek'
+												'id_bahan',
+												'id_proyekbahan',
+												'id_proyekproyek',
+												'wilayah',
+												'nama_bahan',
+												'satuan',
+												'spesifikasi',
+												'merk',
+												'harga_dasar',
+												'keterangan'
 	            	    		             );
 
 		    	return $this->BahanModel->getTabelBahan($datatable);

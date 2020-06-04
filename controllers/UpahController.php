@@ -44,14 +44,15 @@ class UpahController extends CI_Controller {
 	            $datatable  = $_POST;
 
 	            $datatable['col-display'] = array(
-		    								   'urut',
-		    								   'wilayah',
-	            	    		               'nama_upah',
-	            	    		               'satuan',
-	            	    		               'spesifikasi',
-	            	    		               'merk',
-	            	    		               'harga_dasar',
-	            	    		               'status'
+												'id_upah',
+												'id_proyek',
+												'wilayah',
+												'nama_upah',
+												'satuan',
+												'spesifikasi',
+												'merk',
+												'harga_dasar',
+												'keterangan'
 	            	    		             );
 
 		    	return $this->UpahModel->getTabelUpah($datatable);

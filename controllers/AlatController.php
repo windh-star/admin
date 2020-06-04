@@ -44,14 +44,15 @@ class AlatController extends CI_Controller {
 	            $datatable  = $_POST;
 
 	            $datatable['col-display'] = array(
-		    								   'urut',
-		    								   'wilayah',
-	            	    		               'nama_alat',
-	            	    		               'satuan',
-	            	    		               'spesifikasi',
-	            	    		               'merk',
-	            	    		               'harga_dasar',
-	            	    		               'status'
+												'id_alat',
+												'id_proyek',
+												'wilayah',
+												'nama_alat',
+												'satuan',
+												'spesifikasi',
+												'merk',
+												'harga_dasar',
+												'keterangan'
 	            	    		             );
 
 		    	return $this->AlatModel->getTabelAlat($datatable);

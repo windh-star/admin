@@ -17,7 +17,7 @@ class BahanTerpakaiController extends CI_Controller {
         $this->load->view('layout', $data);
 	}
 
-	public function getTabelLengkapiBahan(){
+	public function getTabelBahan(){
     	if(
     		isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
     		!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -26,12 +26,19 @@ class BahanTerpakaiController extends CI_Controller {
 	            $datatable  = $_POST;
 
 	            $datatable['col-display'] = array(
-	            	                           'urut',
-		    								   'nama_bahan',
-	            	    		               'satuan'
+		    								   'id_bahan',
+											   'id_proyekbahan',
+											   'id_proyekproyek',
+	            	    		               'wilayah',
+	            	    		               'nama_bahan',
+											   'satuan',
+											   'spesifikasi',
+	            	    		               'merk',
+											   'harga_dasar',
+											   'keterangan'
 	            	    		             );
 
-		    	return $this->BahanModel->getTabelLengkapiBahan($datatable);
+		    	return $this->BahanTerpakaiModel->getTabelBahan($datatable);
     		}
   	}
 
@@ -44,19 +51,9 @@ class BahanTerpakaiController extends CI_Controller {
 	            $datatable  = $_POST;
 
 	            $datatable['col-display'] = array(
-		    								   'nama_proyek',
-		    								   'id_bahan',
-	            	    		               'wilayah',
-	            	    		               'nama_bahan',
-	            	    		               'satuan',
-	            	    		               'merk',
-	            	    		               'spesifikasi',
-											   'harga_dasar',
-											   'tahun',
-											   'sumber',
-											   'keterangan',
-											   'id_proyekbahan',
-											   'id_proyekproyek'
+		    								   'id_ahs',
+		    								   'nama_pekerjaan',
+	            	    		               'nama_proyek'
 	            	    		             );
 
 		    	return $this->BahanTerpakaiModel->getTabelBahanTerpakai($datatable);
@@ -258,4 +255,7 @@ class BahanTerpakaiController extends CI_Controller {
 			 ->_display();
 	  exit;
 	}
+
+	
+
 }
