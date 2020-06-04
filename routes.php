@@ -56,8 +56,13 @@ $route['translate_uri_dashes'] = FALSE;
 $route['beranda'] = 'BerandaController/index';
 $route['login'] = 'LoginController/index';
 $route['api/loginPengguna'] = 'LoginController/loginPengguna';
+$route['api/getTotalEstimator'] = 'BerandaController/getTotalEstimator';
+$route['api/getTotalSuplier'] = 'BerandaController/getTotalSuplier';
+$route['api/getTotalProyek'] = 'BerandaController/getTotalProyek';
+$route['api/getGrafikProyek'] = 'BerandaController/getGrafikProyek';
 
 $route['bahanterpakai'] = 'BahanTerpakaiController/index';
+$route['api/getTabelBahan1'] = 'BahanTerpakaiController/getTabelBahan';
 $route['api/getTabelBahanTerpakai'] = 'BahanTerpakaiController/getTabelBahanTerpakai';
 $route['api/getRincianBahanTerpakai/(:any)/(:any)/(:any)'] = 'BahanTerpakaiController/getRincianBahanTerpakai/$1/$2/$3';
 $route['api/getRincianJumlahBahanTerpakai/(:any)/(:any)/(:any)'] = 'BahanTerpakaiController/getRincianJumlahBahanTerpakai/$1/$2/$3';
@@ -297,3 +302,8 @@ $route['api/getListKategoriArtikel'] = 'WilayahController/getListKategoriArtikel
 $route['api/getListStatusArtikel'] = 'WilayahController/getListStatusArtikel';
 $route['api/getRingkasanKategoriArtikel'] = 'WilayahController/getRingkasanKategoriArtikel';
 $route['imporIkkBps'] = 'ImporEksporController/imporIkkBps';
+
+$route['api/totalEstimator'] = 'BerandaController/totalEstimator';
+$route['api/totalSuplier'] = 'BerandaController/totalSuplier';
+$route['api/totalProyek'] = 'BerandaController/totalProyek';
+
