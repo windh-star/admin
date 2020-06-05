@@ -6,101 +6,36 @@
             <?php $this->load->view('layout/breadcrumb') ?>
 
             <div class="row">
-                <div class="col-md-12">
-                  <div class="panel panel-default">
+              <div class="col-lg-6">
+                  <div class="panel panel-primary">
                       <div class="panel-heading">
-                          <h3 class="panel-title">PILIH WILAYAH</h3>
+                          <h3 class="panel-title">Ringkasan Bahan Berdasarkan Sumber</h3>
                       </div>
                       <div class="panel-body">
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <div class="form-group">
-                                      <select class="select2-wilayah" style="width: 100%;" id="wilayah_upah" required>
-                                        <option value=""></option>
-                                      </select>
-                                  </div>
-                              </div>
-                          </div>
+                          <ul class="list-group">
+                              <li class="list-group-item">
+                                  <span class="badge badge-warning" id="jum_shbj" style="font-size:10pt; font-weight: bold;">0</span>
+                                  SHBJ
+                              </li>
+                              <li class="list-group-item">
+                                  <span class="badge badge-danger" id="jum_estimatorid" style="font-size:10pt; font-weight: bold;">0</span>
+                                  ESTIMATORID
+                              </li>
+                              <li class="list-group-item">
+                                  <span class="badge badge-success" id="jum_survei" style="font-size:10pt; font-weight: bold;">0</span>
+                                  SURVEI
+                              </li>
+                          </ul>
+                      </div>
+                      <div class="panel-footer">
+                        <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah Bahan <span class="badge badge-primary pull-right" id="jum_sumber" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
                       </div>
                   </div>
-                </div>
-                <div class="col-md-12">
-                    <button type="button" id="btn-tambah" class="btn btn-primary waves-effect waves-light" onclick="tampilTambahUpah()"><strong><i class="fa fa-plus-circle"></i> TAMBAH <?php echo strtoupper($menu) ?></strong></button>
-                    <br><br>
-                    <div id="panel-tambah-upah" class="panel panel-default" style="display: none">
-                        <div class="panel-heading"> 
-                            <h3 class="panel-title">TAMBAH <?php echo strtoupper($menu) ?></h3> 
-                        </div> 
-                        <div class="panel-body"> 
-                          <form role="form" id="frm-tambah-upah">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <div class="form-group">
-                                        <label>Nama Upah</label>
-                                        <select class="select2-upah" style="width: 100%;" id="nama_upah" name="nama_upah" onchange="getInfoUpah($(this).val())" required>
-                                          <option value=""></option>
-                                        </select>
-                                        <input type="hidden" id="id_wilayah" name="id_wilayah">
-                                        <input type="hidden" id="id_upah" name="id_upah">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Spesifikasi</label>
-                                        <input type="text" id="spesifikasi" name="spesifikasi" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Merk</label>
-                                        <input type="text" id="merk" name="merk" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Satuan</label>
-                                        <select class="select2-satuan required" style="width: 100%" id="satuan" name="satuan">
-                                          <option value=""></option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <div class="form-group">
-                                        <label>Harga Dasar</label>
-                                        <input type="text" id="harga_dasar" name="harga_dasar" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tahun</label>
-                                        <div id="spinner-tahun">
-                                          <div class="input-group input-small">
-                                              <input type="text" id="tahun" name="tahun" class="spinner-input form-control" maxlength="4" readonly="">
-                                              <div class="spinner-buttons input-group-btn btn-group-vertical">
-                                                  <button type="button" class="btn spinner-up btn-xs btn-default waves-effect">
-                                                      <i class="fa fa-angle-up"></i>
-                                                  </button>
-                                                  <button type="button" class="btn spinner-down btn-xs btn-default waves-effect">
-                                                      <i class="fa fa-angle-down"></i>
-                                                  </button>
-                                              </div>
-                                          </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Sumber</label>
-                                        <select id="sumber" name="sumber" class="form-control" onchange="getSuggestTahun(1);getSuggestKeterangan(1)">
-                                          <option value="">- Pilih -</option>
-                                          <option value="1">SHBJ</option>
-                                          <option value="2" selected>Estimator.id</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Keterangan</label>
-                                        <input type="text" id="keterangan" name="keterangan" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <center>
-                              <button type="button" id="btn-tambah-upah" class="btn btn-success waves-effect waves-light" onclick="simpanUpah()"><strong><i class="fa fa-check"></i> SIMPAN</strong></button>
-                              <button type="button" id="btn-batal-tambah" class="btn btn-warning waves-effect waves-light" onclick="batalTambahUpah()"><strong><i class="fa fa-times"></i> BATAL</strong></button>
-                            <center>
-                          </form>
-                        </div> 
-                    </div>
+              </div>
+            </div>
 
+            <div class="row">
+                <div class="col-md-12">
                     <div id="panel-ubah-upah" class="panel panel-default" style="display: none">
                         <div class="panel-heading"> 
                             <h3 class="panel-title">UBAH <?php echo strtoupper($menu) ?></h3> 
@@ -222,43 +157,52 @@
                                     <h3 class="panel-title"><?php echo "DATA ".strtoupper($menu) ?></h3>
                                 </div>
                                 <div class="panel-body">
-                                    <div class="row">
-                                      <div class="col-lg-6">
-                                          <div class="panel panel-primary">
-                                              <div class="panel-heading">
-                                                  <h3 class="panel-title">Ringkasan Status</h3>
-                                              </div>
-                                              <div class="panel-body">
-                                                  <ul class="list-group">
-                                                      <li class="list-group-item">
-                                                          <span class="badge badge-warning" id="jum_belum_lengkap" style="font-size:10pt; font-weight: bold;">0</span>
-                                                          Belum Lengkap
-                                                      </li>
-                                                      <li class="list-group-item">
-                                                          <span class="badge badge-danger" id="jum_belum_terverifikasi" style="font-size:10pt; font-weight: bold;">0</span>
-                                                          Belum Terverifikasi
-                                                      </li>
-                                                      <li class="list-group-item">
-                                                          <span class="badge badge-success" id="jum_terverifikasi" style="font-size:10pt; font-weight: bold;">0</span>
-                                                          Terverifikasi
-                                                      </li>
-                                                  </ul>
-                                              </div>
-                                              <div class="panel-footer">
-                                                <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah Upah <span class="badge badge-primary pull-right" id="jum_upah" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
-                                              </div>
-                                          </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">FILTER</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <select class="select2-wilayah required" style="width: 100%;" id="wilayah_upah">
+                                                              <option value=""></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <select class="select2-proyek required" style="width: 100%;" id="namaproyek">
+                                                              <option value=""></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                              <select id="sumber" name="sumber" class="form-control" onchange="">
+                                                                <option value="">- Pilih -</option>
+                                                                <option value="1">SHBJ</option>
+                                                                <option value="2">ESTIMATOR ID</option>
+                                                                <option value="0">SURVEY</option>
+                                                              </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                              
+                                        </div>
                                       </div>
-                                    </div>
+                                      </div>
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <button type="button" id="btn-verifikasi-semua" class="btn btn-success waves-effect waves-light" onclick="verifikasiSemuaUpah()"><strong><i class="fa fa-check-square-o"></i> VERIFIKASI SEMUA</strong></button>
-                                            <br><br>
                                             <table id="tabel-upah" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center" width="3%">No.</th>
-                                                        <th>Urut</th>
+                                                        <th></th>
+                                                        <th></th>
                                                         <th style="text-align: center" width="10%">Wilayah</th>
                                                         <th style="text-align: center" width="40%">Nama Upah</th>
                                                         <th style="text-align: center" width="8%">Satuan</th>
@@ -267,6 +211,7 @@
                                                         <th style="text-align: center" width="10%">Harga Dasar</th>
                                                         <th style="text-align: center" width="10%">Status</th>
                                                         <th style="text-align: center" width="7%">Verifikasi</th>
+                                                        <th style="text-align: center" width="7%">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>
@@ -521,14 +466,14 @@
   function getRingkasanStatus(id_wilayah){
     if (id_wilayah == '') id_wilayah = '0'; else id_wilayah = id_wilayah;
     $.ajax({
-        url : "<?php echo base_url('api/getRingkasanStatusUpah/') ?>"+id_wilayah,
+        url : "<?php echo base_url('api/getRingkasanSumberUpah') ?>",
         type: "POST",
         dataType: "JSON",
         success: function(data){
-          $('#jum_belum_lengkap').html(data.belum_lengkap);
-          $('#jum_terverifikasi').html(data.terverifikasi);
-          $('#jum_belum_terverifikasi').html(data.belum_terverifikasi);
-          $('#jum_upah').html(parseInt(data.belum_lengkap) + parseInt(data.terverifikasi) + parseInt(data.belum_terverifikasi));
+          $('#jum_shbj').html(data.shbj);
+          $('#jum_estimatorid').html(data.estimatorid);
+          $('#jum_survei').html(data.survey);
+          $('#jum_sumber').html(parseInt(data.shbj) + parseInt(data.estimatorid) + parseInt(data.survey));
         }
     });
   }
@@ -667,11 +612,10 @@
           templateResult: formatData
       });
 
-      $(".select2-upah").select2({
+      $(".select2-proyek").select2({
           theme: "bootstrap",
-          placeholder: "Pilih Nama Upah atau Ketik Nama Upah Baru",
+          placeholder: "Pilih Proyek",
           allowClear: true,
-          tags: true,
           "language": {
             "noResults": function() {
                return "<center><img src='<?php echo base_url() ?>assets/not-found.svg' width='30' /><br><strong>Tidak ada hasil ditemukan</strong></center>";
@@ -687,12 +631,11 @@
                return markup;
           },
           ajax: {
-            url: "<?php echo base_url('api/getListUpah') ?>",
+            url: "<?php echo base_url() ?>api/getListProyek",
             dataType: 'json',
             delay: 250,
             data: function (params) {
               return {
-                wilayah: $('#wilayah_upah').val(),
                 q: params.term,
                 page_limit: 10,
                 page: params.page
@@ -700,7 +643,7 @@
             },
             processResults: function (data, params) {
               params.page = params.page || 1;
-
+    
               return {
                 results: data.results,
                 pagination: {
@@ -709,7 +652,8 @@
               };
             },
             cache: true
-          }
+          },
+          templateResult: formatData
       });
       
       $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings){
@@ -800,11 +744,13 @@
           "type": "POST",
           data: function (data) {
             data.wilayah = $('#wilayah_upah').val();
+            data.namaproyek = $('#namaproyek').val();
+            data.sumber = $('#sumber').val();
           }
         },
         "columnDefs": [
           {
-            "targets": [ 1 ],
+            "targets": [ 1,2 ],
             "visible": false,
             "searchable": false
           }
@@ -843,7 +789,7 @@
           tampilUbahUpah();
       });
 
-      $('#wilayah_upah').on('change', function() {
+      $('#wilayah_upah,#sumber,#namaproyek').on('change', function() {
           reloadData();
         //   reloadDataLengkapi();
           getRingkasanStatus($(this).val());

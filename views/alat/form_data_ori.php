@@ -6,36 +6,27 @@
             <?php $this->load->view('layout/breadcrumb') ?>
 
             <div class="row">
-              <div class="col-lg-6">
-                  <div class="panel panel-primary">
+                <div class="col-md-12">
+                  <div class="panel panel-default">
                       <div class="panel-heading">
-                          <h3 class="panel-title">Ringkasan Bahan Berdasarkan Sumber</h3>
+                          <h3 class="panel-title">PILIH WILAYAH</h3>
                       </div>
                       <div class="panel-body">
-                          <ul class="list-group">
-                              <li class="list-group-item">
-                                  <span class="badge badge-warning" id="jum_shbj" style="font-size:10pt; font-weight: bold;">0</span>
-                                  SHBJ
-                              </li>
-                              <li class="list-group-item">
-                                  <span class="badge badge-danger" id="jum_estimatorid" style="font-size:10pt; font-weight: bold;">0</span>
-                                  ESTIMATORID
-                              </li>
-                              <li class="list-group-item">
-                                  <span class="badge badge-success" id="jum_survei" style="font-size:10pt; font-weight: bold;">0</span>
-                                  SURVEI
-                              </li>
-                          </ul>
-                      </div>
-                      <div class="panel-footer">
-                        <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah Bahan <span class="badge badge-primary pull-right" id="jum_sumber" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <select class="select2-wilayah" style="width: 100%;" id="wilayah_alat" required>
+                                        <option value=""></option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
                   </div>
-              </div>
-              
+                </div>
                 <div class="col-md-12">
-                    <!-- <button type="button" id="btn-tambah" class="btn btn-primary waves-effect waves-light" onclick="tampilTambahAlat()"><strong><i class="fa fa-plus-circle"></i> TAMBAH <?php echo strtoupper($menu) ?></strong></button>
-                    <br><br> -->
+                    <button type="button" id="btn-tambah" class="btn btn-primary waves-effect waves-light" onclick="tampilTambahAlat()"><strong><i class="fa fa-plus-circle"></i> TAMBAH <?php echo strtoupper($menu) ?></strong></button>
+                    <br><br>
                     <div id="panel-tambah-alat" class="panel panel-default" style="display: none">
                         <div class="panel-heading"> 
                             <h3 class="panel-title">TAMBAH <?php echo strtoupper($menu) ?></h3> 
@@ -90,7 +81,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Sumber</label>
-                                        <select id="tanbah_sumber" name="sumber" class="form-control" onchange="getSuggestTahun(1);getSuggestKeterangan(1)">
+                                        <select id="sumber" name="sumber" class="form-control" onchange="getSuggestTahun(1);getSuggestKeterangan(1)">
                                           <option value="">- Pilih -</option>
                                           <option value="1">SHBJ</option>
                                           <option value="2" selected>Estimator.id</option>
@@ -232,59 +223,50 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">FILTER</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <select class="select2-wilayah required" style="width: 100%;" id="wilayah_alat">
-                                                              <option value=""></option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <select class="select2-proyek required" style="width: 100%;" id="namaproyek">
-                                                              <option value=""></option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                              <select id="sumber" name="sumber" class="form-control" onchange="">
-                                                                <option value="">- Pilih -</option>
-                                                                <option value="1">SHBJ</option>
-                                                                <option value="2">ESTIMATOR ID</option>
-                                                                <option value="0">SURVEY</option>
-                                                              </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                      <div class="col-lg-6">
+                                          <div class="panel panel-primary">
+                                              <div class="panel-heading">
+                                                  <h3 class="panel-title">Ringkasan Status</h3>
+                                              </div>
+                                              <div class="panel-body">
+                                                  <ul class="list-group">
+                                                      <li class="list-group-item">
+                                                          <span class="badge badge-warning" id="jum_belum_lengkap" style="font-size:10pt; font-weight: bold;">0</span>
+                                                          Belum Lengkap
+                                                      </li>
+                                                      <li class="list-group-item">
+                                                          <span class="badge badge-danger" id="jum_belum_terverifikasi" style="font-size:10pt; font-weight: bold;">0</span>
+                                                          Belum Terverifikasi
+                                                      </li>
+                                                      <li class="list-group-item">
+                                                          <span class="badge badge-success" id="jum_terverifikasi" style="font-size:10pt; font-weight: bold;">0</span>
+                                                          Terverifikasi
+                                                      </li>
+                                                  </ul>
+                                              </div>
+                                              <div class="panel-footer">
+                                                <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah Alat <span class="badge badge-primary pull-right" id="jum_alat" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
+                                              </div>
+                                          </div>
                                       </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <button type="button" id="btn-verifikasi-semua" class="btn btn-success waves-effect waves-light" onclick="verifikasiSemuaAlat()"><strong><i class="fa fa-check-square-o"></i> VERIFIKASI SEMUA</strong></button>
+                                            <br><br>
                                             <table id="tabel-alat" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center" width="3%">No.</th>
-                                                        <th>id_alat</th>
-                                                        <th>id_proyek</th>                                                        
+                                                        <th>Urut</th>
                                                         <th style="text-align: center" width="10%">Wilayah</th>
                                                         <th style="text-align: center" width="40%">Nama Alat</th>
                                                         <th style="text-align: center" width="8%">Satuan</th>
                                                         <th style="text-align: center" width="10%">Spesifikasi</th>
                                                         <th style="text-align: center" width="10%">Merk</th>
                                                         <th style="text-align: center" width="10%">Harga Dasar</th>
-                                                        <th style="text-align: center" width="10%">Sumber</th>
-                                                        <th>sumber</th>    
-                                                        <th style="text-align: center" width="7%">Aksi</th>
+                                                        <th style="text-align: center" width="10%">Status</th>
+                                                        <th style="text-align: center" width="7%">Verifikasi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>
@@ -539,14 +521,14 @@
   function getRingkasanStatus(id_wilayah){
     if (id_wilayah == '') id_wilayah = '0'; else id_wilayah = id_wilayah;
     $.ajax({
-        url : "<?php echo base_url('api/getRingkasanSumberAlat') ?>",
+        url : "<?php echo base_url('api/getRingkasanStatusAlat/') ?>"+id_wilayah,
         type: "POST",
         dataType: "JSON",
         success: function(data){
-          $('#jum_shbj').html(data.shbj);
-          $('#jum_estimatorid').html(data.estimatorid);
-          $('#jum_survei').html(data.survey);
-          $('#jum_sumber').html(parseInt(data.shbj) + parseInt(data.estimatorid) + parseInt(data.survey));
+          $('#jum_belum_lengkap').html(data.belum_lengkap);
+          $('#jum_terverifikasi').html(data.terverifikasi);
+          $('#jum_belum_terverifikasi').html(data.belum_terverifikasi);
+          $('#jum_alat').html(parseInt(data.belum_lengkap) + parseInt(data.terverifikasi) + parseInt(data.belum_terverifikasi));
         }
     });
   }
@@ -605,7 +587,7 @@
           }
       });
       
-      $('#harga_dasar, #ubah_harga_dasar').inputmask('decimal',
+      $('#harga_dasar,#ubah_harga_dasar').inputmask('decimal',
         { 'alias': 'numeric',
           'groupSeparator': '.',
           'autoGroup': true,
@@ -685,10 +667,11 @@
           templateResult: formatData
       });
 
-      $(".select2-proyek").select2({
+      $(".select2-alat").select2({
           theme: "bootstrap",
-          placeholder: "Pilih Proyek",
+          placeholder: "Pilih Nama Alat atau Ketik Nama Alat Baru",
           allowClear: true,
+          tags: true,
           "language": {
             "noResults": function() {
                return "<center><img src='<?php echo base_url() ?>assets/not-found.svg' width='30' /><br><strong>Tidak ada hasil ditemukan</strong></center>";
@@ -704,11 +687,12 @@
                return markup;
           },
           ajax: {
-            url: "<?php echo base_url() ?>api/getListProyek",
+            url: "<?php echo base_url('api/getListAlat') ?>",
             dataType: 'json',
             delay: 250,
             data: function (params) {
               return {
+                wilayah: $('#wilayah_alat').val(),
                 q: params.term,
                 page_limit: 10,
                 page: params.page
@@ -716,7 +700,7 @@
             },
             processResults: function (data, params) {
               params.page = params.page || 1;
-    
+
               return {
                 results: data.results,
                 pagination: {
@@ -725,8 +709,7 @@
               };
             },
             cache: true
-          },
-          templateResult: formatData
+          }
       });
       
       $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings){
@@ -817,18 +800,16 @@
           "type": "POST",
           data: function (data) {
             data.wilayah = $('#wilayah_alat').val();
-            data.namaproyek = $('#namaproyek').val();
-            data.sumber = $('#sumber').val();
           }
         },
         "columnDefs": [
           {
-            "targets": [ 1,2 ],
+            "targets": [ 1 ],
             "visible": false,
             "searchable": false
           }
         ],
-        order: [4, 'asc'],
+        order: [3, 'asc'],
         "bInfo": false,
         rowCallback: function (row, data, iDisplayIndex) {
           var info = this.fnPagingInfo();
@@ -862,7 +843,7 @@
           tampilUbahAlat();
       });
 
-      $('#wilayah_alat,#sumber,#namaproyek').on('change', function() {
+      $('#wilayah_alat').on('change', function() {
           reloadData();
         //   reloadDataLengkapi();
           getRingkasanStatus($(this).val());

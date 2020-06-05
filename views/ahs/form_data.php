@@ -84,6 +84,7 @@ tr.shown td.details-control {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <table class="table table-bordered table-striped" id="tabel-bahan">
@@ -236,19 +237,19 @@ tr.shown td.details-control {
                                       <div class="panel-body">
                                           <ul class="list-group">
                                               <li class="list-group-item">
-                                                  <span class="badge badge-success" id="jum-pupr" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  <span class="badge badge-success" id="jum_pupr" style="font-size:10pt; font-weight: bold;">0</span>
                                                   PUPR
                                               </li>
                                               <li class="list-group-item">
-                                                  <span class="badge badge-danger" id="jum-sni" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  <span class="badge badge-danger" id="jum_sni" style="font-size:10pt; font-weight: bold;">0</span>
                                                   SNI
                                               </li>
                                               <li class="list-group-item">
-                                                  <span class="badge badge-danger" id="jum-estimatorid" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  <span class="badge badge-danger" id="jum_estimatorid" style="font-size:10pt; font-weight: bold;">0</span>
                                                   ESTIMATORID
                                               </li>
                                               <li class="list-group-item">
-                                                  <span class="badge badge-danger" id="jum-empiris" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  <span class="badge badge-danger" id="jum_empiris" style="font-size:10pt; font-weight: bold;">0</span>
                                                   EMPIRIS
                                               </li>
                                           </ul>
@@ -474,21 +475,33 @@ tr.shown td.details-control {
     }
   }
 
-  // function getRingkasanStatus(){
-        //  $.ajax({
-        //      url : "<?php echo base_url('api/getRingkasanSumberAHS') ?>",
-        //      type: "POST",
-        //      dataType: "JSON",
-        //      success: function(data){
-        //       $('#jum-pupr').html(data.PUPR);
-        //       $('#jum-sni').html(data.SNI);
-        //       $('#jum-estimatorid').html(data.ESTIMATORID);
-        //       $('#jum-empiris').html(data.EMPIRIS);
-        //       $('#jum-ahs').html(parseInt(data.PUPR) + parseInt(data.SNI)) + parseInt(data.ESTIMATORID)) + parseInt(data.EMPIRIS));
-        //       reloadData();
-        //      }
-        //  });
-  // }
+  function getRingkasanAHS(){
+    // $.ajax({
+    //     url : "<?php echo base_url('api/getRingkasanSumberAHS') ?>",
+    //     type: "POST",
+    //     dataType: "JSON",
+    //     success: function(data){
+    //       $('#jum_pupr').html(data.PUPR);
+    //       $('#jum_sni').html(data.SNI);
+    //       $('#jum_estimatorid').html(data.ESTIMATORID);
+    //       $('#jum_semua').html(parseInt(data.PUPR) + parseInt(data.SNI) + parseInt(data.ESTIMATORID));
+    //     }
+    // });
+
+         $.ajax({
+             url : "<?php echo base_url('api/getRingkasanSumberAHS') ?>",
+             type: "POST",
+             dataType: "JSON",
+             success: function(data){
+              $('#jum_pupr').html(data.PUPR);
+              $('#jum_sni').html(data.SNI);
+              $('#jum_estimatorid').html(data.ESTIMATORID);
+              $('#jum_empiris').html(data.EMPIRIS);
+              $('#jum_ahs').html(parseInt(data.PUPR) + parseInt(data.SNI) + parseInt(data.ESTIMATORID) + parseInt(data.EMPIRIS));
+           
+             }
+         });
+  }
   
   function format (data) {
     var rincian_ahs = '';
@@ -517,6 +530,7 @@ tr.shown td.details-control {
       $('[id*=spinner-tahun]').spinner({value: thn_sekarang, min: thn_sekarang-3, max: thn_sekarang+1});
       $('#menu_estimasi').click();
       $('#menu_ahs').prop('class','active');
+      getRingkasanAHS();
 
       function formatData (data) {
           if (!data.id) { return data.text; }
@@ -700,11 +714,11 @@ tr.shown td.details-control {
         }
       });
 
-      $('#wilayah').on('change', function() {
-          getRingkasanStatus($(this).val());
-      });
+      // $('#wilayah').on('change', function() {
+      //     getRingkasanStatus($(this).val());
+      // });
       
-      getRingkasanStatus($('#wilayah').val());
+      // getRingkasanStatus($('#wilayah').val());
       
       tambahRincian('A');
       tambahRincian('B');
