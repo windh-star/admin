@@ -13,7 +13,7 @@ class BahanModel extends CI_Model {
 	public $primary_key = "id_bahan";
 	public $foreign_key = "id_wilayah";
     public $foreign_key1 = "id_wilayah";
-    public $foreign_key2 = "id_proyek";
+    public $foreign_key2 = "id_proyekbahan";
 	public $primary_key_rf1 = "wilayah.id_wilayah";
 
   function getTabelLengkapiBahan($datatable){
