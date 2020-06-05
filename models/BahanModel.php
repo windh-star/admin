@@ -183,7 +183,7 @@ class BahanModel extends CI_Model {
 
       foreach ($data->result() as $row) {
        $data = array();
-       
+       $data[] = null;
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) { 
             if ($i == 8) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
