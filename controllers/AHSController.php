@@ -89,4 +89,73 @@ class AHSController extends CI_Controller {
 	         ->_display();
 	    exit;
 	}
+
+	public function simpanBahanAHS(){
+	    parse_str(file_get_contents('php://input'), $data);
+	    $this->AHSModel->simpanBahanAHS($data);
+
+	    $response = array(
+	      'Success' => true,
+	      'Info' => 'Data bahan berhasil disimpan.'
+	    );
+
+	    $this->output
+	         ->set_status_header(201)
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	         ->_display();
+	    exit;
+	}
+
+	public function simpanAlatAHS(){
+	    parse_str(file_get_contents('php://input'), $data);
+	    $this->AHSModel->simpanAlatAHS($data);
+
+	    $response = array(
+	      'Success' => true,
+	      'Info' => 'Data alat berhasil disimpan.'
+	    );
+
+	    $this->output
+	         ->set_status_header(201)
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	         ->_display();
+	    exit;
+	}
+
+	public function simpanUpahAHS(){
+	    parse_str(file_get_contents('php://input'), $data);
+	    $this->AHSModel->simpanUpahAHS($data);
+
+	    $response = array(
+	      'Success' => true,
+	      'Info' => 'Data upah berhasil disimpan.'
+	    );
+
+	    $this->output
+	         ->set_status_header(201)
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	         ->_display();
+	    exit;
+	}
+
+	public function getListSatuan(){
+        $response = array(
+            "total_count" => $this->AHSModel->getJumlahListSatuan($this->input->get("q")),
+            "results" => $this->AHSModel->getListSatuan(
+                $this->input->get("q"),
+                $this->input->get("page") * $this->input->get("page_limit"),
+                $this->input->get("page_limit")
+            )
+        );
+    
+    $this->output
+         ->set_status_header(200)
+         ->set_content_type('application/json')
+         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+         ->_display();
+    exit;
+    }
 }
