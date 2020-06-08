@@ -221,7 +221,7 @@
 
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <table id="tabel-volume" class="table table-striped table-bordered" style="width: 100%">
+                                    <table id="tabel-bua-bps" class="table table-striped table-bordered" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th width="2%">No</th>
@@ -427,7 +427,9 @@
         ajax: {
           "url": "<?php echo base_url('api/getTabelVolume') ?>",
           "type": "POST",
-          data: function (data) {}
+          data: function (data) {
+            data.kategori = $('#filter_kategori').val();
+          }
         },
         // "columnDefs": [
         //   {
