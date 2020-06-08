@@ -105,26 +105,29 @@ class AHSModel extends CI_Model {
   }
 
   function cekDuplikatPekerjaan($id) {
+   // return $this->db->query("select id_pekerjaan from pekerjaan where id_pekerjaan='{$id}'")->row();
     return $this->db->where('id_pekerjaan', $id)
-                    ->count_all_results($this->tabel_pekerjaan);
+                    ->count_all_results('pekerjaan');
   }
 
   function simpanPekerjaan($data){
       if ($data['nama_pekerjaan'] != '') {
-        if ($this->cekDuplikatPekerjaan($data['id_pekerjaan']) == 0) {
+        // if ($this->cekDuplikatPekerjaan($data['id_pekerjaan']) == 0 ) {
+          $id_pekerjaan = strtotime(date("Y-m-d") . date("H:i:s")).rand(1,100);
           $val = array(
               'id_proyek' => '1',
               'id_pelaksana' => '1',
-              'id_pekerjaan' => $data['id_pekerjaan'],
+              'id_pekerjaan' => $id_pekerjaan,
+              // 'id_pekerjaan' => $data['id_pekerjaan'],
               'nama_pekerjaan' => $data['nama_pekerjaan'],
               'satuan' => $data['satuan'],
               'tgl_dibuat' => date("Y-m-d"),
               'jam_dibuat' => date("H:i:s")
           );
 
-          $this->db->insert($this->tabel_pekerjaan, $val);
-        }
-      }
+          $this->db->insert("pekerjaan", $val);
+        // }
+      } 
   }
 
   function cekDuplikatBahan($id) {
@@ -187,20 +190,29 @@ class AHSModel extends CI_Model {
       }
   }
 
+  function getIDPekerjaan(){
+    return $this->db->select('id_pekerjaan')
+                    ->where('nama_pekerjaan',$data['nama_pekerjaan'])
+                    ->get('pekerjaan')->row();
+  }
+
   function simpanAHS($data){
-      $this->simpanPekerjaan($data);
+     $this->simpanPekerjaan($data);
+      
+     $pekerjaan=$this->getIDPekerjaan();
+
       if (isset($data['nama_bahan'])) {
         $nama_bahan = $data['nama_bahan'];
         if ($nama_bahan != '') {
           foreach($nama_bahan as $key => $val) {
             if ($data['nama_bahan'][$key] != '') {
-              $this->simpanBahan($data['id_bahan'][$key],$data['nama_bahan'][$key],$data['satuan_bahan'][$key],$data['sumber_bahan'][$key]);
+              // $this->simpanBahan($data['id_bahan'][$key],$data['nama_bahan'][$key],$data['satuan_bahan'][$key],$data['sumber_bahan'][$key]);
               $value[] = array(
                 'id_proyek' => '1',
                 'id_pelaksana' => '1',
-                'id_kategori_pekerjaan' => $data['id_kategori_pekerjaan'],
-                'id_pekerjaan' => $data['id_pekerjaan'],
-                'nama_kategori_pekerjaan'    => $data['nama_kategori_pekerjaan'],
+                'id_kategori_pekerjaan' => '',
+                'id_pekerjaan' => $pekerjaan->id_pekerjaan,
+                'nama_kategori_pekerjaan'    => '',
                 'nama_pekerjaan'    => $data['nama_pekerjaan'],
                 'satuan_pekerjaan'    => $data['satuan'],
                 'kategori' => $data['kategori_bahan'][$key],
@@ -208,14 +220,14 @@ class AHSModel extends CI_Model {
                 'koefisien' => $data['koefisien_bahan'][$key],
                 'nama_kategori'    => $data['nama_bahan'][$key],
                 'satuan_kategori'    => $data['satuan_bahan'][$key],
-                'spesifikasi'    => "Standar",
-                'merk'    => "Standar",
-                'tahun_kategori'    => "",
+                'spesifikasi'    => $data['spesifikasi'][$key],
+                'merk'    => $data['merk'][$key],
+                'tahun_kategori'    => $data['tahun_kategori'][$key],
                 'sumber_kategori'    => $data['sumber_bahan'][$key],
-                'harga_dasar'    => 0,
-                'tahun' => $data['tahun'],
-                'sumber' => $data['sumber'],
-                'keterangan' => $data['keterangan'],
+                'harga_dasar'    => $data['harga_dasar'][$key],
+                'tahun' => date("Y"),
+                'sumber' => '3',
+                'keterangan' => 'Estimator.id',
                 'tgl_dibuat' => date("Y-m-d"),
                 'jam_dibuat' => date("H:i:s")
               );
@@ -229,13 +241,13 @@ class AHSModel extends CI_Model {
         if ($nama_upah != '') {
           foreach($nama_upah as $key => $val) {
             if ($data['nama_upah'][$key] != '') {
-              $this->simpanUpah($data['id_upah'][$key],$data['nama_upah'][$key],$data['satuan_upah'][$key],$data['sumber_upah'][$key]);
+              // $this->simpanUpah($data['id_upah'][$key],$data['nama_upah'][$key],$data['satuan_upah'][$key],$data['sumber_upah'][$key]);
               $value[] = array(
                 'id_proyek' => '1',
                 'id_pelaksana' => '1',
-                'id_kategori_pekerjaan' => $data['id_kategori_pekerjaan'],
-                'id_pekerjaan' => $data['id_pekerjaan'],
-                'nama_kategori_pekerjaan'    => $data['nama_kategori_pekerjaan'],
+                'id_kategori_pekerjaan' =>'',
+                'id_pekerjaan' => $pekerjaan->id_pekerjaan,
+                'nama_kategori_pekerjaan' => '',
                 'nama_pekerjaan'    => $data['nama_pekerjaan'],
                 'satuan_pekerjaan'    => $data['satuan'],
                 'kategori' => $data['kategori_upah'][$key],
@@ -243,14 +255,14 @@ class AHSModel extends CI_Model {
                 'koefisien' => $data['koefisien_upah'][$key],
                 'nama_kategori'    => $data['nama_upah'][$key],
                 'satuan_kategori'    => $data['satuan_upah'][$key],
-                'spesifikasi'    => "Standar",
-                'merk'    => "Standar",
-                'tahun_kategori'    => "",
+                'spesifikasi'    =>  $data['spesifikasi'][$key],
+                'merk'    =>  $data['merk'][$key],
+                'tahun_kategori'    =>  $data['tahun_kategori']['key'],
                 'sumber_kategori'    => $data['sumber_upah'][$key],
-                'harga_dasar'    => 0,
-                'tahun' => $data['tahun'],
+                'harga_dasar'    => $data['harga_dasar'][$key],
+                'tahun' => date("Y"),
                 'sumber' => $data['sumber'],
-                'keterangan' => $data['keterangan'],
+                'keterangan' => "Estimator.id",
                 'tgl_dibuat' => date("Y-m-d"),
                 'jam_dibuat' => date("H:i:s")
               );
@@ -264,13 +276,13 @@ class AHSModel extends CI_Model {
         if ($nama_alat != '') {
           foreach($nama_alat as $key => $val) {
             if ($data['nama_alat'][$key] != '') {
-              $this->simpanAlat($data['id_alat'][$key],$data['nama_alat'][$key],$data['satuan_alat'][$key],$data['sumber_alat'][$key]);
+              // $this->simpanAlat($data['id_alat'][$key],$data['nama_alat'][$key],$data['satuan_alat'][$key],$data['sumber_alat'][$key]);
               $value[] = array(
                 'id_proyek' => '1',
                 'id_pelaksana' => '1',
-                'id_kategori_pekerjaan' => $data['id_kategori_pekerjaan'],
-                'id_pekerjaan' => $data['id_pekerjaan'],
-                'nama_kategori_pekerjaan'    => $data['nama_kategori_pekerjaan'],
+                'id_kategori_pekerjaan' => '',
+                'id_pekerjaan' =>  $pekerjaan->id_pekerjaan,
+                'nama_kategori_pekerjaan'    => '',
                 'nama_pekerjaan'    => $data['nama_pekerjaan'],
                 'satuan_pekerjaan'    => $data['satuan'],
                 'kategori' => $data['kategori_alat'][$key],
@@ -278,14 +290,14 @@ class AHSModel extends CI_Model {
                 'koefisien' => $data['koefisien_alat'][$key],
                 'nama_kategori'    => $data['nama_alat'][$key],
                 'satuan_kategori'    => $data['satuan_alat'][$key],
-                'spesifikasi'    => "Standar",
-                'merk'    => "Standar",
-                'tahun_kategori'    => "",
+                'spesifikasi'    => $data['spesifikasi'][$key],
+                'merk'    => $data['merk'][$key],
+                'tahun_kategori'    => $data['tahun_kategori'][$key],
                 'sumber_kategori'    => $data['sumber_alat'][$key],
-                'harga_dasar'    => 0,
-                'tahun' => $data['tahun'],
+                'harga_dasar'    => $data['harga_dasar'][$key],
+                'tahun' => date("Y"),
                 'sumber' => $data['sumber'],
-                'keterangan' => $data['keterangan'],
+                'keterangan' => "Estimator.id",
                 'tgl_dibuat' => date("Y-m-d"),
                 'jam_dibuat' => date("H:i:s")
               );
@@ -294,7 +306,7 @@ class AHSModel extends CI_Model {
         }
       }
 
-      $this->db->insert_batch($this->tabel, $value);
+      if (isset($value)) $this->db->insert_batch($this->tabel, $value);
   }
 
   function perbaharuiAHS($sumber){
@@ -551,4 +563,19 @@ class AHSModel extends CI_Model {
                            
                              ORDER BY level,id_pekerjaan,kategori) a WHERE id_pekerjaan='{$id_pekerjaan}'");
    }
+
+
+//Untuk Filter Satuan Pekerjaan
+function getListSatuan($keyword, $page, $limit){
+  return $this->db->select("id_pekerjaan as id, satuan as text")
+                  ->like("satuan", $keyword)
+                  ->get($this->tabel_pekerjaan, $limit, $page)->result_array();
+}
+function getJumlahListSatuan($keyword){
+  return $this->db->select("id_pekerjaan as id, satuan as text")
+                  ->like("satuan", $keyword)
+                  ->count_all_results($this->tabel_pekerjaan);
+}
+
+
 }
