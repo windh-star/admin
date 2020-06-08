@@ -303,7 +303,29 @@ $route['api/getListStatusArtikel'] = 'WilayahController/getListStatusArtikel';
 $route['api/getRingkasanKategoriArtikel'] = 'WilayahController/getRingkasanKategoriArtikel';
 $route['imporIkkBps'] = 'ImporEksporController/imporIkkBps';
 
+//Beranda Count
 $route['api/totalEstimator'] = 'BerandaController/totalEstimator';
 $route['api/totalSuplier'] = 'BerandaController/totalSuplier';
 $route['api/totalProyek'] = 'BerandaController/totalProyek';
 
+//Grafik Proyek
+$route['api/trenProyekAllTahun'] = 'BerandaController/TrenProyekAllTahun';
+$route['api/trenProyekPerBulan'] = 'BerandaController/TrenProyekPerBulan';
+$route['api/filterTrenProyekTahun'] = 'BerandaController/FilterTrenProyekTahun';
+$route['api/filterTrenProyekPerBUlan'] = 'BerandaController/FilterTrenProyekPerBulan';
+
+//Grafik Estimator
+$route['api/trenEstimatorAllTahun'] = 'BerandaController/TrenEstimatorAllTahun';
+$route['api/trenEstimatorPerBulan'] = 'BerandaController/TrenEstimatorPerBulan';
+$route['api/filterTrenEstimatorTahun'] = 'BerandaController/FilterTrenEstimatorTahun';
+$route['api/filterTrenEstimatorPerBUlan'] = 'BerandaController/FilterTrenEstimatorPerBulan';
+
+//Grafik Suplier
+$route['api/trenSuplierAllTahun'] = 'BerandaController/TrenSuplierAllTahun';
+$route['api/trenSuplierPerBulan'] = 'BerandaController/TrenSuplierPerBulan';
+$route['api/filterTrenSuplierTahun'] = 'BerandaController/FilterTrenSuplierTahun';
+$route['api/filterTrenSuplierPerBUlan'] = 'BerandaController/FilterTrenSuplierPerBulan';
+
+//List Satuan Pekerjaan
+
+$route['api/getListSatuan']='AHSController/getListSatuan';
