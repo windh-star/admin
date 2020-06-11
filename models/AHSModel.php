@@ -13,10 +13,12 @@ class AHSModel extends CI_Model {
   public $tabel_alat = "alat";
   public $primary_key = "id_proyek";
   public $fk_wilayah = "id_wilayah";
+  public $foreign_key1 = "id_pengguna";
+  public $foreign_key2 = "id_proyek";
 
 	function getTabelAHS($datatable){
       $columns = implode(', ', $datatable['col-display']);
-      $query  = "(SELECT proyek.nama_proyek,ahs.* FROM ahs,proyek where ahs.id_proyek=proyek.id_proyek GROUP BY id_proyek,id_pekerjaan) a";
+      $query  = "(SELECT proyek.nama_proyek,pelaksana_proyek.id_pengguna,ahs.* FROM ahs,proyek,pelaksana_proyek where ahs.id_pelaksana=pelaksana_proyek.id_pelaksana AND ahs.id_proyek=proyek.id_proyek) a";
       $sql  = "SELECT {$columns} FROM {$query}";
 
       // get total data
@@ -32,6 +34,29 @@ class AHSModel extends CI_Model {
       $search = $datatable['search']['value'];
       $where = '';
 
+        //filter
+    
+    $namaproyek = $this->input->post('namaproyek');
+    $pengguna = $this->input->post('pengguna');
+    
+  
+    if ($namaproyek != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key2 .' = "'. $namaproyek .'"';
+    if ($pengguna != '') $where .= ($where != '' ? ' AND ' : '').$this->foreign_key1 .' = "'. $pengguna .'"';
+    
+     if ($search != '') {
+           if ($where != '') $where .= ' AND ('; else $where .= ' (';
+           for ($i=0; $i < $count_c ; $i++) {
+               $where .= $columnd[$i] .' LIKE "%'. $search .'%"';
+               if ($i < $count_c - 1) {
+                   $where .= ' OR ';
+               }
+           }
+           $where .= ' )';
+     }
+       
+     if ($where != ''){
+         $sql .= " WHERE " . $where;
+     }
      
 
       // get total filtered
@@ -39,6 +64,7 @@ class AHSModel extends CI_Model {
       $total_filter = $data->num_rows();
       $data->free_result();
 
+     
       // sorting
       $sql .= " ORDER BY {$columnd[($datatable['order'][0]['column'])-1]} {$datatable['order'][0]['dir']}";
       
@@ -62,10 +88,12 @@ class AHSModel extends CI_Model {
             //   if ($row->$columnd[$i] == "PUPR") $data[] = "<span class='label label-success'>".$row->$columnd[$i]."</span>";
             //   else $data[] = "<span style='background-color:yellow;'>".$row->$columnd[$i]."</span>";
             // } else
-            
-            $data[] = $row->$columnd[$i];
+            $field=$columnd[$i];
+            $data[] = $row->$field;
          }
-         $data[] = "";
+         $data[] =  "<div class='btn-group'>".
+         "<button type='button' class='btn btn-success btn-sm' id='btn-ubah-pengguna' onClick='TampilUbahAHS(".$data[1].")' title='Ubah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+         "</div>";
          $option['data'][] = $data;
       }
 
@@ -190,16 +218,16 @@ class AHSModel extends CI_Model {
       }
   }
 
-  function getIDPekerjaan(){
+  function getIDPekerjaan($nama_pekerjaan){
     return $this->db->select('id_pekerjaan')
-                    ->where('nama_pekerjaan',$data['nama_pekerjaan'])
+                    ->where('nama_pekerjaan',$nama_pekerjaan)
                     ->get('pekerjaan')->row();
   }
 
   function simpanAHS($data){
      $this->simpanPekerjaan($data);
       
-     $pekerjaan=$this->getIDPekerjaan();
+     $pekerjaan=$this->getIDPekerjaan($data['nama_pekerjaan']);
 
       if (isset($data['nama_bahan'])) {
         $nama_bahan = $data['nama_bahan'];
@@ -577,5 +605,80 @@ function getJumlahListSatuan($keyword){
                   ->count_all_results($this->tabel_pekerjaan);
 }
 
+
+function simpanBahanAHS($data){
+  if ($this->cekDuplikatBahan($id_bahan) == 0) {
+  $val = array(
+      'id_bahan' => $data['id_bahan'],
+      'id_wilayah' => $data['id_wilayah'],
+      'id_proyek' => '1',
+      'id_pelaksana' => '1',
+      'nama_bahan' => $data['nama_bahan'],
+      'spesifikasi' =>  $data['spesifikasi'],
+      'merk' =>  $data['merk'],
+      'satuan' =>  $data['satuan'],
+      'harga_dasar' =>  $data['harga_dasar'],
+      'tahun' =>  $data['tahun'],
+      'sumber' =>  $data['sumber'],
+      'keterangan' =>  $data['keterangan'],
+      'status' => '0',
+      'tgl_dibuat' => date("Y-m-d"),
+      'jam_dibuat' => date("H:m:s")
+  );
+
+  $this->db->insert($this->tabel_bahan, $val);
+}
+}
+function simpanAlatAHS($data){
+if ($this->cekDuplikatAlat($id_alat) == 0) {
+$val = array(
+    'id_alat' => $data['id_alat'],
+    'id_wilayah' => $data['id_wilayah'],
+    'id_proyek' => '1',
+    'id_pelaksana' => '1',
+    'nama_alat' => $data['nama_alat'],
+    'spesifikasi' =>  $data['spesifikasi'],
+    'merk' =>  $data['merk'],
+    'satuan' =>  $data['satuan'],
+    'harga_dasar' =>  $data['harga_dasar'],
+    'tahun' =>  $data['tahun'],
+    'sumber' =>  $data['sumber'],
+    'keterangan' =>  $data['keterangan'],
+    'status' => '0',
+    'tgl_dibuat' => date("Y-m-d"),
+    'jam_dibuat' => date("H:m:s")
+);
+
+$this->db->insert($this->tabel_alat, $val);
+}
+}
+
+function simpanUpahAHS($data){
+if ($this->cekDuplikatUpah($id_upah) == 0) {
+$val = array(
+    'id_upah' => $data['id_upah'],
+    'id_wilayah' => $data['id_wilayah'],
+    'id_proyek' => '1',
+    'id_pelaksana' => '1',
+    'nama_upah' => $data['nama_upah'],
+    'spesifikasi' =>  $data['spesifikasi'],
+    'merk' =>  $data['merk'],
+    'satuan' =>  $data['satuan'],
+    'harga_dasar' =>  $data['harga_dasar'],
+    'tahun' =>  $data['tahun'],
+    'sumber' =>  $data['sumber'],
+    'keterangan' =>  $data['keterangan'],
+    'status' => '0',
+    'tgl_dibuat' => date("Y-m-d"),
+    'jam_dibuat' => date("H:m:s")
+);
+
+$this->db->insert($this->tabel_upah, $val);
+}
+}
+
+function getInfoUbahAHS($id_ahs){
+
+}
 
 }

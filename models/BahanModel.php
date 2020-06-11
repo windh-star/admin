@@ -113,7 +113,6 @@ class BahanModel extends CI_Model {
       $where = '';
 
      //filter
-
     
     $wilayah = $this->input->post('wilayah');
     $namaproyek = $this->input->post('namaproyek');

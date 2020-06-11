@@ -51,32 +51,7 @@ class BerandaModel extends CI_Model {
         }
     }
     
-    //TrenProyek
-    public function TrenProyekAllTahun(){
-        return $this->db->select("nama_proyek as proyek, COUNT(nama_proyek) as total")
-                        ->where('YEAR(tgl_dibuat)', 'YEAR(NOW())', FALSE)
-                        ->get('proyek')->result_array();
-        }
-    public function TrenProyekPerBulan(){
-        return $this->db->select('nama_proyek as proyek, COUNT(nama_proyek) as total')
-                        ->where('MONTH(tgl_dibuat)', 'MONTH(NOW())', FALSE)
-                        ->get('proyek')->result_array();
-    }
   
-    public function FilterTrenProyekPerBulan(){
-    for($i=0; $i<=12; $i++){
-        $this->db->select('COUNT(nama_proyek) as total')
-                    ->where('YEAR(tgl_dibuat)', 'YEAR(NOW())', FALSE)
-                    ->where('MONTH(tgl_dibuat)', $i);
-                    $data[] = $this->db->get('proyek')->row()->total;
-        }
-    return $data;
-    }
-    public function FilterProyekTahun(){
-        return $this->db->select("nama_proyek as proyek, COUNT(nama_proyek) as total, YEAR(tgl_dibuat) as tahun")
-                        ->group_by('YEAR(tgl_dibuat)')
-                        ->get('proyek')->result_array();
-    }
 
   //TrenEstimator
     public function TrenEstimatorAllTahun(){
@@ -143,5 +118,52 @@ class BerandaModel extends CI_Model {
                         ->group_by('YEAR(tgl_dibuat)')
                         ->where('kategori_akun', '3')
                         ->get('pengguna')->result_array();
+    }
+
+  //TrenProyek
+  public function TrenProyekAllTahun(){
+    return $this->db->select("nama_proyek as proyek, COUNT(nama_proyek) as total")
+                    ->where('YEAR(tgl_dibuat)', 'YEAR(NOW())', FALSE)
+                    ->get('proyek')->result_array();
+    }
+public function TrenProyekPerBulan(){
+    return $this->db->select('nama_proyek as proyek, COUNT(nama_proyek) as total')
+                    ->where('MONTH(tgl_dibuat)', 'MONTH(NOW())', FALSE)
+                    ->get('proyek')->result_array();
+}
+
+public function FilterTrenProyekPerBulan(){
+for($i=0; $i<=12; $i++){
+    $this->db->select('COUNT(nama_proyek) as total')
+                ->where('YEAR(tgl_dibuat)', 'YEAR(NOW())', FALSE)
+                ->where('MONTH(tgl_dibuat)', $i);
+                $data[] = $this->db->get('proyek')->row()->total;
+    }
+return $data;
+}
+public function FilterProyekTahun(){
+    return $this->db->select("nama_proyek as proyek, COUNT(nama_proyek) as total, YEAR(tgl_dibuat) as tahun")
+                    ->group_by('YEAR(tgl_dibuat)')
+                    ->get('proyek')->result_array();
+}
+
+    //GRAFIK BARU 
+
+    function fetch_year()
+    {
+     $this->db->select('year');
+     $this->db->from('view_proyek');
+     $this->db->group_by('year');
+     $this->db->order_by('year', 'DESC');
+     return $this->db->get();
+    }
+   
+    function fetch_chart_data($year)
+    {
+    $this->db->select('month, day, count(total) as total');
+     $this->db->where('year =', $year);
+     $this->db->group_by('month');
+     $this->db->order_by('month ', 'ASC');
+     return $this->db->get('view_proyek');
     }
 }
