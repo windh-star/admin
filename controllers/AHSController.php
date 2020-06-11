@@ -33,7 +33,8 @@ class AHSController extends CI_Controller {
 											 //  'ket_sumber',
 											   'keterangan',
 											   'id_proyek',
-											   'id_pekerjaan'
+											   'id_pekerjaan',
+											   'id_pengguna'
 	            	    		             );
 
 		    	return $this->AHSModel->getTabelAHS($datatable);

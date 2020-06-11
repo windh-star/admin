@@ -11,6 +11,7 @@ class BerandaController extends CI_Controller {
 
 	public function index()
 	{
+        $data['year_list'] = $this->BerandaModel->fetch_year();
 		$data['root_menu'] = 'Master Data';
 		$data['menu'] = 'Beranda';
     	$data['halaman'] = 'beranda/index';
@@ -236,4 +237,29 @@ public function FilterTrenEstimatorPerBulan(){
     }
 
 
+    //GRAFIK BARU
+
+    function grafikProyek()
+    {
+     $data['year_list'] = $this->BerandaModel->fetch_year();
+     $this->load->view('dynamic_chart', $data);
+    }
+   
+    function fetchDataProyek()
+    {
+     if($this->input->post('year'))
+     {
+      $chart_data = $this->BerandaModel->fetch_chart_data($this->input->post('year'));
+      
+      foreach($chart_data->result_array() as $row)
+      {
+       $output[] = array(
+        'month'  => $row["month"],
+        'total' => floatval($row["total"])
+       );
+      }
+      echo json_encode($output);
+     }
+
+}
 }
