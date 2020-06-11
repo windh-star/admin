@@ -132,7 +132,7 @@ $route['api/getRingkasanSumberUpah'] = 'UpahController/getRingkasanSumberUpah';
 
 $route['ahs'] = 'AHSController/index';
 $route['api/getRingkasanStatusAHS/(:any)'] = 'AHSController/getRingkasanStatus/$1';
-$route['api/simpanAHS'] = 'AHSController/simpanAHS';
+//$route['api/simpanAHS'] = 'AHSController/simpanAHS';
 $route['api/getTabelAHS'] = 'AHSController/getTabelAHS';
 $route['api/getRincianAHS/(:any)/(:any)'] = 'AHSController/getRincianAHS/$1/$2';
 $route['api/getRingkasanSumberAHS'] = 'AHSController/getRingkasanSumberAHS';
@@ -327,5 +327,13 @@ $route['api/filterTrenSuplierTahun'] = 'BerandaController/FilterTrenSuplierTahun
 $route['api/filterTrenSuplierPerBUlan'] = 'BerandaController/FilterTrenSuplierPerBulan';
 
 //List Satuan Pekerjaan
-
 $route['api/getListSatuan']='AHSController/getListSatuan';
+
+//Grafik Baru 
+$route['api/fetchDataProyek']='BerandaController/fetchDataProyek';
+
+//AHS
+$route['api/simpanBahanAHS']='AHSController/simpanBahanAHS';
+$route['api/simpanUpahAHS']='AHSController/simpanUpahAHS';
+$route['api/simpanAlatAHS']='AHSController/simpanAlatAHS';
+$route['api/simpanAHS']='AHSController/simpanAHS';
