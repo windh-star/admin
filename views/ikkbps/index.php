@@ -192,7 +192,6 @@
 
     <?php $this->load->view('layout/footer') ?>
 
-</div>
 
 <script type="text/javascript">
   function reloadData(){ 

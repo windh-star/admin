@@ -1,8 +1,8 @@
 <style>
 .overview-item--c1 {
-    background-image: -moz-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
-    background-image: -webkit-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
-    background-image: -ms-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
+    background-image: -moz-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+    background-image: -webkit-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+    background-image: -ms-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
 }
 @media (max-width: 1519px) and (min-width: 992px)
 .overview-item {
@@ -13,8 +13,8 @@
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    padding: 30px;
-    padding-bottom: 0;
+    padding: 20px;
+    padding-bottom: 0px;
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
@@ -34,7 +34,7 @@
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    padding: 30px;
+    padding: 20px;
     padding-bottom: 0;
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
@@ -42,9 +42,9 @@
     margin-bottom: 40px;
 }
 .overview-item--c3 {
-    background-image: -moz-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
-    background-image: -webkit-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
-    background-image: -ms-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
+    background-image: -moz-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+    background-image: -webkit-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+    background-image: -ms-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
 }
 @media (max-width: 1519px) and (min-width: 992px)
 .overview-item {
@@ -55,12 +55,59 @@
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    padding: 30px;
+    padding: 3s
+    0px;
     padding-bottom: 0;
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     margin-bottom: 40px;
+}
+.chartjs-render-monitor {
+    -webkit-animation: chartjs-render-animation 0.001s;
+    animation: chartjs-render-animation 0.001s;
+}
+.overview-box .text h2 {
+    font-weight: 300;
+    color: #fff;
+    font-size: 36px;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+h2 {
+    font-size: 30px;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #333333;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+}
+.h2, h2 {
+    font-size: 2rem;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: inherit;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+}
+.overview-box .icon i {
+    font-size: 60px;
+    color: #fff;
+}
+.zmdi {
+    display: inline-block;
+    font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 </style>
 
@@ -113,16 +160,10 @@
                                 <div class="overview-item overview-item--c1">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
-                                            </div>
                                             <div class="text">
                                             <h3 id="estimator" class="mt-3">-</h3>
                                                 <span>Estimator</span>
                                             </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -131,16 +172,10 @@
                                 <div class="overview-item overview-item--c2">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
-                                            </div>
                                             <div class="text">
                                             <h3 id="proyek" class="mt-3">-</h3>
                                                 <span>Proyek</span>
                                             </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -149,25 +184,45 @@
                                 <div class="overview-item overview-item--c3">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
                                             <div class="text">
                                             <h3 id="suplier" class="mt-3">-</h3>
                                                 <span>Suplier</span>
                                             </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+    <div class="row">
+    <div class="col-xl-6">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <h4 class="mt-0 header-title mb-4" id="statistik-produk-perbulan">Statistik Produk Per Bulan</h4>
+                 <div id="tren-perbulan"></div>
+                 <div id="gbr-bulan"><center>
+                     <img src='<?php echo base_url() ?>assets/not-found.png' class="gbr-bulan" width='200' />
+                 <br><strong id="detail-no-data-bulan">Belum Ada Produk</strong></center></div>
+            </div>
+        </div>
+    </div>
+    <!-- end col -->
+    <div class="col-xl-6">
+    <div class="card m-b-30">
+        <div class="card-body">
+            <h4 class="mt-0 header-title mb-4" id="statistik-produk-tahun">Statistik Produk Per Tahun</h4>
+            <div id="tren-tahun"></div>
+                /* <div id="gambar"><center>
+                    <img src='<?php echo base_url() ?>assets/not-found.png' width='200' />
+                <br><strong id="detail-no-data-tahun">Belum Ada Produk</strong></center>
+                </div> */
+        </div>
+    </div>
+    </div>
+</div>
+
 <html>
 <head>
-	<title>Membuat Grafik Dengan Menggunakan Chart.js - www.malasngoding.com</title>
 	<script type="text/javascript" src="assets/chartjs/chartjs/Chart.js"></script>
 </head>
 <body>
@@ -178,15 +233,11 @@
 	</style>
  
 	<h4> Grafik Perkembangan Jumlah Proyek </h4>
- 
- 
- 
 	<div style="width: 500px;height: 500px">
 		<canvas id="myChart"></canvas>
 	</div>
  
- 
-	<script>
+ 	<script>
 		var ctx = document.getElementById("myChart").getContext('2d');
 		var myChart = new Chart(ctx, {
 			type: 'line',
@@ -285,11 +336,11 @@ function totalSuplier(){
     });
 }
 
-function getGrafikTrenProyekTahun(){
+function TrenProyekAllTahun(){
     var d = new Date();
     var y = d.getFullYear();
     if(proyek == null || proyek == ''){
-      $('#statistik-produk-tahun').html("Statistik Produk Tahun "+y+"");
+      $('#statistik-proyek-tahun').html("Statistik Produk Tahun "+y+"");
     $.ajax({
         url: "<?php echo base_url('api/trenProyekAllTahun') ?>",
         type: "POST",

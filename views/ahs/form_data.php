@@ -16,6 +16,39 @@ tr.shown td.details-control {
             <?php $this->load->view('layout/breadcrumb') ?>
 
             <div class="row">
+                              <div class="col-lg-6">
+                                  <div class="panel panel-primary">
+                                      <div class="panel-heading">
+                                          <h3 class="panel-title">Ringkasan Sumber</h3>
+                                      </div>
+                                      <div class="panel-body">
+                                          <ul class="list-group">
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-success" id="jum_pupr" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  PUPR
+                                              </li>
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-danger" id="jum_sni" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  SNI
+                                              </li>
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-danger" id="jum_estimatorid" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  ESTIMATORID
+                                              </li>
+                                              <li class="list-group-item">
+                                                  <span class="badge badge-danger" id="jum_empiris" style="font-size:10pt; font-weight: bold;">0</span>
+                                                  EMPIRIS
+                                              </li>
+                                          </ul>
+                                      </div>
+                                      <div class="panel-footer">
+                                        <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah AHS yang dibutuhkan <span class="badge badge-primary pull-right" id="jum_ahs" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+
+            <div class="row">
                 <div class="col-md-12">
                     <button type="button" id="btn-tambah" class="btn btn-primary waves-effect waves-light" onclick="tampilTambahAHS()"><strong><i class="fa  fa-plus-circle"></i> TAMBAH <?php echo $menu ?></strong></button>
                     <button type="button" id="btn-impor" class="btn btn-danger waves-effect waves-light" onclick="tampilImporAHS()"><strong><i class="fa fa-upload"></i> IMPOR <?php echo $menu ?></strong></button>
@@ -100,9 +133,14 @@ tr.shown td.details-control {
                                         <tbody id="data-bahan"></tbody>
                                     </table>
                                 </div>
-                                <div class="panel-footer"> 
-                                    <h3 class="panel-title"><button type="button" id="btn-tambah-bahan" class="btn btn-info waves-effect waves-light" onclick="tambahRincian('A')"><strong><i class="fa fa-plus-circle"></i> TAMBAH BAHAN</strong></button></h3>
-                                </div> 
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <div class="panel-footer"> 
+                                          <button type="button" id="btn-tambah-bahan" class="btn btn-info waves-effect waves-light" onclick="tambahRincian('A')"><strong><i class="fa fa-plus-circle"></i> TAMBAH BAHAN</strong></button>
+                                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-isi="Web Master">BAHAN BARU</button>
+                                      </div> 
+                                    </div>
+                                  </div>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
@@ -193,8 +231,13 @@ tr.shown td.details-control {
                           </form>
                         </div> 
                     </div>
-
-                <div class="row">
+                                        
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><?php echo "DATA ".$menu ?></h3>
+                        </div>
+                        <div class="panel-body">
+                        <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
                           <div class="panel-heading">
@@ -203,7 +246,7 @@ tr.shown td.details-control {
                       <div class="panel-body">
                           <div class="row">
                               <div class="col-md-4">
-                                  <label>Filtering Proyek</label>
+                                  <label>Proyek</label>
                                   <div class="form-group">
                                       <select class="select2-proyek required" style="width: 100%;" id="proyek-wilayah">
                                         <option value=""></option>
@@ -212,7 +255,7 @@ tr.shown td.details-control {
                               </div>
                               
                               <div class="col-md-4">
-                                <label>Filtering Pengguna</label>
+                                <label>Pengguna</label>
                                   <div class="form-group">
                                       <select class="select2-pengguna required" style="width: 100%;" id="proyek-pengguna">
                                         <option value=""></option>
@@ -222,44 +265,6 @@ tr.shown td.details-control {
                           </div>
                       </div>
                     </div>
-                                        
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><?php echo "DATA ".$menu ?></h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                              <div class="col-lg-6">
-                                  <div class="panel panel-primary">
-                                      <div class="panel-heading">
-                                          <h3 class="panel-title">Ringkasan Sumber</h3>
-                                      </div>
-                                      <div class="panel-body">
-                                          <ul class="list-group">
-                                              <li class="list-group-item">
-                                                  <span class="badge badge-success" id="jum_pupr" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  PUPR
-                                              </li>
-                                              <li class="list-group-item">
-                                                  <span class="badge badge-danger" id="jum_sni" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  SNI
-                                              </li>
-                                              <li class="list-group-item">
-                                                  <span class="badge badge-danger" id="jum_estimatorid" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  ESTIMATORID
-                                              </li>
-                                              <li class="list-group-item">
-                                                  <span class="badge badge-danger" id="jum_empiris" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  EMPIRIS
-                                              </li>
-                                          </ul>
-                                      </div>
-                                      <div class="panel-footer">
-                                        <strong><h4 class="panel-title" style="margin-left: 25px;">Jumlah AHS yang dibutuhkan <span class="badge badge-primary pull-right" id="jum_ahs" style="font-size:11pt; font-weight: bold; margin-right: 21px;"></span></h4></strong>
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <table id="tabel-ahs" class="table table-striped table-bordered">
@@ -274,6 +279,7 @@ tr.shown td.details-control {
                                                 <th style="text-align: center" width="13%">Sumber</th>
                                                 <th>ID Proyek</th>
                                                 <th>ID Pekerjaan</th>
+                                                <th>ID Pengguna</th>
                                                 <th style="text-align: center" width="5%">Aksi</th>
                                             </tr>
                                         </thead>
@@ -284,9 +290,45 @@ tr.shown td.details-control {
                         </div>
                     </div>
                 </div>
-                
-            </div> <!-- End Row -->
 
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Silahkan Masukkan Data Bahan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Nama Bahan:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Satuan:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Spesifikasi:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Merk:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Simpan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+            </div> <!-- End Row -->
 
         </div> <!-- container -->
                    
@@ -505,11 +547,11 @@ tr.shown td.details-control {
   
   function format (data) {
     var rincian_ahs = '';
-    rincian_ahs = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+    rincian_ahs = '<table class="table table-striped table-bordered" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<thead>'+
-            '<th>Nama Kategori</th>'+
-            '<th>Koefisien</th>'+
-            '<th>Harga Dasar</th>'+
+            '<th width="30%">Nama Kategori</th>'+
+            '<th width="10%">Koefisien</th>'+
+            '<th width="10%">Harga Dasar</th>'+
         '</thead>'+
         '<tbody>';
             $.each(data, function(i, val){
@@ -666,12 +708,13 @@ tr.shown td.details-control {
           "url": "<?php echo base_url('api/getTabelAHS') ?>",
           "type": "POST",
           data: function (data) {
-            data.wilayah = $('#wilayah').val();
+            data.namaproyek = $('#proyek-wilayah').val();
+            data.pengguna = $('#proyek-pengguna').val();
           }
         },
         "columnDefs": [
           {
-            "targets": [ 7, 8 ],
+            "targets": [ 7, 8, 9 ],
             "visible": false,
             "searchable": false
           }
@@ -685,7 +728,7 @@ tr.shown td.details-control {
           var index = page * length + (iDisplayIndex + 1);
           $('td:eq(0)', row).addClass("details-control");
           $('td:eq(1)', row).html(index);
-          $('td:eq(1),td:eq(4),td:eq(5),td:eq(6)', row).prop('align','center');
+          $('td:eq(1),td:eq(4),td:eq(5)', row).prop('align','center');
         },
         scrollY: 700,
         scrollCollapse: true
@@ -714,9 +757,10 @@ tr.shown td.details-control {
         }
       });
 
-      // $('#wilayah').on('change', function() {
-      //     getRingkasanStatus($(this).val());
-      // });
+      $('#proyek-wilayah,#proyek-pengguna').on('change', function() {
+          reloadData();
+          getRingkasanStatus($(this).val());
+      });
       
       // getRingkasanStatus($('#wilayah').val());
       
