@@ -158,5 +158,16 @@ class AHSController extends CI_Controller {
          ->set_output(json_encode($response, JSON_PRETTY_PRINT))
          ->_display();
     exit;
-    }
+	}
+	
+	public function getInfoUbahAHS($id_ahs){
+		$response = $this->AHSModel->getInfoUbahAHS($id_ahs)->row();
+
+		$this->output
+			 ->set_status_header(200)
+			 ->set_content_type('application/json')
+			 ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+			 ->_display();
+		exit;
+	}
 }
