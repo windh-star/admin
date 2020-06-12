@@ -337,3 +337,4 @@ $route['api/simpanBahanAHS']='AHSController/simpanBahanAHS';
 $route['api/simpanUpahAHS']='AHSController/simpanUpahAHS';
 $route['api/simpanAlatAHS']='AHSController/simpanAlatAHS';
 $route['api/simpanAHS']='AHSController/simpanAHS';
+$route['api/getInfoUbahAHS/(:any)']='AHSController/getInfoUbahAHS/$1';
