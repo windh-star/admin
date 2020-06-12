@@ -678,7 +678,15 @@ $this->db->insert($this->tabel_upah, $val);
 }
 
 function getInfoUbahAHS($id_ahs){
-
+  $this->db->select('ahs.id_ahs,pekerjaan.id_pekerjaan,pekerjaan.nama_pekerjaan,pekerjaan.satuan, bahan.id_bahan, bahan.nama_bahan, 
+  bahan.satuan, bahan.harga_dasar, alat.id_alat, alat.nama_alat, alat.satuan, 
+  alat.harga_dasar, upah.id_upah, upah.nama_upah,upah.satuan,upah.harga_dasar ');
+        $this->db->from('ahs');
+        $this->db->join('alat', 'alat.id_alat = ahs.id_kategori' );
+        $this->db->join('bahan', 'bahan.id_bahan = ahs.id_kategori' );
+        $this->db->join('upah', 'upah.id_alat = ahs.id_kategori' );
+        $this->db->where('ahs.id_ahs', $id_ahs);
+        return $this->db->get();
 }
 
 }
