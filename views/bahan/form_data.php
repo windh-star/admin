@@ -276,6 +276,7 @@ tr.shown td.details-control {
                                                 <tr>
                                                   <th></th>
                                                   <th style="text-align: center" width="3%">No.</th>
+
                                                   <th style="text-align: center" width="3%">ID Bahan</th>
                                                   <th style="text-align: center" width="15%">ID Proyek Bahan</th>
                                                   <th style="text-align: center" width="15%">ID Proyek Bahan</th>
@@ -285,8 +286,9 @@ tr.shown td.details-control {
                                                   <th style="text-align: center" width="13%">Spesifikasi</th>
                                                   <th style="text-align: center" width="13%">Merk</th>
                                                   <th style="text-align: center" width="13%">Harga Dasar</th>
-                                                  <th style="text-align: center" width="13%">Harga Dasar</th>
+                                                  <th style="text-align: center" width="13%"></th>
                                                   <th style="text-align: center" width="13%">Sumber</th>
+                                                  
                                                   <th style="text-align: center" width="5%">Aksi</th>
                                                 </tr>
                                                 </thead>
@@ -542,10 +544,11 @@ tr.shown td.details-control {
         }
     });
   }
+  
   // function getTotal(id_wilayah){
   //   if (id_wilayah == '') id_wilayah = '0'; else id_wilayah = id_wilayah;
   //   $.ajax({
-  //       url : "<?php echo base_url('api/getRincianJumlahBahanTerpakai/') ?>"+id_proyekbahan+"/"+id_proyekproyek+"/"+bahan,
+  //       url : "<?php echo base_url() ?> api/getRincianJumlahBahanTerpakai/",
   //       type: "POST",
   //       dataType: "JSON",
   //       success: function(data){
@@ -554,7 +557,19 @@ tr.shown td.details-control {
   //   });
   // }
 
-  function format () {
+  function getTotal(id_wilayah){
+    if (id_wilayah == '') id_wilayah = '0'; else id_wilayah = id_wilayah;
+    $.ajax({
+        url : "<?php echo base_url('api/getRincianJumlahBahanTerpakai/') ?>"+id_proyekbahan+"/"+id_proyekproyek+"/"+bahan,
+        type: "POST",
+        dataType: "JSON",
+        success: function(data){
+          $('#total').html(data.jumlah);
+        }
+    });
+  }
+
+  function format() {
     var rincian_ahs = '';
     rincian_ahs = 
     ` <div id="total">Total Terpakai : <span class="badge badge-warning" id="total" style="font-size:10pt; font-weight: bold;">0</span></div>

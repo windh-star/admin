@@ -33,11 +33,11 @@ tr.shown td.details-control {
                                               </li>
                                               <li class="list-group-item">
                                                   <span class="badge badge-danger" id="jum_estimatorid" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  ESTIMATORID
+                                                  Estimator.id
                                               </li>
                                               <li class="list-group-item">
                                                   <span class="badge badge-danger" id="jum_empiris" style="font-size:10pt; font-weight: bold;">0</span>
-                                                  EMPIRIS
+                                                  Empiris
                                               </li>
                                           </ul>
                                       </div>
@@ -62,18 +62,18 @@ tr.shown td.details-control {
                           <form role="form" id="frm-ahs">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>ID Kategori Pekerjaan</label>
-                                        <input type="text" id="id_kategori_pekerjaan" name="id_kategori_pekerjaan" class="form-control">
-                                    </div>
-                                    <div class="form-group">
+                                        <input type="hidden" id="id_kategori_pekerjaan" name="id_kategori_pekerjaan" class="form-control">
+                                    </div> -->
+                                    <!-- <div class="form-group">
                                         <label>Nama Kategori Pekerjaan</label>
-                                        <input type="text" id="nama_kategori_pekerjaan" name="nama_kategori_pekerjaan" class="form-control">
-                                    </div>
-                                    <div class="form-group">
+                                        <input type="hidden" id="nama_kategori_pekerjaan" name="nama_kategori_pekerjaan" class="form-control">
+                                    </div> -->
+                                    <!-- <div class="form-group">
                                         <label>ID Pekerjaan</label>
-                                        <input type="text" id="id_pekerjaan" name="id_pekerjaan" class="form-control">
-                                    </div>
+                                        <input type="hidden" id="id_pekerjaan" name="id_pekerjaan" class="form-control">
+                                    </div> -->
                                     <div class="form-group">
                                         <label>Nama Pekerjaan</label>
                                         <input type="text" id="nama_pekerjaan" name="nama_pekerjaan" class="form-control">
@@ -86,11 +86,11 @@ tr.shown td.details-control {
                                           <option value=""></option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Tahun</label>
-                                        <div id="spinner-tahun">
+                                    <!-- <div class="form-group"> -->
+                                        <!-- <label>Tahun</label> -->
+                                        <!-- <div id="spinner-tahun">
                                           <div class="input-group input-small">
-                                              <input type="text" id="tahun" name="tahun" class="spinner-input form-control" maxlength="4" readonly="">
+                                              <input type="hidden" id="tahun" name="tahun" class="spinner-input form-control" maxlength="4" readonly="">
                                               <div class="spinner-buttons input-group-btn btn-group-vertical">
                                                   <button type="button" class="btn spinner-up btn-xs btn-default waves-effect">
                                                       <i class="fa fa-angle-up"></i>
@@ -101,20 +101,20 @@ tr.shown td.details-control {
                                               </div>
                                           </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Sumber</label>
-                                        <select id="sumber" name="sumber" class="form-control">
+                                    </div> -->
+                                    <!-- <div class="form-group">
+                                        <!-- <label>Sumber</label> -->
+                                        <!-- <select id="sumber" name="sumber" class="form-control">
                                           <option value="">- Pilih -</option>
                                           <option value="1">PUPR</option>
                                           <option value="2">SNI</option>
                                           <option value="3" selected>Estimator.id</option>
                                         </select>
-                                    </div>
-                                    <div class="form-group">
+                                    </div> -->
+                                    <!-- <div class="form-group">
                                         <label>Keterangan</label>
-                                        <input type="text" id="keterangan" name="keterangan" class="form-control">
-                                    </div>
+                                        <input type="hidden" id="keterangan" name="keterangan" class="form-control">
+                                    </div> -->
                                 </div>
                             </div>
 
@@ -137,7 +137,7 @@ tr.shown td.details-control {
                                     <div class="col-md-12">
                                       <div class="panel-footer"> 
                                           <button type="button" id="btn-tambah-bahan" class="btn btn-info waves-effect waves-light" onclick="tambahRincian('A')"><strong><i class="fa fa-plus-circle"></i> TAMBAH BAHAN</strong></button>
-                                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-isi="Web Master">BAHAN BARU</button>
+                                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-isi="Web Master"><i class="fa fa-plus-circle"></i> BAHAN BARU</button>
                                       </div> 
                                     </div>
                                   </div>
@@ -292,41 +292,41 @@ tr.shown td.details-control {
                 </div>
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Silahkan Masukkan Data Bahan</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label">Nama Bahan:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label">Satuan:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label">Spesifikasi:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label">Merk:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>          
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Simpan</button>
-      </div>
-    </div>
-  </div>
-</div>
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Silahkan Masukkan Data Bahan</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <div class="form-group">
+                              <label for="recipient-name" class="form-control-label">Nama Bahan:</label>
+                              <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="form-group">
+                              <label for="recipient-name" class="form-control-label">Satuan:</label>
+                              <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="form-group">
+                              <label for="recipient-name" class="form-control-label">Spesifikasi:</label>
+                              <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="form-group">
+                              <label for="recipient-name" class="form-control-label">Merk:</label>
+                              <input type="text" class="form-control" id="recipient-name">
+                            </div>          
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Simpan</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
 
             </div> <!-- End Row -->
 
@@ -648,6 +648,50 @@ tr.shown td.details-control {
           },
           ajax: {
             url: "<?php echo $this->config->item('url_server') ?>api/getListPengguna/",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+              return {
+                q: params.term,
+                page_limit: 10,
+                page: params.page
+              };
+            },
+            processResults: function (data, params) {
+              params.page = params.page || 1;
+    
+              return {
+                results: data.results,
+                pagination: {
+                  more: (params.page * 10) < data.total_count
+                }
+              };
+            },
+            cache: true
+          }
+      });
+
+      $(".select2-satuan").select2({
+          theme: "bootstrap",
+          placeholder: "Pilih Satuan",
+          allowClear: true,
+          tags: true,
+          "language": {
+            "noResults": function() {
+               return "<center><img src='<?php echo base_url() ?>assets/not-found.svg' width='30' /><br><strong>Tidak ada hasil ditemukan</strong></center>";
+            },
+            searching: function () {
+               return "<center><img src='<?php echo base_url() ?>assets/searching.gif' width='30' /><br>Mencari hasil...</center>";
+            },
+            loadingMore: function () {
+               return "<center><img src='<?php echo base_url() ?>assets/ajax-loader.svg' width='30'/></center>";
+            }
+          },
+          escapeMarkup: function (markup) {
+               return markup;
+          },
+          ajax: {
+            url: "<?php echo $this->config->item('url_server') ?>api/getListSatuan/",
             dataType: 'json',
             delay: 250,
             data: function (params) {
