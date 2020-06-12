@@ -18,7 +18,7 @@ class AHSModel extends CI_Model {
 
 	function getTabelAHS($datatable){
       $columns = implode(', ', $datatable['col-display']);
-      $query  = "(SELECT proyek.nama_proyek,pelaksana_proyek.id_pengguna,ahs.* FROM ahs,proyek,pelaksana_proyek where ahs.id_pelaksana=pelaksana_proyek.id_pelaksana AND ahs.id_proyek=proyek.id_proyek) a";
+      $query  = "(SELECT proyek.nama_proyek,pelaksana_proyek.id_pengguna,ahs.* FROM ahs,proyek,pelaksana_proyek where ahs.id_pelaksana=pelaksana_proyek.id_pelaksana AND ahs.id_proyek=proyek.id_proyek GROUP BY id_pekerjaan,id_proyek) a";
       $sql  = "SELECT {$columns} FROM {$query}";
 
       // get total data

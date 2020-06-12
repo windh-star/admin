@@ -182,17 +182,17 @@ class BahanModel extends CI_Model {
 
       foreach ($data->result() as $row) {
        $data = array();
-       $data[] = null;
+       $data[] = null;    
          $data[] = null;
          for ($i=0; $i < $count_c; $i++) { 
             if ($i == 8) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
-            else
+            else {
              $field=$columnd[$i];
-            $data[] = $row->$field;
+            $data[] = $row->$field; }
          }
          $data[] = "<div class='btn-group'>".
-         "<button onclick='TampilUbahBahan(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
-         "<button onclick='HapusBahan(".$data[1].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+         "<button onclick='TampilUbahBahan(".$data[2].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+         "<button onclick='HapusBahan(".$data[2].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
      "</div>";
 
          $option['data'][] = $data;
@@ -328,7 +328,7 @@ class BahanModel extends CI_Model {
           'jam_dibuat' => date("H:m:s")
       );
 
-      $this->db->where("urut",$data['urut_bahan'])
+      $this->db->where("urut",$data['id_bahan'])
                ->update($this->tabel, $val);
   }
 

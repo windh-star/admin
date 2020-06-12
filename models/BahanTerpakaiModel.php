@@ -134,13 +134,12 @@ class BahanTerpakaiModel extends CI_Model {
     //   $columns = str_replace('id_wilayah', 'bahan.id_wilayah', $columns);
     //   $join = "INNER JOIN {$this->tabel_rf1} ON {$this->foreign_key1} = {$this->primary_key_rf1}";
     //   $sql  = "SELECT {$columns} FROM {$this->tabel} {$join}";
-    $id_proyekbahan = $this->input->post('id_proyekbahan');
+    // $id_proyekbahan = $this->input->post('id_proyekbahan');
     $id_proyekproyek = $this->input->post('id_proyekproyek');
     $id_bahan = $this->input->post('id_bahan'); 
     
-    $query  = "(SELECT ahs.id_ahs,bahan.id_proyek as id_proyekbahan,proyek.id_proyek as id_proyekproyek, 
-      ahs.id_proyek,ahs.nama_pekerjaan,proyek.nama_proyek,bahan.nama_bahan, bahan.id_bahan as id_bahan FROM ahs,bahan,proyek 
-      WHERE ahs.id_proyek='{$id_proyekbahan}' and ahs.id_proyek='{$id_proyekproyek}' and bahan.id_bahan='{$id_bahan}' group by nama_pekerjaan) a";
+    $query  = "(SELECT ahs.id_pekerjaan,ahs.id_proyek,ahs.id_ahs,ahs.nama_pekerjaan, proyek.nama_proyek from ahs, proyek
+      WHERE ahs.id_proyek='{$id_proyekproyek}' and ahs.id_kategori='{$id_bahan}' group by id_pekerjaan,id_proyek) a";
 
       $sql="SELECT {$columns} FROM {$query}";
       // get total data
