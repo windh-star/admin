@@ -1,114 +1,316 @@
 <style>
-.overview-item--c1 {
-    background-image: -moz-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
-    background-image: -webkit-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
-    background-image: -ms-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -12px;
+    margin-left: -12px;
 }
-@media (max-width: 1519px) and (min-width: 992px)
-.overview-item {
-    padding-left: 15px;
-    padding-right: 15px;
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
-.overview-item {
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    padding: 20px;
-    padding-bottom: 0px;
-    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    margin-bottom: 40px;
+user agent stylesheet
+div {
+    display: block;
 }
-.overview-item--c2 {
-    background-image: -moz-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
-    background-image: -webkit-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
-    background-image: -ms-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+@media (min-width: 1200px)
+.col-xl-3 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
 }
-@media (max-width: 1519px) and (min-width: 992px)
-.overview-item {
-    padding-left: 15px;
-    padding-right: 15px;
+@media (min-width: 768px)
+.col-md-6 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
 }
-.overview-item {
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    padding: 20px;
-    padding-bottom: 0;
-    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    margin-bottom: 40px;
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: relative;
+    width: 100%;
+    padding-right: 12px;
+    padding-left: 12px;
 }
-.overview-item--c3 {
-    background-image: -moz-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
-    background-image: -webkit-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
-    background-image: -ms-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
-@media (max-width: 1519px) and (min-width: 992px)
-.overview-item {
-    padding-left: 15px;
-    padding-right: 15px;
+user agent stylesheet
+div {
+    display: block;
 }
-.overview-item {
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    padding: 3s
-    0px;
-    padding-bottom: 0;
-    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    margin-bottom: 40px;
+.card-box {
+    background-color: #fff;
+    padding: 1.25rem;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(33,37,41,.1);
+    box-shadow: 0 1px 2px 0 rgba(33,37,41,.1);
+    margin-bottom: 24px;
+    border-radius: .25rem;
 }
-.chartjs-render-monitor {
-    -webkit-animation: chartjs-render-animation 0.001s;
-    animation: chartjs-render-animation 0.001s;
+.card, .card-box {
+    margin-bottom: 24px;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(33,37,41,.1);
+    box-shadow: 0 1px 2px 0 rgba(33,37,41,.1);
 }
-.overview-box .text h2 {
-    font-weight: 300;
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.media {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.avatar-md {
+    height: 3.5rem;
+    width: 3.5rem;
+}
+.mr-2, .mx-2 {
+    margin-right: .5rem!important;
+}
+.rounded-circle {
+    border-radius: 50%!important;
+}
+.bg-info {
+    background-color: #29b6f6!important;
+}
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.avatar-title {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
     color: #fff;
-    font-size: 36px;
-    line-height: 1;
-    margin-bottom: 5px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
 }
-h2 {
-    font-size: 30px;
+.font-26 {
+    font-size: 26px!important;
 }
-h1, h2, h3, h4, h5, h6 {
-    color: #333333;
-    font-weight: 700;
-    margin: 0;
-    line-height: 1.2;
+.text-white {
+    color: #fff!important;
 }
-.h2, h2 {
-    font-size: 2rem;
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+i {
+    font-style: italic;
+}
+.align-self-center {
+    -ms-flex-item-align: center!important;
+    align-self: center!important;
+}
+.media-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.mt-4, .my-4 {
+    margin-top: 1.5rem!important;
+}
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.text-uppercase {
+    text-transform: uppercase!important;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin: 10px 0;
+    font-family: Roboto,sans-serif;
+    color: #343a40;
+}
+.h6, h6 {
+    font-size: .9rem;
 }
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     margin-bottom: .5rem;
-    font-family: inherit;
     font-weight: 500;
     line-height: 1.2;
-    color: inherit;
 }
 h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: .5rem;
 }
-.overview-box .icon i {
-    font-size: 60px;
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+h6 {
+    display: block;
+    font-size: 0.67em;
+    margin-block-start: 2.33em;
+    margin-block-end: 2.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.float-right {
+    float: right!important;
+}
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.text-uppercase {
+    text-transform: uppercase!important;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin: 10px 0;
+    font-family: Roboto,sans-serif;
+    color: #343a40;
+}
+.h6, h6 {
+    font-size: .9rem;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+user agent stylesheet
+h6 {
+    font-size: 0.67em;
+    font-weight: bold;
+}
+.progress-sm {
+    height: 5px;
+}
+.progress {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin-bottom: 18px;
+    overflow: hidden;
+    height: .7rem;
+}
+.progress-sm {
+    height: 5px;
+}
+.m-0 {
+    margin: 0!important;
+}
+.progress {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: .75rem;
+    overflow: hidden;
+    font-size: .675rem;
+    background-color: #f5f5f5;
+    border-radius: .2rem;
+}
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+element.style {
+    width: 60%;
+}
+.bg-info {
+    background-color: #29b6f6!important;
+}
+.progress-bar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    overflow: hidden;
     color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #317eeb;
+    -webkit-transition: width .6s ease;
+    transition: width .6s ease;
 }
-.zmdi {
-    display: inline-block;
-    font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
+user agent stylesheet
+div {
+    display: block;
+}
+.progress {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: .75rem;
+    overflow: hidden;
+    font-size: .675rem;
+    background-color: #f5f5f5;
+    border-radius: .2rem;
+}
+.text-right {
+    text-align: right!important;
+}
+
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+
 </style>
 
 <div class="content-page">
@@ -117,109 +319,87 @@ h1, h2, h3, h4, h5, h6 {
         <div class="container">
             <?php $this->load->view('layout/breadcrumb') ?>
 
+    
+    <!-- Filtering -->
+
     <div class="row">
-    <div class="col-md-12"> 
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Tahun</label>
-                        <div class="form-group">
-                            <select id="filter-status-verifikasi" name="status" class="form-control" onchange="">
-                                <option value="">- Pilih Tahun -</option>
-                                <option value="1">2018</option>
-                                <option value="2">2019</option>
-                                <option value="3">2020</option>
-                            </select>
+        <div class="col-md-12"> 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style= "width: 100%;">FILTERING</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Tahun</label>
+                            <div class="form-group">
+                                <input type="text" id="pilih-tahun" name="tahun" class="form-control" placeholder="Input Tahun">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label>Proyek</label>
-                        <div class="form-group">
-                                <select class="select2-proyek required" style="width: 100%;" id="proyek-wilayah">
-                                    <option value=""></option>
-                                </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label>Wilayah</label>
-                        <div class="form-group">
+                        <div class="col-md-4">
+                            <label>Wilayah</label>
+                            <div class="form-group">
                                 <select class="select2-wilayah required" style="width: 100%;" id="wilayah">
                                     <option value=""></option>
                                 </select>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 
-					<div class="row" style="margin-top: -30px;">
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="text">
-                                            <h3 id="estimator" class="mt-3">-</h3>
-                                                <span>Estimator</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+    <!-- View Card Moltran -->
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card-box">
+                    <div class="media">
+                        <div class="avatar-md bg-info rounded-circle mr-2">
+                            <i class="ion-logo-usd avatar-title font-26 text-white"></i>
+                        </div>
+                        <div class="media-body align-self-center">
+                            <div class="text-right">
+                                <h4 id="estimator" class="font-20 my-0 font-weight-bold"><span data-plugin="counterup">-</span></h4>
+                                <p class="mb-0 mt-1 text-truncate">Total Estimator</p>
                             </div>
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="text">
-                                            <h3 id="proyek" class="mt-3">-</h3>
-                                                <span>Proyek</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <div class="col-md-3">
+                    <div class="card-box">
+                        <div class="media">
+                            <div class="avatar-md bg-purple rounded-circle">
+                                <i class="ion-md-cart avatar-title font-26 text-white"></i>
                             </div>
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="text">
-                                            <h3 id="suplier" class="mt-3">-</h3>
-                                                <span>Suplier</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="media-body align-self-center">
+                                <div class="text-right">
+                                    <h4 id="proyek" class="font-20 my-0 font-weight-bold"><span data-plugin="counterup">-</span></h4>
+                                    <p class="mb-0 mt-1 text-truncate">Total Proyek</p>
                                 </div>
                             </div>
                         </div>
-
-    <div class="row">
-    <div class="col-xl-6">
-        <div class="card m-b-30">
-            <div class="card-body">
-                <h4 class="mt-0 header-title mb-4" id="statistik-produk-perbulan">Statistik Produk Per Bulan</h4>
-                 <div id="tren-perbulan"></div>
-                 <div id="gbr-bulan"><center>
-                     <img src='<?php echo base_url() ?>assets/not-found.png' class="gbr-bulan" width='200' />
-                 <br><strong id="detail-no-data-bulan">Belum Ada Produk</strong></center></div>
-            </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-box">
+                        <div class="media">
+                            <div class="avatar-md bg-purple rounded-circle">
+                                <i class="ion-md-cart avatar-title font-26 text-white"></i>
+                            </div>
+                            <div class="media-body align-self-center">
+                                <div class="text-right">
+                                    <h4 id="suplier" class="font-20 my-0 font-weight-bold"><span data-plugin="counterup">-</span></h4>
+                                    <p class="mb-0 mt-1 text-truncate">Total Suplier</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
-    </div>
-    <!-- end col -->
-    <div class="col-xl-6">
-    <div class="card m-b-30">
-        <div class="card-body">
-            <h4 class="mt-0 header-title mb-4" id="statistik-produk-tahun">Statistik Produk Per Tahun</h4>
-            <div id="tren-tahun"></div>
-                /* <div id="gambar"><center>
-                    <img src='<?php echo base_url() ?>assets/not-found.png' width='200' />
-                <br><strong id="detail-no-data-tahun">Belum Ada Produk</strong></center>
-                </div> */
-        </div>
-    </div>
-    </div>
-</div>
 
 <html>
 <head>
@@ -291,8 +471,8 @@ h1, h2, h3, h4, h5, h6 {
 </body>
 </html>
 
-</div>
-</div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">

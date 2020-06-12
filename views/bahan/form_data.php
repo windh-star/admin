@@ -278,15 +278,15 @@ tr.shown td.details-control {
                                                   <th style="text-align: center" width="3%">No.</th>
 
                                                   <th style="text-align: center" width="3%">ID Bahan</th>
-                                                  <th style="text-align: center" width="15%">ID Proyek Bahan</th>
-                                                  <th style="text-align: center" width="15%">ID Proyek Bahan</th>
+                                                <th style="text-align: center" width="15%">ID Proyek Bahan</th>
+                                                 <th style="text-align: center" width="15%">ID Proyek Bahan</th>
                                                   <th style="text-align: center" width="15%">Wilayah</th>
                                                   <th style="text-align: center" width="20%">Nama Bahan</th>
                                                   <th style="text-align: center" width="15%">Satuan</th>
                                                   <th style="text-align: center" width="13%">Spesifikasi</th>
                                                   <th style="text-align: center" width="13%">Merk</th>
                                                   <th style="text-align: center" width="13%">Harga Dasar</th>
-                                                  <th style="text-align: center" width="13%"></th>
+                                               
                                                   <th style="text-align: center" width="13%">Sumber</th>
                                                   
                                                   <th style="text-align: center" width="5%">Aksi</th>
@@ -544,11 +544,10 @@ tr.shown td.details-control {
         }
     });
   }
-  
   // function getTotal(id_wilayah){
   //   if (id_wilayah == '') id_wilayah = '0'; else id_wilayah = id_wilayah;
   //   $.ajax({
-  //       url : "<?php echo base_url() ?> api/getRincianJumlahBahanTerpakai/",
+  //       url : "<?php echo base_url('api/getRincianJumlahBahanTerpakai/') ?>"+id_proyekbahan+"/"+id_proyekproyek+"/"+bahan,
   //       type: "POST",
   //       dataType: "JSON",
   //       success: function(data){
@@ -557,30 +556,18 @@ tr.shown td.details-control {
   //   });
   // }
 
-  function getTotal(id_wilayah){
-    if (id_wilayah == '') id_wilayah = '0'; else id_wilayah = id_wilayah;
-    $.ajax({
-        url : "<?php echo base_url('api/getRincianJumlahBahanTerpakai/') ?>"+id_proyekbahan+"/"+id_proyekproyek+"/"+bahan,
-        type: "POST",
-        dataType: "JSON",
-        success: function(data){
-          $('#total').html(data.jumlah);
-        }
-    });
-  }
-
-  function format() {
+  function format () {
     var rincian_ahs = '';
     rincian_ahs = 
     ` <div id="total">Total Terpakai : <span class="badge badge-warning" id="total" style="font-size:10pt; font-weight: bold;">0</span></div>
                                 
-    <table id="tabel-bahan-terpakai" class="table table-striped table-bordered" >
+    <table id="tabel-bahan-terpakai" width="70%" class="table table-striped table-bordered">
             <thead>
                 <tr>
                     
                     <th style="text-align: center" width="3%">No.</th>
-                    <th style="text-align: center" width="15%">ID AHS</th>
-                    <th style="text-align: center" width="20%">Nama Pekerjaan</th>
+                    <th style="text-align: center" width="10%">ID AHS</th>
+                    <th style="text-align: center" width="15%">Nama Pekerjaan</th>
                     <th style="text-align: center" width="15%">Nama Proyek</th>
 
                 </tr>
@@ -866,9 +853,9 @@ tr.shown td.details-control {
       
         "columnDefs": [
           {
-            "targets": [ 3,4,11 ],
+            "targets": [3,4],
             "visible": false,
-            "searchable": false
+           // "searchable": false
           }
         ],
         order: [5, 'asc'],
@@ -879,7 +866,7 @@ tr.shown td.details-control {
           var length = info.iLength;
           var index = page * length + (iDisplayIndex + 1);
           var verifikasi;
-          if (data[8] == "<span class='label label-danger'>Belum Terverifikasi</span>") verifikasi = "<button class='btn btn-success btn-icon waves-effect waves-light' id='btn-verifikasi' onclick='verifikasiBahan("+data[1]+")'><i class='fa fa-check'></i></button>"; else verifikasi = "";
+       //   if (data[8] == "<span class='label label-danger'>Belum Terverifikasi</span>") verifikasi = "<button class='btn btn-success btn-icon waves-effect waves-light' id='btn-verifikasi' onclick='verifikasiBahan("+data[1]+")'><i class='fa fa-check'></i></button>"; else verifikasi = "";
           $('td:eq(0)', row).addClass("details-control");
           $('td:eq(1)', row).html(index);
           $('td:eq(8)', row).html(verifikasi);
@@ -894,7 +881,7 @@ tr.shown td.details-control {
         var tr = $(this).closest('tr');
         var row = tabel.row(tr);
         var data = row.data();
-        var id_proyekbahan = data[3];
+     //   var id_proyekbahan = data[3];
         var id_proyekproyek = data[4];
         var id_bahan = data[2];
  
@@ -940,7 +927,7 @@ tr.shown td.details-control {
               "type": "POST",
               data: function (data) {
                 data.id_bahan = id_bahan;
-                data.id_proyekbahan = id_proyekbahan;
+               // data.id_proyekbahan = id_proyekbahan;
                 data.id_proyekproyek = id_proyekproyek;
               }
             },
