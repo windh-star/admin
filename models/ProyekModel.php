@@ -84,7 +84,7 @@ class ProyekModel extends CI_model{
                 $data[] = $row->$columnd[$i];
             }
             $data[] = "<div class='btn-group'>".
-           "<button onclick='ubahProyek(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
+           "<button onclick='TampilUbahProyek(".$data[1].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
        "</div>";
 
             $option['data'][] = $data;

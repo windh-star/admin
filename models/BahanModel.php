@@ -96,7 +96,7 @@ class BahanModel extends CI_Model {
     //   $columns = str_replace('id_wilayah', 'bahan.id_wilayah', $columns);
     //   $join = "INNER JOIN {$this->tabel_rf1} ON {$this->foreign_key1} = {$this->primary_key_rf1}";
     //   $sql  = "SELECT {$columns} FROM {$this->tabel} {$join}";
-      $query  = "(SELECT bahan.id_bahan,bahan.id_wilayah, bahan.id_proyek AS id_proyekbahan, bahan.nama_bahan, bahan.satuan, bahan.merk, bahan.spesifikasi, bahan.harga_dasar, bahan.tahun, bahan.sumber, bahan.keterangan, wilayah.wilayah,proyek.id_proyek AS id_proyekproyek, proyek.nama_proyek FROM bahan, wilayah, proyek WHERE bahan.id_wilayah=wilayah.id_wilayah AND bahan.id_proyek=proyek.id_proyek) a";
+      $query  = "(SELECT bahan.urut, bahan.id_bahan,bahan.id_wilayah, bahan.id_proyek AS id_proyekbahan, bahan.nama_bahan, bahan.satuan, bahan.merk, bahan.spesifikasi, bahan.harga_dasar, bahan.tahun, bahan.sumber, bahan.keterangan, wilayah.wilayah,proyek.id_proyek AS id_proyekproyek, proyek.nama_proyek FROM bahan, wilayah, proyek WHERE bahan.id_wilayah=wilayah.id_wilayah AND bahan.id_proyek=proyek.id_proyek) a";
 
       $sql="SELECT {$columns} FROM {$query}";
       // get total data
@@ -183,16 +183,16 @@ class BahanModel extends CI_Model {
       foreach ($data->result() as $row) {
        $data = array();
        $data[] = null;    
-         $data[] = null;
+       $data[] = null;
          for ($i=0; $i < $count_c; $i++) { 
             if ($i == 8) $data[] = "Rp ".number_format($row->$columnd[$i], 2, ",", ".");
             else {
              $field=$columnd[$i];
-            $data[] = $row->$field; }
+            $data[] = $row->$field;}
          }
          $data[] = "<div class='btn-group'>".
-         "<button onclick='TampilUbahBahan(".$data[2].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[1]'><i class='fa fa-edit'></i></button>".
-         "<button onclick='HapusBahan(".$data[2].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[1]'><i class='fa fa-trash'></i></button>".
+         "<button onclick='TampilUbahBahan(".$data[12].")' type='button' class='btn btn-success btn-xs' id='ubah' data-toggle='modal' title='Ubah' data-target='#ModalUbah' data-id='$data[12]'><i class='fa fa-edit'></i></button>".
+         "<button onclick='HapusBahan(".$data[2].")' type='button' class='btn btn-danger btn-xs' id='hapus' data-toggle='modal' title='Hapus' data-target='#ModalHapus' data-id='$data[2]'><i class='fa fa-trash'></i></button>".
      "</div>";
 
          $option['data'][] = $data;
@@ -313,6 +313,7 @@ class BahanModel extends CI_Model {
 
   function ubahBahan($data){
       $val = array(
+        'id_bahan' => $data['id_bahan'],
           'id_wilayah' => $data['id_wilayah'],
           'id_proyek' => '1',
           'id_pelaksana' => '1',
@@ -328,7 +329,7 @@ class BahanModel extends CI_Model {
           'jam_dibuat' => date("H:m:s")
       );
 
-      $this->db->where("urut",$data['id_bahan'])
+      $this->db->where("id_bahan",$data['id_bahan'])
                ->update($this->tabel, $val);
   }
 
@@ -359,14 +360,14 @@ public function hapusBahan($data){
 }
 
 
-function getInfoBahan($id_bahan){
+function getInfoBahan($urut){
     $this->db->select('*');
     $this->db->from('bahan');
     $this->db->join('wilayah', 'wilayah.id_wilayah = bahan.id_wilayah' );
-    $this->db->join('proyek', 'proyek.id_proyek = bahan.id_proyek' );
-    $this->db->where('bahan.id_bahan', $id_bahan);
-    $query = $this->db->get();
-    return $query->result();
+   // $this->db->join('proyek', 'proyek.id_proyek = bahan.id_proyek' );
+    $this->db->where('bahan.urut', $urut);
+    return $this->db->get();
+ 
 }
 
 }

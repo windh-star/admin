@@ -160,10 +160,42 @@ public function FilterProyekTahun(){
    
     function fetch_chart_data($year)
     {
-    $this->db->select('month, day, count(total) as total');
+     $this->db->select('month, day, count(total) as total');
      $this->db->where('year =', $year);
      $this->db->group_by('month');
      $this->db->order_by('month ', 'ASC');
      return $this->db->get('view_proyek');
     }
+
+    function fetch_chart_data_estimator($year)
+    {
+    $this->db->select('month, day, count(total) as total');
+     $this->db->where('year =', $year);
+     $this->db->where('kategori_akun', '1');
+     $this->db->or_where('kategori_akun','2');
+     $this->db->group_by('month');
+     $this->db->order_by('month ', 'ASC');
+     return $this->db->get('views_pengguna');
+    }
+
+
+    function fetch_chart_data_suplier($year)
+    {
+    $this->db->select('month, day, count(total) as total');
+     $this->db->where('year =', $year);
+     $this->db->where('kategori_akun', '3');
+     $this->db->group_by('month');
+     $this->db->order_by('month ', 'ASC');
+     return $this->db->get('views_pengguna');
+    }
+
+    // function fetch_chart_data_suplier($year)
+    // {
+    //  $this->db->select('month, day, count(total) as total');
+    //  $this->db->where('year =', $year);
+    //  $this->db->where('kategori_akun =', '3');
+    //  $this->db->group_by('month');
+    //  $this->db->order_by('month ', 'ASC');
+    //  return $this->db->get('views_pengguna');
+    // }
 }
