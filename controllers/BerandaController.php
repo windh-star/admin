@@ -260,6 +260,39 @@ public function FilterTrenEstimatorPerBulan(){
       }
       echo json_encode($output);
      }
+    }
 
-}
+    function fetchDataEstimator()
+    {
+     if($this->input->post('year'))
+     {
+      $chart_data = $this->BerandaModel->fetch_chart_data_estimator($this->input->post('year'));
+      
+      foreach($chart_data->result_array() as $row)
+      {
+       $output[] = array(
+        'month'  => $row["month"],
+        'total' => floatval($row["total"])
+       );
+      }
+      echo json_encode($output);
+     }
+    }
+
+    function fetchDataSuplier()
+    {
+     if($this->input->post('year'))
+     {
+      $chart_data = $this->BerandaModel->fetch_chart_data_suplier($this->input->post('year'));
+      
+      foreach($chart_data->result_array() as $row)
+      {
+       $output[] = array(
+        'month'  => $row["month"],
+        'total' => floatval($row["total"])
+       );
+      }
+      echo json_encode($output);
+     }
+    }
 }

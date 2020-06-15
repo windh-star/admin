@@ -74,4 +74,21 @@ class ProyekController extends CI_controller{
              ->_display();
         exit();
     }
+
+    public function simpanProyek(){
+        parse_str(file_get_contents('php://input'), $data);
+        $this->ProyekModel->simpanProyek($data);
+        
+        $response = array(
+            'Success' => true,
+            'Info' => 'Data Proyek berhasil diperbaharui.'
+        );
+        
+        $this->output
+             ->set_status_header(201)
+             ->set_content_type('application/json')
+             ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+             ->_display();
+        exit();
+    }
 }

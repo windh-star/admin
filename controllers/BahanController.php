@@ -53,7 +53,8 @@ class BahanController extends CI_Controller {
 												'spesifikasi',
 												'merk',
 												'harga_dasar',
-												'keterangan'
+												'keterangan',
+												'urut'
 	            	    		             );
 
 		    	return $this->BahanModel->getTabelBahan($datatable);
@@ -246,14 +247,14 @@ class BahanController extends CI_Controller {
    exit();
 	}
 	
-	public function getInfoBahan($id_bahan){
-        $response = $this->BahanModel->getInfoBahan($id_bahan)->row();
+	public function getInfoBahan($urut){
+        $response = $this->BahanModel->getInfoBahan($urut)->row();
         
-        $this->output
-             ->set_status_header(200)
-             ->set_content_type('application/json')
-             ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-             ->_display();
-        exit();
+		$this->output
+		->set_status_header(200)
+		->set_content_type('application/json')
+		->set_output(json_encode($response, JSON_PRETTY_PRINT))
+		->_display();
+   exit();
     }
 }
