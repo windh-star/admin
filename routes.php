@@ -152,6 +152,10 @@ $route['api/getListPengguna'] = 'PenggunaController/getListPengguna';
 ///Proyek
 $route['proyek'] = 'ProyekController/index';
 $route['api/getTabelProyek'] = 'ProyekController/getTabelProyek';
+$route['api/getListProyek'] = 'ProyekController/getListProyek';
+$route['api/getInfoProyek/(:any)'] = 'ProyekController/getInfoProyek/$1';
+$route['api/ubahProyek'] = 'ProyekController/ubahProyek';
+$route['api/simpanProyek'] = 'ProyekController/simpanProyek';
 
 ///Pekerjaan
 $route['pekerjaan'] = 'PekerjaanController/index';
@@ -168,11 +172,6 @@ $route['api/simpanKategori'] = 'KategoriPekerjaanController/simpanKategori';
 $route['api/getInfoKategori/(:any)'] = 'KategoriPekerjaanController/getInfoKategori/$1';
 $route['api/ubahKategori'] = 'KategoriPekerjaanController/ubahKategori';
 $route['api/hapusKategori'] = 'KategoriPekerjaanController/hapusKategori';
-
-///proyek
-$route['api/getListProyek'] = 'ProyekController/getListProyek';
-$route['api/getInfoProyek/(:any)'] = 'ProyekController/getInfoProyek/$1';
-$route['api/ubahProyek'] = 'ProyekController/ubahProyek';
 
 ///Penngguna
 $route['api/getInfoPengguna/(:any)'] = 'PenggunaController/getInfoPengguna/$1';
@@ -331,6 +330,8 @@ $route['api/getListSatuan']='AHSController/getListSatuan';
 
 //Grafik Baru 
 $route['api/fetchDataProyek']='BerandaController/fetchDataProyek';
+$route['api/fetchDataEstimator']='BerandaController/fetchDataEstimator';
+$route['api/fetchDataSuplier']='BerandaController/fetchDataSuplier';
 
 //AHS
 $route['api/simpanBahanAHS']='AHSController/simpanBahanAHS';
